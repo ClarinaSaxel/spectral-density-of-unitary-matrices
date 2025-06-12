@@ -1,0 +1,98 @@
+<define-tag topic endtag=required>
+<h2>%0</h2>
+<div class=subsection>
+%body
+</div>
+</define-tag>
+
+<:
+	$dirbase="../files/chktex.pkg";
+	$dlbase="http://savannah.nongnu.org/download/chktex/chktex.pkg";
+	$archive=".tar.gz";
+	
+	sub basefile
+	{
+		my $dir = shift(@_);
+		my $ver = $dir;
+		my $sign = '';
+		my $readme = '';
+		my $changelog = '';
+		my $file = '';
+
+		foreach (`ls $dirbase/$dir`)
+		{
+			s/^\s+//;
+			s/\s+$//;
+
+			# Skip symbolic links
+			if ( -l "$dirbase/$dir/$_" ) { next; }
+
+			if (m/.asc$/)
+			{
+				$sign = $_;
+			}
+			elsif (m/README$/)
+			{
+				$readme = $_;
+			}
+			elsif (m/ChangeLog$/)
+			{
+				$changelog = $_;
+			}
+			else {
+				$file = $_;
+			}
+		}
+
+		return ($file, $sign, $readme, $changelog);
+	}
+	
+	sub dlurl
+	{
+		my $ver = shift(@_);
+		my $file = shift(@_);
+		return "$dlbase/$ver/$file";
+	}
+
+	sub extra
+	{
+		my $ver = shift(@_);
+		my $file = shift(@_);
+		my $text= shift(@_);
+
+		if (! $file eq '')
+		{
+			print ' - <a href="', dlurl($ver, $file), '">', $text, "</a>\n";
+		}
+	}
+	
+	sub listversions
+	{
+		my @vers = ();
+
+		# list all files in $dirbase
+		foreach $dir (`ls $dirbase`) 
+		{ 
+			$dir =~ s/\s//g;
+			push @vers, $dir;
+		}
+
+		foreach $ver (@vers) {
+			my ($file, $sign, $readme, $changelog) = basefile($ver);
+			$text = $ver;
+			if ($text eq 'snapshot') {
+				$text = $file;
+				$text =~ s/.*(snapshot-\d+\.\d+\.\d+).*/$1/;
+			}
+
+			print "<li>\n";
+			print '<a href="', dlurl($ver,$file), '">', $text, "</a>\n";
+			extra($ver, $sign, "GPG Signature");
+			extra($ver, $readme, "README");
+			extra($ver, $changelog, "ChangeLog");
+			print "</li>\n";
+		}
+	}
+:>
+
+

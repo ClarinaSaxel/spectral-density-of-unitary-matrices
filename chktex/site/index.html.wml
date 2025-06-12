@@ -1,0 +1,199 @@
+#use wml::templates::be-tmpl
+<subject "ChkTeX - LaTeX semantic checker"/>
+
+<topic "ChkTeX">
+ <p>
+  This is an homepage for ChkTeX, for a long time now it didn't have any home and
+  it needed one in order to have a center place for development.
+ </p>
+ <p>
+  I (Baruch Even) am the Debian maintainer for the ChkTeX package, and since the
+  program author is missing, I fixed some bugs and maintained it to the best of
+  ability. However Debian is not the only distribution and others are interested
+  in this program so I setup this place to allow for a central place to get
+  updates and provide patches.
+ </p>
+ <p>
+  I am unlikely to continue development on ChkTeX, I'll mostly do bug fixes. If
+  anyone is interested in stepping up and improve ChkTeX further it will be
+  appreciated.
+ </p>
+ 
+ <p>
+  Actual development happens in a Subversion repository.
+  Anonymous checkout can be done with the command:
+  <tt>svn co svn://svn.ev-en.org/chktex/trunk/chktex</tt>
+ </p> 
+ 
+ <ul>
+  <li><a href="http://svn.ev-en.org/?project=chktex">Subversion repository</a></li>
+  <li><a href="https://savannah.nongnu.org/projects/chktex/">Savannah project</a></li>
+ </ul>
+ 
+<p>
+The latest version is:
+</p>
+<ul>
+ <li><a href="chktex-1.6.4.tar.gz">1.6.4</a>
+     -
+	 <a href="chktex-1.6.4.tar.gz.sig">GPG Signature</a>
+ </li>
+</ul>
+
+</topic>
+
+
+<pre>
+|             #####  ###       ###    ########     ###     ##
+|           ###   ##  ##        ##       ##          ##   #
+|          @@         @@ @@@    @@  @@   @@  #######  @@ @
+|          @@         @@@  @@   @@ @@    @@   ##   #   @@
+|          &amp;&amp;         &amp;&amp;   &amp;&amp;   &amp;&amp;&amp;&amp;     &amp;&amp;   @@      &amp; &amp;&amp;
+|           &amp;&amp;&amp;   &amp;&amp;  &amp;&amp;   &amp;&amp;   &amp;&amp; &amp;&amp;    &amp;&amp;   @@@@   &amp;   &amp;&amp;
+|             %%%%%  %%%   %%% %%%  %%%  %%   &amp;&amp;   %%%    %%% v1.6.4
+|                                             &amp;&amp;   &amp;
+|                                            %%%%%%%
+</pre>
+
+                                 <topic "Introduction">
+
+  <p>
+   This program has been written in frustration because some constructs
+   in LaTeX are sometimes non-intuitive, and easy to forget. It is _not_
+   a replacement for the built-in checker in LaTeX; however it catches
+   some typographic errors LaTeX oversees. In other words, it is Lint for
+   LaTeX. Filters are also provided for checking the LaTeX parts of CWEB
+   documents.
+  </p>
+  <p>
+   The program also supports output formats suitable for further
+   processing by editors or other programs, making errors easy to cycle
+   through. Software is provided for beautifully interfacing against the
+   AUC-TeX Emacs mode. It is known to interface with
+   <a href="http://www.lyx.org/">LyX</a>.
+  </p>
+  </topic>
+                                   <topic "Features">
+
+  <p>
+   ChkTeX begins to get quite a few bells and whistles now. However, you
+   should be aware of that in most cases, all this is transparent to the
+   user. As you will see, ChkTeX offers the ability to adapt to many
+   environments and configurations.
+  </p>
+ </topic> 
+
+<topic "Feature list">
+
+<pre>
+     * Supports over 40 warnings. Warnings include:
+          + Commands terminated with space. Ignores ``\tt'', etc.
+          + Space in front of references instead of ``~''.
+          + Forgetting to group parenthesis characters when
+            sub-/superscripting.
+          + Italic correction (``\/'') mistakes (double, missing,
+            unnecessary).
+          + Parenthesis and environment matching.
+          + Ellipsis detection; also checks whether to use ``\dots'',
+            ``\cdots'' or ``\ldots''.
+          + Enforcement of normal space after abbreviation. Detects most
+            abbreviations automagically.
+          + Enforcement of end-of-sentence space when the last sentence
+            ended with capital letter.
+          + Math-mode on/off detection.
+          + Quote checking, both wrong types (``"'') and wrong direction.
+          + Recommends splitting three quotes in a row.
+          + Searching for user patterns.
+          + Displays comments.
+          + Space in front of ``\label'' and similar commands.
+          + Use of ``x'' instead of ``$\times$'' between numbers.
+          + Multiple spaces in input which will be rendered as one space
+            (or multiple spaces, where that is undesirable).
+          + Warns about text which may be ignored.
+          + Mathematical operators typeset as variables.
+          + No space in front of/after parenthesis.
+          + Demands a consistent quote style.
+          + Punctuation inside inner math mode/outside display math mode.
+          + Use of TeX primitives where LaTeX equivalents are available.
+          + Space in front of footnotes.
+          + Bogus characters following commands.
+     * Fully customizable. Intelligent resource format makes it possible
+       to make ChkTeX respect your LaTeX setup. Even command-line options
+       may be specified globally in the ``chktexrc'' file.
+     * Supports ``\input'' command; both TeX and LaTeX version. Actually
+       includes the files. ``TEXINPUTS''-equivalent search path.
+     * Intelligent warning/error handling. The user may promote/mute
+       warnings to suit his preferences. You may also mute warnings in
+       the header of a file; thus killing much unwanted garbage.
+     * Scripts included for checking CWEB files written in LaTeX.
+       (Requires perl v5).
+     * Supports both LaTeX 2.09 and LaTeX2e.
+     * Flexible output handling. Has some predefined formats and lets the
+       user specify his own format. Uses a ``printf()'' similar syntax.
+       ``lacheck'' compatible mode included for interfacing with the
+       AUC-TeX Emacs mode.
+     * ARexx scripts for interfacing with ScMsg and VBrowse are included.
+       Special scripts included for CygnusED/GoldED, for binding to
+       hotkey.
+     * Amiga Workbench support. Parameters may be passed by
+       shift-clicking the LaTeX files and setting the remaining options
+       in the tooltypes.
+     * Wildcard matching (Amiga only). Matches file patterns internally,
+       thus saving a lot of work. This is, however, platform-specific
+       code -- on UNIX boxes this is done by the shell.
+     * Written in ANSI C. ``configure'' script included for easy setup
+       and installation on UNIX systems.
+</pre>
+
+  <p>
+   Still, it is important to realize that the output from ChkTeX is only
+   intended as a _guide_ to fixing faults. However, it is by no means
+   always correct. This means that correct LaTeX code may produce errors
+   in ChkTeX, and vice versa: Incorrect LaTeX code may pass silently
+   through.
+  </p>
+</topic>
+
+                                  <topic "Legal stuff">
+<pre>
+   ChkTeX, documentation, installations scripts, CWEB filters and other
+   materials provided are copyright © 1995-96 Jens T. Berger Thielemann,
+   unless explicitly stated otherwise.
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or (at
+   your option) any later version.
+   
+   This program is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+   General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to:
+   
+     The Free Software Foundation, Inc.
+     675 Mass Ave
+     Cambridge
+     MA 02139
+     USA
+</pre>
+</topic>
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-8919607265829754";
+google_ad_width = 336;
+google_ad_height = 280;
+google_ad_format = "336x280_as";
+google_ad_type = "text";
+google_ad_channel ="1476636074";
+google_color_border = "DDB7BA";
+google_color_bg = "FFF5F6";
+google_color_link = "0000CC";
+google_color_url = "008000";
+google_color_text = "6F6F6F";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>

@@ -1,8 +1,8 @@
-PWD /Users/carinaseidel/Library/CloudStorage/OneDrive-Personal/Dokumente/Adulting/Uni/Mathematik Bachelor Uni Potsdam/Spectral Density of Unitary Matrices/Thesis
+PWD /Users/carinaseidel/Library/CloudStorage/OneDrive-Personal/Dokumente/Adulting/Uni/Mathematik Bachelor Uni Potsdam/spectral-density-of-unitary-matrices/Thesis
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/carinaseidel/Library/CloudStorage/OneDrive-Personal/Dokumente/Adulting/Uni/Mathematik Bachelor Uni Potsdam/Spectral Density of Unitary Matrices/Thesis/main.tex
+INPUT /Users/carinaseidel/Library/CloudStorage/OneDrive-Personal/Dokumente/Adulting/Uni/Mathematik Bachelor Uni Potsdam/spectral-density-of-unitary-matrices/Thesis/main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/report.cls
@@ -352,6 +352,9 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
 INPUT ./Graphics/cayley_transform.tex
 INPUT ./Graphics/cayley_transform.tex
 INPUT Graphics/cayley_transform.tex
+INPUT ./Chapters/motivation.tex
+INPUT ./Chapters/motivation.tex
+INPUT Chapters/motivation.tex
 INPUT ./Chapters/bibliography.tex
 INPUT ./Chapters/bibliography.tex
 INPUT Chapters/bibliography.tex
@@ -362,6 +365,7 @@ INPUT ./main.out
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb

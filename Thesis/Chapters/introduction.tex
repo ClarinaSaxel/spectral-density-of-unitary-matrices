@@ -52,7 +52,7 @@ Therefore, we can divide by $v^* \cdot v$ to obtain
     1 = \left| \lambda \right|^2 = \left| \lambda \right|
 \end{equation}
 
-meaning that all eigenvalues of unitary matrices have a length of $1$ and are situated on the unit circle.
+meaning that all eigenvalues of unitary matrices have a length of $1$ and are thus situated on the unit circle.
 For orthogonal matrices, this means their eigenvalues are either $1$ or $-1$.
 This is an important property, as it justifies that we can make use of the Cayley transfrom introduced in the following section.
 
@@ -73,3 +73,71 @@ This will be relevant later, as we can then use $\varphi$ to transform unitary m
 Now, let's look how the spectral density is defined in the next section.
 
 \section{Spectral Density}
+
+To get to the notion of the spectral density, we will first need some more basic definitions to build on.
+
+\begin{definition}[linear functional]
+    Let $V$ be a vectorspace over a field $\K$. A \emph{linear functional} $T$ is a linear function $T: V \to \K$.
+    The space over all linear functionals $V \mapsto \K$ is called the \emph{dual space} $V'$.
+\end{definition}
+
+A simple example for such a functional would be
+
+\begin{equation} \label{eq:functional_example_simple}
+    T: \Cinfty(\R) \to \R, \qquad f \mapsto f(0)
+\end{equation}
+
+A more special case is the integral.
+
+\begin{equation} \label{eq:functional_example_integral}
+    T_g: \Cinfty(\C) \to \C, \qquad f \mapsto \int\limits_{\C} g \cdot f \dx
+\end{equation}
+
+This definition leads to the concept of a distribution which was introduced to get a method to differentiate where differentiation in the classical sense is not possible.
+
+\begin{definition}[distribution]
+    Let $\emptyset \neq \Omega \subset \R^n$ be open.
+    Let $\mathcal{E}$ be the space of \emph{test functions} over $\Omega$.
+    A \emph{distribution} $T$ is a function $T: \mathcal{E} \to \C$ where for all
+    $g, g_1, g_2, \{g_n\}_{n \in \N} \in \mathcal{E}$
+    with $\lim\limits_{n \to \infty} g_n \to g$ it holds:
+    $$T(g_1 + \lambda g_2) = T(g_1) + \lambda T(g_2) \quad \text{und}\quad \lim\limits_{n \to \infty} T(g_n) \to T(g)$$
+\end{definition}
+
+So, put shortly: A distribution $T$ is a continuous and linear functional on $\mathcal{E}$.
+Now the path is clear to define the so called Dirac delta distribution
+
+\begin{definition}[Dirac delta function]
+    Let $\mathcal{E} = \Cinfty(\Omega)$ with $0 \in \Omega \subset \R^n$.
+    Then
+    $$\delta: \mathcal{E} \to \R, f \mapsto f(0) \quad \text{mit} \quad \delta(f) = \langle \delta, f \rangle = f(0)$$
+\end{definition}
+
+An important feature of this definition is:
+
+$$\int\limits_{-\infty}^{\infty} f(x) \delta(x-a) \dx = \int\limits_{-\infty}^{\infty} f(x) \delta(a-x) \dx = f(a) \implies \int\limits_{-\infty}^{\infty} \delta(x-a) \dx = 1$$
+
+This distribution is often misleadingly labled as a function inspite of being decidedly not that.\\
+We can now finally define the spectral density.
+
+\begin{definition} [spectral density]
+    Let $A \in \R^{n \times n}$, $A^T = A$ and $A$ sparce.
+    Then, the spectral density is defined as
+    $$\phi(t) = \frac{1}{n} \sum_{j=1}^{n} \delta(t - \lambda_j)$$
+    where $\delta$ is the delta distribution and $\lambda_j$ are the eigenvalues of $A$ in non-descending order.
+\end{definition}
+
+The number of eigenvalues in an intervall $[a, b]$ can then be expressed as follows:
+
+\begin{equation} \label{eq:nu_a_b}
+    \nu_{[a, b]} = \int\limits_a^b \sum_j \delta(t - \lambda_j) \dt \equiv \int\limits_a^b n \phi(t) \dt
+\end{equation}
+
+\begin{definition} [Schwartz-space over $\R$] \label{def:Schwartz space}
+    The Schwartz-space over $\R$ contains all smooth functions $f$,
+    which fall fast enough against $0$, when $|x|$ gets closer to $\infty$. \cite{richtmyer}
+    In Formeln
+    $$\SR(\R) := \left\{f \in \Cinfty(\R) \mid \forall p, k \in \N_0: \sup_{x \in \R} \left| x^pf^{(k)}(x)\right| < \infty \right\}$$
+    Im Weiteren werde ich das Symbol $\SR$ als Abkürzung für $\SR(\R)$ benutzen,
+    da sich diese Arbeit allein mit dem reellen Kontext befasst.
+\end{definition}

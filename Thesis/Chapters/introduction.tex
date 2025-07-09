@@ -4,17 +4,56 @@ Upon this we should be well-equipped to proceed with the investigation afterward
 
 \section{Unitary Matrices}
 
-We first recall a definition that will be relevant in later chapters.
+We first recall two definitions for important real matrices that we then extend to complex matrices.
 The index $^T$ marks the transpose of a matrix.
-As common in a lot of literature, $I_n$ denotes the identity matrix of size $n$.
+As common in the literature, $I_n$ denotes the identity matrix of size $n$.
 
 \begin{definition}[Orthogonal matrix]
     Let $A$ be a real, square matrix of size $n$.
     Then $A$ is called \emph{orthogonal} if $A^T \cdot A = I_n$.
 \end{definition}
 
-Throughout this thesis, $A$ will denote a complex, square matrix of size $n$, unless stated otherwise.
+For completeness' sake, we also define symmetric matrices.
+
+\begin{definition}[Symmetric matrix]
+    Let $A$ be a real, square matrix of size $n$.
+    Then $A$ is called \emph{symmetric} if $A^T = A$.
+\end{definition}
+
+The complex equivalent of a real symmetric matrix is a \emph{Hermitian matrix}.
 Note that $A^*$ is \emph{conjugate transpose} of the matrix $A$ with all of its entries complex conjugated and transposed.
+
+\begin{definition}[Hermitian matrix]
+    Let $A$ be a complex square matrix of size $n$.
+    Then $A$ is called \emph{Hermitian} if $A^* = A$.
+\end{definition}
+
+Throughout this thesis, $A$ will denote a complex, square matrix of size $n$,
+unless stated otherwise.
+
+We examine the eigenvalues of Hermitian matrices.
+
+Let $A = A^*$ and $A v = \lambda v$ for a complex vector $v \neq \mathbf{0}$ of size $n$ and a scalar $\lambda \in \C$.
+Consider now the inner product $ v^* v$.
+
+\begin{equation} \label{eq:real_symmetric_inner_product}
+    \lambda v^* v = v^* (\lambda v) = v^* (A v) = (A^* v)^* v = (A v)^* v = (\lambda v)^* v = \overline{\lambda} v^* v \\
+\end{equation}
+
+Since we have that $v \neq \mathbf{0}$ it follows that $v^* \cdot v \neq 0$
+and therefore $\lambda = \overline{\lambda}$, that is to say $\lambda$ is real.
+This means that all eigenvalues of Hermitian matrices are real numbers.
+
+The complex equivalent of a symmetric matrix is a \emph{Hermitian matrix}:
+
+\begin{definition}[Hermitian matrix]
+    Let $A$ be a complex square matrix of size $n$.
+    Then $A$ is called \emph{Hermitian} if $A^* = A$.
+\end{definition}
+
+Throughout this thesis, $A$ will denote a complex, square matrix of size $n$,
+unless stated otherwise.
+
 
 \begin{definition}[Unitary matrix]
     A matrix $A$ is called \emph{unitary} if $A^* \cdot A = I_n$.
@@ -25,7 +64,7 @@ It is easy to see that orthogonal matrices are a special case of unitary matrice
 Consider a unitary matrix $U$; we are interested in determining its eigenvalues.
 That means we have to solve the equation
 
-\begin{equation} \label{eq:eigenvalue_equation}
+\begin{equation} \label{eq:unitary_eigenvalue_equation}
     U \cdot v = \lambda \cdot v
 \end{equation}
 
@@ -54,11 +93,12 @@ Therefore, we can divide by $v^* \cdot v$ to obtain
 
 meaning that all eigenvalues of unitary matrices have a length of $1$ and are thus situated on the unit circle.
 For orthogonal matrices, this means their eigenvalues are either $1$ or $-1$.
-This is an important property, as it justifies that we can make use of the Cayley transfrom introduced in the following section.
+This property is crucial, as it enables the application of the Cayley transform,
+introduced in the following section.
 
 \section{Cayley Transform}
 
-The Cayley transform or Cayley transformation is given by the simple function
+The Cayley transform is given by the simple function
 
 $$\varphi(z) = (i-z)(i+z)^{-1}$$
 

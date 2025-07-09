@@ -1,8 +1,8 @@
-PWD /Users/carinaseidel/Library/CloudStorage/OneDrive-Personal/Dokumente/Adulting/Uni/Mathematik Bachelor Uni Potsdam/spectral-density-of-unitary-matrices/Thesis
+PWD /Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/carinaseidel/Library/CloudStorage/OneDrive-Personal/Dokumente/Adulting/Uni/Mathematik Bachelor Uni Potsdam/spectral-density-of-unitary-matrices/Thesis/main.tex
+INPUT /Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/report.cls

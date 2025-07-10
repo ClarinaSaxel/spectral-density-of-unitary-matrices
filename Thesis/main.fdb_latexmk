@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1752065469.56006 "/Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex" "main.pdf" "main" 1752065472.43184 0
+["pdflatex"] 1752066119.76656 "/Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex" "main.pdf" "main" 1752066122.53956 0
   "/Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex" 1752052499.41792 1451 e69796b3ba3c22f3b3ea1cc9b813eca3 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -212,15 +212,15 @@
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "Chapters/abstract.tex" 1752055441.69242 646 8ac8b24dafab70bf3bb52494de5583f5 ""
   "Chapters/bibliography.tex" 1751100950.35436 787 22e98c3502a56fa204f5a4c000f5c5b4 ""
-  "Chapters/introduction.tex" 1752065469.34033 7904 eef92c13d48fdc3aa71c4c215c877d08 ""
+  "Chapters/introduction.tex" 1752066119.55127 7342 f9978cbb8e53d87bf3e3d2aaa07df4b8 ""
   "Chapters/motivation.tex" 1751100950.35519 1750 59b5063e9f3917015fefebef76086d1e ""
   "Chapters/titlepage.tex" 1751100950.35529 2533 d828b8c64f0259f5716e9eb1f337cd1e ""
   "Graphics/Uni Potsdam.png" 1751100950.35545 1728 b7f1047bee259a5ac55b6992aef2bfca ""
   "Graphics/cayley_transform.tex" 1751100950.35556 3481 e190d1d4277a63cbfc0f99d00ae2068b ""
-  "main.aux" 1752065472.35719 1815 28f9c0aa91320c90d1563d2a68d8be0b "pdflatex"
-  "main.out" 1752065472.35764 711 f90c21f07925fd6d71db84e7db4f0549 "pdflatex"
+  "main.aux" 1752066122.46947 1727 6b788f925ac6449660dbc7f777184eee "pdflatex"
+  "main.out" 1752066122.47013 711 f90c21f07925fd6d71db84e7db4f0549 "pdflatex"
   "main.tex" 1752052499.41792 1451 e69796b3ba3c22f3b3ea1cc9b813eca3 ""
-  "main.toc" 1752065472.35783 432 406ecc99ec20a8f04d99ccff28d9d93a "pdflatex"
+  "main.toc" 1752066122.47031 432 406ecc99ec20a8f04d99ccff28d9d93a "pdflatex"
   (generated)
   "main.aux"
   "main.log"

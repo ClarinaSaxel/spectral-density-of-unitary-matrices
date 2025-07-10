@@ -37,23 +37,18 @@ Let $A = A^*$ and $A v = \lambda v$ for a complex vector $v \neq \mathbf{0}$ of 
 Consider now the inner product $ v^* v$.
 
 \begin{equation} \label{eq:real_symmetric_inner_product}
-    \lambda v^* v = v^* (\lambda v) = v^* (A v) = (A^* v)^* v = (A v)^* v = (\lambda v)^* v = \overline{\lambda} v^* v \\
+    \lambda v^* v = v^* \left( \lambda v \right)
+    = v^* \left( A v \right)
+    = \left( A^* v \right)^* v
+    = \left( A v \right)^* v
+    = (\lambda v)^* v
+    = \overline{\lambda} v^* v
 \end{equation}
 
-Since we have that $v \neq \mathbf{0}$ it follows that $v^* \cdot v \neq 0$
+Since we have that $v \neq \mathbf{0}$ it follows that $v^* v \neq 0$
 and therefore $\lambda = \overline{\lambda}$, that is to say $\lambda$ is real.
 This means that all eigenvalues of Hermitian matrices are real numbers.
-
-The complex equivalent of a symmetric matrix is a \emph{Hermitian matrix}:
-
-\begin{definition}[Hermitian matrix]
-    Let $A$ be a complex square matrix of size $n$.
-    Then $A$ is called \emph{Hermitian} if $A^* = A$.
-\end{definition}
-
-Throughout this thesis, $A$ will denote a complex, square matrix of size $n$,
-unless stated otherwise.
-
+It follows that all eigenvalues of symmetric matrices are also real numbers, since they are a special case of Hermitian matrices.
 
 \begin{definition}[Unitary matrix]
     A matrix $A$ is called \emph{unitary} if $A^* \cdot A = I_n$.
@@ -61,31 +56,20 @@ unless stated otherwise.
 
 We will oftentimes denote unitary matrices by using $U$ as a reference.
 It is easy to see that orthogonal matrices are a special case of unitary matrices, since $A^T = A^*$ for all real matrices.\\
-Consider a unitary matrix $U$; we are interested in determining its eigenvalues.
-That means we have to solve the equation
-
-\begin{equation} \label{eq:unitary_eigenvalue_equation}
-    U \cdot v = \lambda \cdot v
-\end{equation}
-
-for a complex vector $v \neq \mathbf{0}$ of size $n$ and a scalar $\lambda \in \C$.
-The complex conjugate of this equation is
+Consider a unitary matrix $U$ and an eigenpair $(\lambda, v)$ of $U$.
+The complex conjugate of the eigenvalue equation $U v = \lambda v$ is
 
 \begin{equation} \label{eq:eigenvalue_equation_complex_conjugate}
-    v^* \cdot U^* = v^* \cdot \lambda^* = \lambda^* \cdot v^*
+    v^* U^* = v^* \lambda^* = \lambda^* v^*
 \end{equation}
 
-Put together, we calculate
+We calculate
 
 \begin{align*}
-    v^* \cdot v & = v^* \cdot U^* \cdot U \cdot v \\
-    & = v^* \cdot \lambda^* \cdot \lambda \cdot v \\
-    & = \lambda^* \cdot \lambda\cdot v^* \cdot v \\
-    & = \left| \lambda \right|^2 \cdot v^* \cdot v
+    v^* v = v^* U^* U v = v^* \lambda^* \lambda v = \lambda^* \lambda v^* v = \left| \lambda \right|^2 v^* v
 \end{align*}
 
-Since we have that $v \neq \mathbf{0}$ it follows that $v^* \cdot v \neq 0$.
-Therefore, we can divide by $v^* \cdot v$ to obtain
+Similarly to above, we can divide by $v^* \cdot v$ to obtain
 
 \begin{equation} \label{eq:unitary_eigenvalues}
     1 = \left| \lambda \right|^2 = \left| \lambda \right|

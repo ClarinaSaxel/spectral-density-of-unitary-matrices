@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1752066119.76656 "/Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex" "main.pdf" "main" 1752066122.53956 0
-  "/Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex" 1752052499.41792 1451 e69796b3ba3c22f3b3ea1cc9b813eca3 ""
+["pdflatex"] 1752331894.09601 "/Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex" "main.pdf" "main" 1752331896.97223 0
+  "/Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex" 1752326975.31448 1451 e69796b3ba3c22f3b3ea1cc9b813eca3 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -210,17 +210,17 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1752054077 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1752053994 3345740 764917bb7d03157e747b24ce084d7331 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "Chapters/abstract.tex" 1752055441.69242 646 8ac8b24dafab70bf3bb52494de5583f5 ""
+  "Chapters/abstract.tex" 1752327008.84321 658 a325578cdc92ce66f719dc9c297dcb2a ""
   "Chapters/bibliography.tex" 1751100950.35436 787 22e98c3502a56fa204f5a4c000f5c5b4 ""
-  "Chapters/introduction.tex" 1752066119.55127 7342 f9978cbb8e53d87bf3e3d2aaa07df4b8 ""
+  "Chapters/introduction.tex" 1752331893.88031 8412 e35cbf2f2f2cb2c06c000f68d43432d7 ""
   "Chapters/motivation.tex" 1751100950.35519 1750 59b5063e9f3917015fefebef76086d1e ""
   "Chapters/titlepage.tex" 1751100950.35529 2533 d828b8c64f0259f5716e9eb1f337cd1e ""
   "Graphics/Uni Potsdam.png" 1751100950.35545 1728 b7f1047bee259a5ac55b6992aef2bfca ""
   "Graphics/cayley_transform.tex" 1751100950.35556 3481 e190d1d4277a63cbfc0f99d00ae2068b ""
-  "main.aux" 1752066122.46947 1727 6b788f925ac6449660dbc7f777184eee "pdflatex"
-  "main.out" 1752066122.47013 711 f90c21f07925fd6d71db84e7db4f0549 "pdflatex"
-  "main.tex" 1752052499.41792 1451 e69796b3ba3c22f3b3ea1cc9b813eca3 ""
-  "main.toc" 1752066122.47031 432 406ecc99ec20a8f04d99ccff28d9d93a "pdflatex"
+  "main.aux" 1752331896.90203 1727 6b788f925ac6449660dbc7f777184eee "pdflatex"
+  "main.out" 1752331896.90269 711 f90c21f07925fd6d71db84e7db4f0549 "pdflatex"
+  "main.tex" 1752326975.31448 1451 e69796b3ba3c22f3b3ea1cc9b813eca3 ""
+  "main.toc" 1752331896.90288 432 406ecc99ec20a8f04d99ccff28d9d93a "pdflatex"
   (generated)
   "main.aux"
   "main.log"

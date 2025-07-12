@@ -17,4 +17,6 @@ xpoints = np.array([-1, 1])
 ypoints = np.array([varphi(x) for x in xpoints])
 
 if st.button("Calculate Cayley Transform"):
-    st.pyploy(ypoints, x=xpoints)
+    plt.figure()
+    plt.plot(xpoints, ypoints)
+    st.pyplot(plt)

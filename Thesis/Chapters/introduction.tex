@@ -32,9 +32,9 @@ Throughout this thesis, $A$ will denote a complex, square matrix of size $n$,
 unless stated otherwise.
 To reference a Hermitian matrix, we will use the letter $H$.
 
-We examine the eigenvalues of Hermitian matrices.
+We now examine the eigenvalues of Hermitian matrices.
 
-Let $H = H^*$ and $H v = \lambda v$ for a complex vector $v \neq \mathbf{0}$ of size $n$ and a scalar $\lambda \in \C$.
+Let $H = H^*$ and $H v = \lambda v$ for a complex vector $v \neq 0$ of size $n$ and a scalar $\lambda \in \C$.
 Consider now the inner product $ v^* v$.
 
 \begin{equation} \label{eq:real_symmetric_inner_product}
@@ -47,12 +47,12 @@ Consider now the inner product $ v^* v$.
     = \overline{\lambda} v^* v
 \end{equation}
 
-Since we have that $v \neq \mathbf{0}$ it follows that $v^* v \neq \mathbf{0}$
+Since we have that $v \neq 0$ it follows that $v^* v \neq 0$
 and therefore $\lambda = \overline{\lambda}$, that is to say $\lambda$ is real.
 This means that all eigenvalues of Hermitian matrices are real numbers.
 It follows that all eigenvalues of symmetric matrices are also real numbers,
 since they are a special case of Hermitian matrices.
-Now we can extend the definition of orthogonal matrices to complex matrices.
+Now we can define the complex equivalent of orthogonal matrices:
 
 \begin{definition}[Unitary matrix]
     A matrix $A$ is called \emph{unitary} if $A^* \cdot A = I_n$.
@@ -85,23 +85,38 @@ As they are a special case of unitary matrices, the same goes for orthogonal mat
 This property is crucial, as it enables the application of the Cayley transform,
 introduced in the following section.
 
+There is a special group of matrices that all the matrices we have defined so far belong to.
+
+\begin{definition}[Normal matrix]
+    A matrix $A$ is called \emph{normal} if it commutes with its conjugate transpose,
+    that is to say $A^* A = A A^*$.
+\end{definition}
+
+It is easy to see that both Hermitian and unitary matrices are normal matrices
+and that the notion includes real symmetric and orthogonal matrices as special cases.
+The spectral theorem states that normal matrices can be diagonalized by a unitary matrix.
+That means, for any normal matrix $A$, there exists a unitary matrix $U$ such that $A = U \Lambda U^*$,
+where $\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ with $\lambda_1, \ldots, \lambda_n$ being the eigenvalues of $A$.
+This is essential for applying a function to a matrix, which we will get to in the next section.
+
 \section{Cayley Transform}
 
-Before deep diving into the exact definition of the Cayley transform,
-we will first introduce the concept of a \emph{matrix function}.
+Before giving the central definition of this section,
+we will first enxtend the concept of functions to normal matrices,
+allowing us to map one matrix to another.
 
-\begin{definition}[matrix function]
-    Let $A$ be a real square matrix with eigenvalues $\lambda_1, \ldots, \lambda_n$.
+\begin{definition}[Matrix function on normal matrices]
+    Let $A$ be a normal matrix and let $f: \C \to \C$ be a function that is defined on the spectrum of $A$,
+    $\sigma(A) = \{\lambda_1, \ldots, \lambda_n\}$.
     Then the \emph{matrix function} $f(A)$ is defined as
     \[
-    f(A) = U f(\Lambda) U^T
+    f(A) := U f(\Lambda) U^* = U \diag(f(\lambda_1), \ldots, f(\lambda_n)) U^*
     \]
     where $U$ is the matrix of eigenvectors of $A$ and $\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ is the diagonal matrix of eigenvalues.
 \end{definition}
 
-A matrix function is a way to extend the concept of functions to matrices,
-allowing us to map one matrix to another.
-The Cayley transform establishes a correspondence between Hermitian and unitary matrices,
+Now we can define the \emph{Cayley transform}, which is a specific matrix function, 
+that establishes a correspondence between Hermitian and unitary matrices,
 allowing spectral properties to be translated between these two important classes.
 
 For a complex number $z \in \mathbb{C}$ with $z \neq -i$, the Cayley transform is defined as
@@ -126,8 +141,7 @@ and therefore
 (i + H) v = i v + H v = i v + (-i v) = 0.
 \]
 
-Luckily, we know that Hermitian matrices can only ever have real eigenvalues, so $-i$ can never be an eigenvalue.\\
-
+Since Hermitian matrices have only real eigenvalues as discussed above, $-i$ can never be an eigenvalue.
 Conversely, given a unitary matrix $U$ (with $U \neq -I_n$),
 the inverse Cayley transform yields a Hermitian matrix:
 \[
@@ -143,69 +157,95 @@ which will be explored in the following sections.
 To get to the notion of the spectral density,
 we will first need some more basic definitions to build on.
 
-\begin{definition}[linear functional]
-    Let $V$ be a vectorspace over a field $\K$. A \emph{linear functional} $T$ is a linear function $T: V \to \K$.
-    The space over all linear functionals $V \mapsto \K$ is called the \emph{dual space} $V'$.
+\begin{definition}[Linear functional]
+    Let $V$ be a vectorspace over $\C$.
+    A \emph{linear functional} $T$ is a linear map $T: V \to \C$.
 \end{definition}
 
-A simple example for such a functional would be
+A simple example for such a functional is evaluation at a point:
 
 \begin{equation} \label{eq:functional_example_simple}
-    T: \Cinfty(\R) \to \R, \qquad f \mapsto f(0)
+    T: \Cinfty(\C) \to \C, \qquad f \mapsto f(0)
 \end{equation}
 
-A more special case is the integral.
+where $\Cinfty(\C)$ denotes the space of infinitely differentiable (smooth) functions over $\C$.
+
+Another example is integration against a fixed complex-valued function $g$:
 
 \begin{equation} \label{eq:functional_example_integral}
     T_g: \Cinfty(\C) \to \C, \qquad f \mapsto \int\limits_{\C} g \cdot f \dx
 \end{equation}
 
-This definition leads to the concept of a distribution
-which was introduced to get a method to differentiate
-where differentiation in the classical sense is not possible.
+Now, let $\Omega \subset \C^n$ be open and non-empty.
+A \emph{test function} is a smooth function with compact support defined on $\Omega$.
+The space of all test functions on $\Omega$ is usually denoted by $\mathcal{E}$.
+\emph{Distributions} generalize the concept of functions
+and allow for differentiation in cases where classical differentiation is not possible.
 
-\begin{definition}[distribution]
-    Let $\emptyset \neq \Omega \subset \R^n$ be open.
-    Let $\mathcal{E}$ be the space of \emph{test functions} over $\Omega$.
-    A \emph{distribution} $T$ is a function $T: \mathcal{E} \to \C$ where for all
-    $g, g_1, g_2, \{g_n\}_{n \in \N} \in \mathcal{E}$
-
-    with $\lim\limits_{n \to \infty} g_n \to g$ it holds:
-    $$T(g_1 + \lambda g_2) = T(g_1) + \lambda T(g_2) \quad \text{and}\quad \lim\limits_{n \to \infty} T(g_n) \to T(g)$$
+\begin{definition}[Distribution] \label{def:Distribution}
+    Let $\Omega \subset \C^n$ be open,
+    and let $\mathcal{E}$ be the space of complex-valued test functions over $\Omega$.
+    A \emph{distribution} $T$ is a continuous linear functional $T: \mathcal{E} \to \C$.
+    That is, for all $g_1, g_2 \in \mathcal{E}$ and $\lambda \in \C$,
+    \[
+    T(g_1 + \lambda g_2) = T(g_1) + \lambda T(g_2)
+    \]
+    and for any sequence $\{g_n\}_{n \in \N}$ in $\mathcal{E}$ with $g_n \to g$,
+    \[
+    T(g_n) \to T(g).
+    \]
 \end{definition}
 
-In summary, a distribution $T$ is a continuous and linear functional on $\mathcal{E}$.
-This leads us to the definition of the Dirac delta distribution:
+An important example of a distribution is the \emph{Dirac delta distribution}, which is defined as follows:
 
-\begin{definition}[Dirac delta function]
+\begin{definition}[Dirac delta distribution]
     Let $\mathcal{E} = \Cinfty(\Omega)$ with $0 \in \Omega \subset \R^n$.
     Then
     $$\delta: \mathcal{E} \to \R, \quad f \mapsto f(0) \quad \text{with} \quad \delta(f) = \langle \delta, f \rangle = f(0)$$
 \end{definition}
 
-An important property of the Dirac delta is:
-
-$$\int\limits_{-\infty}^{\infty} f(x) \delta(x-a) \dx = \int\limits_{-\infty}^{\infty} f(x) \delta(a-x) \dx = f(a) \implies \int\limits_{-\infty}^{\infty} \delta(x-a) \dx = 1$$
-
-This distribution is often mistakenly referred to as a function,
+this distribution is often mistakenly referred to as a function,
 although it is not a function in the classical sense.\\
-We can now define the spectral density:
+The Dirac delta is characterized by the following property:
+
+\[
+\int\limits_{-\infty}^{\infty} f(x) \delta(x-a) \dx = \int\limits_{-\infty}^{\infty} f(x) \delta(a-x) \dx = f(a) \implies \int\limits_{-\infty}^{\infty} \delta(x-a) \dx = 1.
+\]
+
+This means that the Dirac delta distribution is zero everywhere except at the point $a$,
+where it is infinitely high, such that the integral over it equals $1$.
+We now have all the tools we need to define the central concept of this thesis:
 
 \begin{definition}[Spectral density]
-    Let $A \in \R^{n \times n}$, $A^T = A$, and $A$ sparse.
-    The spectral density is defined as
-    $$\phi(t) = \frac{1}{n} \sum_{j=1}^{n} \delta(t - \lambda_j)$$
-    where $\delta$ is the Dirac delta distribution and $\lambda_j$ are the eigenvalues of $A$ in non-descending order.
+    Let $H$ be hermitian and sparse.
+    The \emph{spectral density} is then defined as
+    \[
+    \phi(t) = \frac{1}{n} \sum_{j=1}^{n} \delta(t - \lambda_j)
+    \]
+    where $\delta$ is the Dirac delta distribution
+    and $\lambda_j$ are the eigenvalues of $H$ in non-descending order.
 \end{definition}
 
-The number of eigenvalues in an interval $[a, b]$ can then be expressed as:
+The number of eigenvalues in an interval $[a, b]$ can then be counted in the following manner:
 
 \begin{equation} \label{eq:nu_a_b}
     \nu_{[a, b]} = \int\limits_a^b \sum_j \delta(t - \lambda_j) \dt \equiv \int\limits_a^b n \phi(t) \dt
 \end{equation}
 
+Random matrix theory tells us that the eigenvalues of random unitary matrices are distributed uniformly on the unit circle.
+Thus, we would expect the spectral density to be uniformly distributed on the unit circle as well.
+This is important as we think of the choice of random unitary matrices.
+
+If we generate a random complex square matrix $A$,
+there are multiple ways to obtain a unitary matrix $U$.
+We will now compare the svd with the qr decomposition.
+
+Before we can proceed to the motice of this thesis, we will need to define the following space:
+
 \begin{definition}[Schwartz space over $\R$] \label{def:Schwartz space}
-    The Schwartz space over $\R$ consists of all smooth functions $f$ that decay rapidly to zero as $|x|$ approaches infinity \cite{richtmyer}.
+    The \emph{Schwartz space} over $\R$ consists of all smooth functions $f$ that decay rapidly to zero as $|x|$ approaches infinity \cite{richtmyer}.
     Formally,
-    $$\SR(\R) := \left\{f \in \Cinfty(\R) \mid \forall p, k \in \N_0: \sup_{x \in \R} \left| x^p f^{(k)}(x) \right| < \infty \right\}$$
+    \[
+    \SR := \left\{f \in \Cinfty(\R) \mid \forall p, k \in \N_0: \sup_{x \in \R} \left| x^p f^{(k)}(x) \right| < \infty \right\}
+    \]
 \end{definition}

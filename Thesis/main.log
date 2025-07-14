@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.9)  14 JUL 2025 09:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.9)  14 JUL 2025 14:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -634,7 +634,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<./Graphics/Uni Potsdam.png, id=47, 174.6525pt x 174.6525pt>
+<./Graphics/Uni Potsdam.png, id=63, 174.6525pt x 174.6525pt>
 File: ./Graphics/Uni Potsdam.png Graphic file (type png)
 <use ./Graphics/Uni Potsdam.png>
 Package pdftex.def Info: ./Graphics/Uni Potsdam.png  used on input line 54.
@@ -669,81 +669,73 @@ Chapter 1.
 
 [2
 
-] (./Graphics/cayley_transform.tex)
+]
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+[3] (./Graphics/cayley_transform.tex)
 
- []
+[4]
 
+[5])
 
-
-[4])
-
-[5]
+[6]
 Chapter 2.
 (./Chapters/motivation.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 10--64
+Underfull \hbox (badness 10000) in paragraph at lines 9--64
 
  []
 
 
 
-[6
+[7
 
 ]
 Chapter 3.
 (./Chapters/KPM.tex
 
-[7
+[8
 
 ]
-Overfull \hbox (34.2992pt too wide) in paragraph at lines 61--61
-|[]\OT1/cmr/bx/n/14.4 Polynomiale Er-weiterung durch Tschebyschev-Polynome| 
- []
+Underfull \hbox (badness 10000) in paragraph at lines 92--94
 
-
-Overfull \hbox (7.23769pt too wide) in paragraph at lines 62--64
-\OT1/cmr/m/n/10.95 Aufgrund ihrer vie-len einzi-gar-ti-gen Eigen-schaften sind Tschebyschev-Polynome beson-
- []
-
-LaTeX Font Info:    Trying to load font information for U+dsrom on input line 78.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/doublestroke/Udsrom.fd
-File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-)
-Underfull \hbox (badness 10000) in paragraph at lines 88--90
-
- []
-
-
-
-[8]
-Overfull \hbox (1.12396pt too wide) in paragraph at lines 121--123
-\OT1/cmr/m/n/10.95 Nutze nun die Or-thog-o-nalit^^?at der Tschebyschev-Polynome aus, um einen bes-timmten
- []
-
-
-Overfull \hbox (37.26697pt too wide) detected at line 128
-[]
  []
 
 
 
 [9]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 166.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 169.
+
+[10]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 193.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 196.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 169.
-) (./Chapters/bibliography.tex
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 196.
+)
 
-[10]
+[11]
 
-[11])
+[12]
+Chapter 4.
+(./Chapters/quality_analysis.tex
 
-[12
+[13
+
+]
+
+[14]
+<./Graphics/screenshot.png, id=207, 604.2575pt x 417.56pt>
+File: ./Graphics/screenshot.png Graphic file (type png)
+<use ./Graphics/screenshot.png>
+Package pdftex.def Info: ./Graphics/screenshot.png  used on input line 110.
+(pdftex.def)             Requested size: 308.81267pt x 213.39566pt.
+
+
+[15 <./Graphics/screenshot.png>]) (./Chapters/bibliography.tex
+
+[16])
+
+[17
 
 ] (./main.aux)
  ***********
@@ -751,21 +743,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DA6C590F9CC685A73D5AF7E0D2CA7C94;1501.
+(rerunfilecheck)             Checksum: 1A79DF18AC5534073B070FEE51C433AC;2374.
  ) 
 Here is how much of TeX's memory you used:
- 32469 strings out of 473190
- 756093 string characters out of 5715801
- 1637954 words of memory out of 5000000
- 55141 multiletter control sequences out of 15000+600000
- 568882 words of font info for 74 fonts, out of 8000000 for 9000
+ 32482 strings out of 473190
+ 756337 string characters out of 5715801
+ 1636608 words of memory out of 5000000
+ 55145 multiletter control sequences out of 15000+600000
+ 568594 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,11n,105p,791b,2108s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/doublestroke/dsrom8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (14 pages, 284353 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (19 pages, 328454 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 216 compressed objects within 3 object streams
- 54 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 319 PDF objects out of 1000 (max. 8388607)
+ 255 compressed objects within 3 object streams
+ 65 named destinations out of 1000 (max. 500000)
+ 135 words of extra memory for PDF output out of 10000 (max. 10000000)
 

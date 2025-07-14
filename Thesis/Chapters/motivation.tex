@@ -1,19 +1,17 @@
 \section{Motivation}
-Calculating the spectral density of a matrix is trivial, when its eigenvalues are already known.
-However, this is mostly not the case and calculating eigenvalues of very large matrices is time- and energy intensive.
-At the same time, the DOS as a kind of probability density over the distribution of eigenvalues is of great interest in many fields.
-Thus, there is a need for methods which approximate the spectral density at low cost.
-The problem with this is that $\phi(t)$ the Delta distribution is not a \emph{function} as we know it,
-that can be evaluated at each point.\\
-A more intuitive idea would be to choose an intervall $I \in \R$ such that the spectrum of $A$, $\sigma(A)$, is a subset of $I$.
-Now choose $k$ points $t_i$ in $I$, such that the intervall is divided in sub intervals:
-$$\{t_i\}_{i = 1}^k \subset I \quad \text{mit} \quad \bigcup_{i = 1}^{k - 1} [t_i, t_{i+1}] = I$$
-Now count the eigenvalues in every sub interval.
-Then calculate the average value of $\phi(t)$ in every intervall with $\nu_{[a, b]}$ from equation \ref{eq:nu_a_b}.
-The results is histograms, which with increasingly smaller subintervalls, that is to say bigger $k$ and $(t_{i+1} - t_i) \longrightarrow 0$, approach the spectral density.\\
-To count the eigenvalues in the intervals, there is means like for example the Sylvestreschen Trägheitssatz.
-The details of this method are not part of this work,
-it would be necessary to calculate a decomposition of $A - t_i I = LDL^T$ for all $t_i$ \cite{golubvanloan}.
-We prefer a method in which $A$ is multiplied with vectors, which is in bigger dimensions.\\
-For simplicity we are going to assume, that $A$ is szmmetric and real.
-The extension to hermetian matrices is simple in comparison.
+Calculating the spectral density of a matrix is straightforward when its eigenvalues are already known.
+However, this is rarely the case in practice, and computing the eigenvalues of very large matrices is both time-consuming and computationally expensive.
+At the same time, the density of states (DOS), which serves as a probability density for the distribution of eigenvalues, is of great interest in many fields.
+Therefore, there is a need for efficient methods to approximate the spectral density at low computational cost.
+
+The challenge arises because $\phi(t)$, the delta distribution, is not a conventional \emph{function} that can be evaluated pointwise.\\
+One intuitive approach is to select an interval $I \in \R$ such that the spectrum of $A$, $\sigma(A)$, is contained within $I$.
+Next, choose $k$ points $t_i$ in $I$ so that the interval is divided into subintervals:
+$$\{t_i\}_{i = 1}^k \subset I \quad \text{with} \quad \bigcup_{i = 1}^{k - 1} [t_i, t_{i+1}] = I$$
+Count the number of eigenvalues in each subinterval.
+Then, calculate the average value of $\phi(t)$ in each interval using $\nu_{[a, b]}$ from equation \ref{eq:nu_a_b}.
+The result is a histogram, which, as the subintervals become smaller (i.e., as $k$ increases and $(t_{i+1} - t_i) \longrightarrow 0$), approaches the true spectral density.\\
+To count the eigenvalues in the intervals, one can use methods such as Sylvester's law of inertia.
+The details of this method are beyond the scope of this work;
+it would require computing a decomposition of $A - t_i I = LDL^T$ for all $t_i$ \cite{golubvanloan}.
+Instead, we prefer a method in which $A$ is multiplied by vectors, which is more efficient in higher dimensions.\\

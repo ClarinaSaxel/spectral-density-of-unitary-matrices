@@ -2,6 +2,8 @@
 
 \usepackage[left=3.5cm,right=3.5cm,top=3cm,bottom=3.5cm]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{dsfont}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -15,24 +17,25 @@
 \titleformat{\chapter}[display]
   {\normalfont\bfseries}{}{0pt}{\Huge}
 
-\newtheoremstyle{mydefinition} % Name des neuen Stils
-  {10pt} % Raum über der Definition
-  {10pt} % Raum unter der Definition
-  {} % Körper-Schriftart (leer bedeutet Standard)
-  {0pt} % Einrückung (kein Einrücken)
-  {\bfseries} % Kopf-Schriftart
-  {.} % Kopf-Punktierung
-  { } % Kopf-Abstand
-  {} % Kopf-Spezifikation (leer bedeutet Standard)
+\newtheoremstyle{mydefinition}
+  {10pt} % space above the definition
+  {10pt} % space below the definition
+  {} % font of the body (empty means standard)
+  {0pt} % no indentation
+  {\bfseries} % font of the header
+  {.} % punctuation after the header
+  { } % space after the header
+  {} % header specification (empty means standard)
 
-% Verwende den neuen Theoremstil
 \theoremstyle{mydefinition}
 \newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
 
 \newcommand{\1}{\mathds{1}}
 \newcommand{\dt}{\;\mathrm{d}t}
 \newcommand{\dx}{\;\mathrm{d}x}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
 \newcommand{\K}{\mathbb{K}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
@@ -40,6 +43,10 @@
 \newcommand{\re}{\operatorname{Re}}
 \newcommand{\im}{\operatorname{Im}}
 \newcommand{\Cinfty}{\mathcal{C}^{\infty}}
+
+\DeclareMathOperator\diag{diag}
+\DeclareMathOperator\arcosh{arcosh}
+\DeclareMathOperator\Spur{Spur}
 
 \begin{document}
 
@@ -54,6 +61,9 @@
 
 \chapter{Motivation}
 \input{Chapters/motivation.tex}
+
+\chapter{Kernel Polynomial Method}
+\input{Chapters/KPM.tex}
 
 \input{Chapters/bibliography.tex}
     

@@ -87,6 +87,20 @@ introduced in the following section.
 
 \section{Cayley Transform}
 
+Before deep diving into the exact definition of the Cayley transform,
+we will first introduce the concept of a \emph{matrix function}.
+
+\begin{definition}[matrix function]
+    Let $A$ be a real square matrix with eigenvalues $\lambda_1, \ldots, \lambda_n$.
+    Then the \emph{matrix function} $f(A)$ is defined as
+    \[
+    f(A) = U f(\Lambda) U^T
+    \]
+    where $U$ is the matrix of eigenvectors of $A$ and $\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ is the diagonal matrix of eigenvalues.
+\end{definition}
+
+A matrix function is a way to extend the concept of functions to matrices,
+allowing us to map one matrix to another.
 The Cayley transform establishes a correspondence between Hermitian and unitary matrices,
 allowing spectral properties to be translated between these two important classes.
 
@@ -146,51 +160,52 @@ A more special case is the integral.
     T_g: \Cinfty(\C) \to \C, \qquad f \mapsto \int\limits_{\C} g \cdot f \dx
 \end{equation}
 
-This definition leads to the concept of a distribution which was introduced to get a method to differentiate where differentiation in the classical sense is not possible.
+This definition leads to the concept of a distribution
+which was introduced to get a method to differentiate
+where differentiation in the classical sense is not possible.
 
 \begin{definition}[distribution]
     Let $\emptyset \neq \Omega \subset \R^n$ be open.
     Let $\mathcal{E}$ be the space of \emph{test functions} over $\Omega$.
     A \emph{distribution} $T$ is a function $T: \mathcal{E} \to \C$ where for all
     $g, g_1, g_2, \{g_n\}_{n \in \N} \in \mathcal{E}$
+
     with $\lim\limits_{n \to \infty} g_n \to g$ it holds:
-    $$T(g_1 + \lambda g_2) = T(g_1) + \lambda T(g_2) \quad \text{und}\quad \lim\limits_{n \to \infty} T(g_n) \to T(g)$$
+    $$T(g_1 + \lambda g_2) = T(g_1) + \lambda T(g_2) \quad \text{and}\quad \lim\limits_{n \to \infty} T(g_n) \to T(g)$$
 \end{definition}
 
-So, put shortly: A distribution $T$ is a continuous and linear functional on $\mathcal{E}$.
-Now the path is clear to define the so called Dirac delta distribution
+In summary, a distribution $T$ is a continuous and linear functional on $\mathcal{E}$.
+This leads us to the definition of the Dirac delta distribution:
 
 \begin{definition}[Dirac delta function]
     Let $\mathcal{E} = \Cinfty(\Omega)$ with $0 \in \Omega \subset \R^n$.
     Then
-    $$\delta: \mathcal{E} \to \R, f \mapsto f(0) \quad \text{mit} \quad \delta(f) = \langle \delta, f \rangle = f(0)$$
+    $$\delta: \mathcal{E} \to \R, \quad f \mapsto f(0) \quad \text{with} \quad \delta(f) = \langle \delta, f \rangle = f(0)$$
 \end{definition}
 
-An important feature of this definition is:
+An important property of the Dirac delta is:
 
 $$\int\limits_{-\infty}^{\infty} f(x) \delta(x-a) \dx = \int\limits_{-\infty}^{\infty} f(x) \delta(a-x) \dx = f(a) \implies \int\limits_{-\infty}^{\infty} \delta(x-a) \dx = 1$$
 
-This distribution is often misleadingly labled as a function inspite of being decidedly not that.\\
-We can now finally define the spectral density.
+This distribution is often mistakenly referred to as a function,
+although it is not a function in the classical sense.\\
+We can now define the spectral density:
 
-\begin{definition} [spectral density]
-    Let $A \in \R^{n \times n}$, $A^T = A$ and $A$ sparce.
-    Then, the spectral density is defined as
+\begin{definition}[Spectral density]
+    Let $A \in \R^{n \times n}$, $A^T = A$, and $A$ sparse.
+    The spectral density is defined as
     $$\phi(t) = \frac{1}{n} \sum_{j=1}^{n} \delta(t - \lambda_j)$$
-    where $\delta$ is the delta distribution and $\lambda_j$ are the eigenvalues of $A$ in non-descending order.
+    where $\delta$ is the Dirac delta distribution and $\lambda_j$ are the eigenvalues of $A$ in non-descending order.
 \end{definition}
 
-The number of eigenvalues in an intervall $[a, b]$ can then be expressed as follows:
+The number of eigenvalues in an interval $[a, b]$ can then be expressed as:
 
 \begin{equation} \label{eq:nu_a_b}
     \nu_{[a, b]} = \int\limits_a^b \sum_j \delta(t - \lambda_j) \dt \equiv \int\limits_a^b n \phi(t) \dt
 \end{equation}
 
-\begin{definition} [Schwartz-space over $\R$] \label{def:Schwartz space}
-    The Schwartz-space over $\R$ contains all smooth functions $f$,
-    which fall fast enough against $0$, when $|x|$ gets closer to $\infty$. \cite{richtmyer}
-    In Formeln
-    $$\SR(\R) := \left\{f \in \Cinfty(\R) \mid \forall p, k \in \N_0: \sup_{x \in \R} \left| x^pf^{(k)}(x)\right| < \infty \right\}$$
-    Im Weiteren werde ich das Symbol $\SR$ als Abkürzung für $\SR(\R)$ benutzen,
-    da sich diese Arbeit allein mit dem reellen Kontext befasst.
+\begin{definition}[Schwartz space over $\R$] \label{def:Schwartz space}
+    The Schwartz space over $\R$ consists of all smooth functions $f$ that decay rapidly to zero as $|x|$ approaches infinity \cite{richtmyer}.
+    Formally,
+    $$\SR(\R) := \left\{f \in \Cinfty(\R) \mid \forall p, k \in \N_0: \sup_{x \in \R} \left| x^p f^{(k)}(x) \right| < \infty \right\}$$
 \end{definition}

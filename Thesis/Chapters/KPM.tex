@@ -5,62 +5,67 @@ We will focus on the main approach in the following.\\
 As the name suggests, the KPM is a polynomial extension of the spectral density.
 The coefficients of the polynomials are derived from the method of moments,
 in order to obtain an estimator function as in statistics.
-The method is based on a corollary of the following theorem:
 
+The method is based on a corollary of the following generalized theorem:
 
 \begin{theorem}
-    Let $A = A^T \in \R^{n \times n}$ with spectral decomposition
+    Let $A \in \C^{n \times n}$ be a normal matrix with spectral decomposition
     \[
-    A = U \Lambda U^T \quad \text{where} \quad UU^T = I_n \text{ and } \Lambda = \diag(\lambda_1, ..., \lambda_n)
-    \] 
-    Also, let $\beta, v \in \R^n$ with $v = U\beta$.\\
-    If $v_i \sim_\text{i.i.d.} \mathcal{N}(0, 1)$ for the components $\{v_i\}_{i = 1}^n$ of $v$, that is to say
-    \begin{equation} \label{eq:normal_distributed_vector}
-        \E[v] = 0 \text{ and } \E[vv^T] = I_n \text{,}
+    A = U \Lambda U^* \quad \text{where} \quad UU^* = I_n \text{ and } \Lambda = \diag(\lambda_1, ..., \lambda_n)
+    \]
+    Let $\beta, v \in \C^n$ with $v = U\beta$.
+    Suppose $v$ is a random vector whose entries $v_i$ are independent and identically distributed standard complex normal variables,
+    i.e., $v_i \sim_\text{i.i.d.} \mathcal{N}_\C(0, 1)$, meaning $\Real(v_i), \Imag(v_i)$ are independent $\mathcal{N}(0, \frac{1}{2})$.
+    Then
+    \begin{equation} \label{eq:complex_normal_vector}
+        \E[v] = 0 \quad \text{and} \quad \E[v v^*] = I_n,
     \end{equation}
-    then
+    and it follows that
     \[
-    \E[\beta] = 0 \text{ and } E[\beta \beta^T] = I_n
+    \E[\beta] = 0 \quad \text{and} \quad \E[\beta \beta^*] = I_n.
     \]
 \end{theorem}
 
 
 \begin{proof}[Proof of Theorem 1]
-    It holds that
+    Since the expectation operator is linear, it holds that
     \[
     \E[v] = \E[U\beta] = U\E[\beta] = 0 \implies \E[\beta] = 0
     \]
     Furthermore it holds that
     \[
-    \E[vv^T] = \E[U\beta \beta^TU^T] = U \E[\beta \beta^T]U^T = U \E[\beta \beta^T]U^T = I_n
+    I_n = \E[vv^*] = \E[(U\beta)(U\beta)^*] = \E[U\beta \beta^*U^*] = U \E[\beta \beta^*]U^*
     \]
-    Since $U$ is orthogonal, we can multiply both sides with $U^T$ and $U$:
+    Multiplying both sides with $U^*$ and $U$ yields:
     \[
-    U^T \E[vv^T] U = \E[\beta \beta^T] = U^T I_n U = I_n
+    U^* I_n U = U^* U \E[\beta \beta^*]U^* U = \E[\beta \beta^*]
     \]
-    Thus, we have shown that $\E[\beta \beta^T] = I_n$.
+    Since $U$ is unitary, we have shown that $\E[\beta \beta^*] = I_n$.
 \end{proof}
+
 
 \vspace{0.5 cm}
 This theorem has a nice corollary when investigating a matrix function $f(A)$.
 In that case, we have
 
 \begin{align*}
-    \E\left[v^Tf(A)v\right] = \E\left[(U\beta)^Tf(U\Lambda U^T)(U\beta)\right] & = \E\left[\beta^TU^TUf(\Lambda)U^TU\beta\right]\\
-        & = \E\left[\beta^Tf(\Lambda)\beta\right]\\
-        & = \E\left[\sum_{j = 1}^n \beta_j^2 f(\lambda_j) \right]\\
-        & = \sum_{j = 1}^n f(\lambda_j) \E\left[ \beta_j^2 \right]\\
-        & = \sum_{j = 1}^n f(\lambda_j)
+    \E\left[v^* f(A) v\right] &= \E\left[(U\beta)^* f(U\Lambda U^*) (U\beta)\right] \\
+        &= \E\left[\beta^* U^* U f(\Lambda) U^* U \beta\right] \\
+        &= \E\left[\beta^* f(\Lambda) \beta\right] \\
+        &= \E\left[\sum_{j = 1}^n |\beta_j|^2 f(\lambda_j) \right] \\
+        &= \sum_{j = 1}^n f(\lambda_j) \E\left[ |\beta_j|^2 \right] \\
+        &= \sum_{j = 1}^n f(\lambda_j)
 \end{align*}
 
-or, put simpler
+or, more concisely,
 \begin{equation} \label{eq:theorem_result}
-    \E\left[v^Tf(A)v\right] = \Tr(f(A)).
+    \E\left[v^* f(A) v\right] = \Tr(f(A)).
 \end{equation}
 
-\section{Polynomial Extension with Tschebyschev polynomials}
-We assume Tschebyshev polynomials to be a good fit for the polynomial extension of the Dirac delta distribution because of many of their properties.
-Using the trigonometrical functions, they can be expressed as follows:
+\section{Polynomial Extension with Tschebyshev polynomials}
+We assume Tschebyshev polynomials to be a good fit for the polynomial extension of the Dirac delta distribution
+because of the many great properties we will see now. First, let's look how Tschebyshev polynomials are defined.
+Using the trigonometric functions, they can be expressed as follows:
 \[ T_k(t) =
 \begin{cases}
     \cos(k \arccos(t))            & \quad \text{for } k \in [-1, 1]\\

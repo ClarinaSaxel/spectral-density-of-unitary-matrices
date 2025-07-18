@@ -1,6 +1,6 @@
 We begin this thesis by examining unitary matrices and their fundamental properties.
-Then we revisit the Cayley transform to finally close in on the spectral density.
-Upon this we should be well-equipped to proceed with the investigation afterwards.
+Next, we introduce the Cayley transform to finally approach the concept of spectral density.
+Upon this we will be well-equipped to proceed with the investigation afterwards.
 
 \section{Unitary Matrices}
 
@@ -17,27 +17,31 @@ The following definition is for matrices with their transpose as their inverse.
 
 \begin{definition}[Orthogonal matrix]
     Let $A$ be a real, square matrix of size $n$.
-    Then $A$ is called \emph{orthogonal} if $A^T \cdot A = I_n$.
+    Then $A$ is called \emph{orthogonal} if $A^T \cdot A = A \cdot A^T = I_n$.
 \end{definition}
 
-The complex equivalent of a real symmetric matrix is a \emph{Hermitian matrix}.
-Note that $A^*$ is \emph{conjugate transpose} of the matrix $A$ with all of its entries complex conjugated and transposed.
+
+Now we define the complex equivalent of a real symmetric matrix:
 
 \begin{definition}[Hermitian matrix]
     Let $A$ be a complex square matrix of size $n$.
     Then $A$ is called \emph{Hermitian} if $A^* = A$.
 \end{definition}
 
-Throughout this thesis, $A$ will denote a complex, square matrix of size $n$,
-unless stated otherwise.
-To reference a Hermitian matrix, we will use the letter $H$.
+Here, $A^*$ denotes the \emph{conjugate transpose} (also called adjoint) of $A$, that is,
+the matrix obtained by taking the transpose and then complex conjugating all entries.
+
+Throughout this thesis, $A$ will denote a complex, square matrix of size $n$, unless stated otherwise.
+When referring to a Hermitian matrix, we will use the letter $H$.
 
 We now examine the eigenvalues of Hermitian matrices.
 
-Let $H = H^*$ and $H v = \lambda v$ for a complex vector $v \neq 0$ of size $n$ and a scalar $\lambda \in \C$.
+Let $H = H^*$ and $H v = \lambda v$ for a complex vector $v \neq \mathbf{0}$ of size $n$ and a scalar $\lambda \in \C$.
 Consider now the inner product $ v^* v$.
+Remember that $(A \cdot B)^* = B^* \cdot A^*$ holds for a matrix product,
+and obviously ${(A^*)^*} = A$ for all matrices and vectors.
 
-\begin{equation} \label{eq:real_symmetric_inner_product}
+\[
     \lambda v^* v = v^* \left( \lambda v \right)
     = v^* \left( H v \right)
     = \left(v^* H \right) v
@@ -45,9 +49,9 @@ Consider now the inner product $ v^* v$.
     = \left( H v \right)^* v
     = (\lambda v)^* v
     = \overline{\lambda} v^* v
-\end{equation}
+\]
 
-Since we have that $v \neq 0$ it follows that $v^* v \neq 0$
+Since we have that $v \neq \mathbf{0}$ it follows that $v^* v \neq \mathbf{0}$
 and therefore $\lambda = \overline{\lambda}$, that is to say $\lambda$ is real.
 This means that all eigenvalues of Hermitian matrices are real numbers.
 It follows that all eigenvalues of symmetric matrices are also real numbers,
@@ -55,7 +59,7 @@ since they are a special case of Hermitian matrices.
 Now we can define the complex equivalent of orthogonal matrices:
 
 \begin{definition}[Unitary matrix]
-    A matrix $A$ is called \emph{unitary} if $A^* \cdot A = I_n$.
+    A matrix $A$ is called \emph{unitary} if $A^* \cdot A = A \cdot A^* = I_n$.
 \end{definition}
 
 We will oftentimes denote unitary matrices by using $U$ as a reference.
@@ -64,20 +68,20 @@ since $A^T = A^*$ for all real matrices.\\
 Consider a unitary matrix $U$ and an eigenpair $(\lambda, v)$ of $U$.
 The complex conjugate of the eigenvalue equation $U v = \lambda v$ is
 
-\begin{equation} \label{eq:eigenvalue_equation_complex_conjugate}
+\[
     v^* U^* = v^* \overline{\lambda} = \overline{\lambda} v^*
-\end{equation}
+\]
 
 We calculate
 
-\begin{align*}
-    v^* v = v^* U^* U v = v^* \overline{\lambda} \lambda v = \overline{\lambda} \lambda v^* v = \left| \lambda \right|^2 v^* v
-\end{align*}
+\[
+    v^* v = v^* I_n v = v^* U^* U v = v^* \overline{\lambda} \lambda v = \overline{\lambda} \lambda v^* v = \left| \lambda \right|^2 v^* v
+\]
 
 Similarly to above, we can divide by $v^* v$ to obtain
 
 \begin{equation} \label{eq:unitary_eigenvalues}
-    1 = \left| \lambda \right|^2 = \left| \lambda \right|
+    1 = \left| \lambda \right|^2 \implies \left| \lambda \right| = 1
 \end{equation}
 
 meaning that all eigenvalues of unitary matrices have a length of $1$ and are thus situated on the unit circle.
@@ -92,8 +96,8 @@ There is a special group of matrices that all the matrices we have defined so fa
     that is to say $A^* A = A A^*$.
 \end{definition}
 
-It is easy to see that both Hermitian and unitary matrices are normal matrices
-and that the notion includes real symmetric and orthogonal matrices as special cases.
+It is straightforward to see that both Hermitian and unitary matrices are normal matrices
+and that the notion includes real symmetric and orthogonal matrices as special cases.\\
 The spectral theorem states that normal matrices can be diagonalized by a unitary matrix.
 That means, for any normal matrix $A$, there exists a unitary matrix $U$ such that $A = U \Lambda U^*$,
 where $\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ with $\lambda_1, \ldots, \lambda_n$ being the eigenvalues of $A$.

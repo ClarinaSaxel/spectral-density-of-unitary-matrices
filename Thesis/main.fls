@@ -336,11 +336,11 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
-INPUT ./Graphics/Uni Potsdam.png
-INPUT ./Graphics/Uni Potsdam.png
-INPUT ./Graphics/Uni Potsdam.png
-INPUT ./Graphics/Uni Potsdam.png
-INPUT ./Graphics/Uni Potsdam.png
+INPUT ./Graphics/Universität_Potsdam_logo.png
+INPUT ./Graphics/Universität_Potsdam_logo.png
+INPUT ./Graphics/Universität_Potsdam_logo.png
+INPUT ./Graphics/Universität_Potsdam_logo.png
+INPUT ./Graphics/Universität_Potsdam_logo.png
 INPUT /usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./Chapters/abstract.tex
 INPUT ./Chapters/abstract.tex
@@ -362,6 +362,12 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
 INPUT ./Graphics/cayley_transform.tex
 INPUT ./Graphics/cayley_transform.tex
 INPUT Graphics/cayley_transform.tex
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT ./Graphics/eigenvalue_comparison.png
+INPUT ./Graphics/eigenvalue_comparison.png
+INPUT ./Graphics/eigenvalue_comparison.png
+INPUT ./Graphics/eigenvalue_comparison.png
+INPUT ./Graphics/eigenvalue_comparison.png
 INPUT ./Chapters/motivation.tex
 INPUT ./Chapters/motivation.tex
 INPUT Chapters/motivation.tex

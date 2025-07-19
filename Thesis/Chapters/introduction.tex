@@ -21,15 +21,14 @@ The following definition is for matrices with their transpose as their inverse.
 \end{definition}
 
 
-Now we define the complex equivalent of a real symmetric matrix:
+Now we define the complex equivalent of a real symmetric matrix.
+Here, $A^*$ denotes the \emph{conjugate transpose} (also called adjoint) of $A$, that is,
+the matrix obtained by taking the transpose and then complex conjugating all entries.
 
 \begin{definition}[Hermitian matrix]
     Let $A$ be a complex square matrix of size $n$.
     Then $A$ is called \emph{Hermitian} if $A^* = A$.
 \end{definition}
-
-Here, $A^*$ denotes the \emph{conjugate transpose} (also called adjoint) of $A$, that is,
-the matrix obtained by taking the transpose and then complex conjugating all entries.
 
 Throughout this thesis, $A$ will denote a complex, square matrix of size $n$, unless stated otherwise.
 When referring to a Hermitian matrix, we will use the letter $H$.
@@ -80,9 +79,9 @@ We calculate
 
 Similarly to above, we can divide by $v^* v$ to obtain
 
-\begin{equation} \label{eq:unitary_eigenvalues}
+\[
     1 = \left| \lambda \right|^2 \implies \left| \lambda \right| = 1
-\end{equation}
+\]
 
 meaning that all eigenvalues of unitary matrices have a length of $1$ and are thus situated on the unit circle.
 As they are a special case of unitary matrices, the same goes for orthogonal matrices.
@@ -106,7 +105,7 @@ This is essential for applying a function to a matrix, which we will get to in t
 \section{Cayley Transform}
 
 Before giving the central definition of this section,
-we will first enxtend the concept of functions to normal matrices,
+we will first extend the concept of functions to normal matrices,
 allowing us to map one matrix to another.
 
 \begin{definition}[Matrix function on normal matrices]
@@ -153,54 +152,45 @@ H = i (I_n - U)(I_n + U)^{-1}.
 \]
 
 This will be relevant later, as we can then use $\varphi$ to transform unitary matrices into symmetric ones and vice versa.
-In particular, it enables the transfer of spectral density results,
-which will be explored in the following sections.
+
+\subsection*{On the Choice of Random Unitary Matrices}
+
+
+When generating random unitary matrices for numerical experiments,
+it is important to ensure that their eigenvalues are distributed uniformly on the unit circle,
+as predicted by random matrix theory.
+A common approach is to generate a random complex matrix $A$ with independent standard normal entries
+and then construct a unitary matrix from $A$ using either the QR decomposition or the singular value decomposition (SVD).
+In the QR approach, $A$ is factored as $A = QR$, where $Q$ is unitary and $R$ is upper triangular.
+The matrix $Q$ is then used as the random unitary matrix.
+In the SVD approach, $A$ is factored as $A = U \Sigma V^*$,
+and either $U$ or $V$ (both unitary) can be used as a random unitary matrix.
+Although both methods produce unitary matrices, their statistical properties differ.
+The SVD-based approach yields unitary matrices whose eigenvalues are uniformly distributed on the unit circle,
+matching the theoretical prediction for random unitary matrices (the so-called Haar measure).
+In contrast, the QR-based approach does not generally produce a uniform distribution of eigenvalues on the unit circle.
+This distinction is important for applications where the spectral properties of random unitary matrices play a central role,
+such as in the study of spectral densities.
+For such purposes, the SVD-based construction is preferable,
+as it ensures the correct statistical behavior of the eigenvalues.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\textwidth]{Graphics/eigenvalue_comparison.png}
+    \caption{Eigenvalue distributions of random unitary matrices generated via SVD and QR.}
+    \label{fig:eigenvalue-comparison}
+\end{figure}
 
 \section{Spectral Density}
 
 To get to the notion of the spectral density,
 we will first need some more basic definitions to build on.
-
-\begin{definition}[Linear functional]
-    Let $V$ be a vectorspace over $\C$.
-    A \emph{linear functional} $T$ is a linear map $T: V \to \C$.
-\end{definition}
-
-A simple example for such a functional is evaluation at a point:
-
-\begin{equation} \label{eq:functional_example_simple}
-    T: \Cinfty(\C) \to \C, \qquad f \mapsto f(0)
-\end{equation}
-
-where $\Cinfty(\C)$ denotes the space of infinitely differentiable (smooth) functions over $\C$.
-
-Another example is integration against a fixed complex-valued function $g$:
-
-\begin{equation} \label{eq:functional_example_integral}
-    T_g: \Cinfty(\C) \to \C, \qquad f \mapsto \int\limits_{\C} g \cdot f \dx
-\end{equation}
-
-Now, let $\Omega \subset \C^n$ be open and non-empty.
-A \emph{test function} is a smooth function with compact support defined on $\Omega$.
+The reader is assumed to be familiar with the concepts of distributions.
+Let us also recap that for $\Omega \subset \C^n$ open and non-empty,
+a \emph{test function} is a smooth function with compact support defined on $\Omega$.
 The space of all test functions on $\Omega$ is usually denoted by $\mathcal{E}$.
-\emph{Distributions} generalize the concept of functions
-and allow for differentiation in cases where classical differentiation is not possible.
 
-\begin{definition}[Distribution] \label{def:Distribution}
-    Let $\Omega \subset \C^n$ be open,
-    and let $\mathcal{E}$ be the space of complex-valued test functions over $\Omega$.
-    A \emph{distribution} $T$ is a continuous linear functional $T: \mathcal{E} \to \C$.
-    That is, for all $g_1, g_2 \in \mathcal{E}$ and $\lambda \in \C$,
-    \[
-    T(g_1 + \lambda g_2) = T(g_1) + \lambda T(g_2)
-    \]
-    and for any sequence $\{g_n\}_{n \in \N}$ in $\mathcal{E}$ with $g_n \to g$,
-    \[
-    T(g_n) \to T(g).
-    \]
-\end{definition}
-
-An important example of a distribution is the \emph{Dirac delta distribution}, which is defined as follows:
+We will now look at an important case of a distribution
 
 \begin{definition}[Dirac delta distribution]
     Let $\mathcal{E} = \Cinfty(\Omega)$ with $0 \in \Omega \subset \R^n$.
@@ -222,9 +212,9 @@ We now have all the tools we need to define the central concept of this thesis:
 
 \begin{definition}[Spectral density]
     Let $H$ be hermitian and sparse.
-    The \emph{spectral density} is then defined as
+    For $x \in \R$, the \emph{spectral density} is then defined as
     \[
-    \phi(t) = \frac{1}{n} \sum_{j=1}^{n} \delta(t - \lambda_j)
+    \phi(x) = \frac{1}{n} \sum_{j=1}^{n} \delta(x - \lambda_j)
     \]
     where $\delta$ is the Dirac delta distribution
     and $\lambda_j$ are the eigenvalues of $H$ in non-descending order.

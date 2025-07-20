@@ -362,12 +362,6 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
 INPUT ./Graphics/cayley_transform.tex
 INPUT ./Graphics/cayley_transform.tex
 INPUT Graphics/cayley_transform.tex
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT ./Graphics/eigenvalue_comparison.png
-INPUT ./Graphics/eigenvalue_comparison.png
-INPUT ./Graphics/eigenvalue_comparison.png
-INPUT ./Graphics/eigenvalue_comparison.png
-INPUT ./Graphics/eigenvalue_comparison.png
 INPUT ./Chapters/motivation.tex
 INPUT ./Chapters/motivation.tex
 INPUT Chapters/motivation.tex
@@ -378,6 +372,11 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
+INPUT ./Graphics/eigenvalue_comparison.png
+INPUT ./Graphics/eigenvalue_comparison.png
+INPUT ./Graphics/eigenvalue_comparison.png
+INPUT ./Graphics/eigenvalue_comparison.png
+INPUT ./Graphics/eigenvalue_comparison.png
 INPUT ./Chapters/quality_analysis.tex
 INPUT ./Chapters/quality_analysis.tex
 INPUT Chapters/quality_analysis.tex

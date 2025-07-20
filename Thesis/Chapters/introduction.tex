@@ -1,6 +1,21 @@
-We begin this thesis by examining unitary matrices and their fundamental properties.
-Next, we introduce the Cayley transform to finally approach the concept of spectral density.
-Upon this we will be well-equipped to proceed with the investigation afterwards.
+The importance of eigenvalues in mathematics and physics is well established.
+However, for very large matrices, computing all eigenvalues can be prohibitively expensive.
+In many applications, it is sufficient to know only a few extremal eigenvalues,
+or even just the overall distribution of eigenvalues.
+This leads to the concept of the spectral density,
+which describes how eigenvalues are distributed for a given matrix.
+
+While the spectral density is well understood for real symmetric matrices,
+our goal is to extend this concept to the complex case.
+To do so, we first examine Hermitian matrices, which generalize symmetric matrices to the complex domain.
+We then introduce the Cayley transform, which serves as a bridge to unitary matrices.
+Finally, we define and investigate the spectral density for unitary matrices,
+which plays a central role in many areas of mathematics and physics.
+
+We begin this thesis by recalling fundamental properties of unitary matrices.
+Next, we introduce the Cayley transform to connect Hermitian and unitary matrices,
+and then approach the concept of spectral density.
+With this foundation, we are well-equipped to proceed with the main investigation.
 
 \section{Unitary Matrices}
 
@@ -19,7 +34,6 @@ The following definition is for matrices with their transpose as their inverse.
     Let $A$ be a real, square matrix of size $n$.
     Then $A$ is called \emph{orthogonal} if $A^T \cdot A = A \cdot A^T = I_n$.
 \end{definition}
-
 
 Now we define the complex equivalent of a real symmetric matrix.
 Here, $A^*$ denotes the \emph{conjugate transpose} (also called adjoint) of $A$, that is,
@@ -153,34 +167,6 @@ H = i (I_n - U)(I_n + U)^{-1}.
 
 This will be relevant later, as we can then use $\varphi$ to transform unitary matrices into symmetric ones and vice versa.
 
-\subsection*{On the Choice of Random Unitary Matrices}
-
-
-When generating random unitary matrices for numerical experiments,
-it is important to ensure that their eigenvalues are distributed uniformly on the unit circle,
-as predicted by random matrix theory.
-A common approach is to generate a random complex matrix $A$ with independent standard normal entries
-and then construct a unitary matrix from $A$ using either the QR decomposition or the singular value decomposition (SVD).
-In the QR approach, $A$ is factored as $A = QR$, where $Q$ is unitary and $R$ is upper triangular.
-The matrix $Q$ is then used as the random unitary matrix.
-In the SVD approach, $A$ is factored as $A = U \Sigma V^*$,
-and either $U$ or $V$ (both unitary) can be used as a random unitary matrix.
-Although both methods produce unitary matrices, their statistical properties differ.
-The SVD-based approach yields unitary matrices whose eigenvalues are uniformly distributed on the unit circle,
-matching the theoretical prediction for random unitary matrices (the so-called Haar measure).
-In contrast, the QR-based approach does not generally produce a uniform distribution of eigenvalues on the unit circle.
-This distinction is important for applications where the spectral properties of random unitary matrices play a central role,
-such as in the study of spectral densities.
-For such purposes, the SVD-based construction is preferable,
-as it ensures the correct statistical behavior of the eigenvalues.
-
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=1\textwidth]{Graphics/eigenvalue_comparison.png}
-    \caption{Eigenvalue distributions of random unitary matrices generated via SVD and QR.}
-    \label{fig:eigenvalue-comparison}
-\end{figure}
-
 \section{Spectral Density}
 
 To get to the notion of the spectral density,
@@ -220,7 +206,13 @@ We now have all the tools we need to define the central concept of this thesis:
     and $\lambda_j$ are the eigenvalues of $H$ in non-descending order.
 \end{definition}
 
-The number of eigenvalues in an interval $[a, b]$ can then be counted in the following manner:
+The summation over the $n$ eigenvalues of $H$ creates a spike at each eigenvalue $\lambda_j$,
+resulting in a distribution that is zero everywhere except at the eigenvalues of $H$.
+The division by $n$ ensures that the spectral density is normalized,
+meaning that the integral over the entire real line equals $1$.
+This is an important property, as it allows us to interpret the spectral density as a probability density function.
+
+The number of eigenvalues $\nu$ in an interval $[a, b]$ can then be counted in the following manner:
 
 \begin{equation} \label{eq:nu_a_b}
     \nu_{[a, b]} = \int\limits_a^b \sum_j \delta(t - \lambda_j) \dt \equiv \int\limits_a^b n \phi(t) \dt

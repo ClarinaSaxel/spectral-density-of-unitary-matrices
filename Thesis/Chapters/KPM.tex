@@ -62,6 +62,9 @@ or, more concisely,
     \E\left[v^* f(A) v\right] = \Tr(f(A)).
 \end{equation}
 
+We now have a method to calculate the trace of a matrix function $f(A)$,
+using only vector multiplications with $A$.
+
 \section{Polynomial Extension with Chebyshev polynomials}
 We assume Chebyshev polynomials to be a good fit for the polynomial extension of the Dirac delta distribution
 because of the many great properties we will see now. First, let's look how Chebyshev polynomials are defined.
@@ -232,3 +235,30 @@ The implementation is done in Python, and linked in the appendix.
 
 Applying the Cayley transform to an arbitrary unitary matrix $U$ yields a Hermitian matrix $H$;
 and as this is the case, the KPM can be applied to unitary matrices as well.
+
+\section{The Choice of Random Unitary Matrices}
+
+When generating random unitary matrices for numerical experiments,
+it is important to ensure that their eigenvalues are distributed uniformly on the unit circle,
+as predicted by random matrix theory.
+A common approach is to generate a random complex matrix $A$ with independent standard normal entries
+and then construct a unitary matrix from $A$ using either the QR decomposition or the singular value decomposition (SVD).
+In the QR approach, $A$ is factored as $A = QR$, where $Q$ is unitary and $R$ is upper triangular.
+The matrix $Q$ is then used as the random unitary matrix.
+In the SVD approach, $A$ is factored as $A = U \Sigma V^*$,
+and either $U$ or $V$ (both unitary) can be used as a random unitary matrix.
+Although both methods produce unitary matrices, their statistical properties differ.
+The SVD-based approach yields unitary matrices whose eigenvalues are uniformly distributed on the unit circle,
+matching the theoretical prediction for random unitary matrices (the so-called Haar measure).
+In contrast, the QR-based approach does not generally produce a uniform distribution of eigenvalues on the unit circle.
+This distinction is important for applications where the spectral properties of random unitary matrices play a central role,
+such as in the study of spectral densities.
+For such purposes, the SVD-based construction is preferable,
+as it ensures the correct statistical behavior of the eigenvalues.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=1\textwidth]{Graphics/eigenvalue_comparison.png}
+    \caption{Eigenvalue distributions of random unitary matrices generated via SVD and QR.}
+    \label{fig:eigenvalue-comparison}
+\end{figure}

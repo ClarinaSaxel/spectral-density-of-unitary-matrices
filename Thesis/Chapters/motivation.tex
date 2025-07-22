@@ -1,36 +1,48 @@
 Because of its ability to capture the distribution of eigenvalues,
-the spectral density of a matrix is a crucial concept in various fields, including physics, statistics,
-and machine learning, although this list is not exhaustive.
-However, two challenges arise when defining the spectral density of a matrix $H$:
+the spectral density of a matrix is a crucial concept in various fields.
+For example, in quantum mechanics, it describes the density of energy states;
+in statistics, it is related to the distribution of principal components;
+and in machine learning, it provides insight into the behavior of large neural networks.
+However, two main challenges arise when defining and computing the spectral density for a matrix $H$:
 
-Firstly, the eigenvalues of the matrix $H$ are typically not known in advance.
-This would make the computation of the spectral density straightforward, but also defeat the purpose.
+Firstly, the eigenvalues of $H$ are typically not known in advance.
+If they were, computing the spectral density would be straightforward,
+but this is rarely the case for large matrices.
+Secondly, the spectral density is defined using the Dirac delta distribution,
+which is not a conventional function and cannot be evaluated pointwise.
+This makes direct computation infeasible,
+especially for large matrices where eigenvalue decomposition is prohibitively expensive.
 
-Secondly, the delta distribution $\phi(x)$ is not a conventional \emph{function} that can be evaluated pointwise.
-Therefore, there is a need for efficient methods to approximate the spectral density at low computational cost.
+To address these challenges, a fundamental idea is to replace the delta distribution by a regular function $f$ with similar properties:
+\begin{equation} \label{integral_equals_one}
+    \int\limits_{\mathbb{R}} f(x)\, dx = 1,
+\end{equation}
 
-A fundamental idea to address this is to replace the delta distribution by a regular function $f$ with similar properties:
-\[
-\int\limits_{\mathbb{R}} f(x)\, dx = 1,
-\]
-where $f(x)$ is very small or zero for most $x \neq 0$, and finite but large near $x = 0$.
-This regularization makes it possible to approximate the spectral density numerically and is central to many practical algorithms.
+where $f(x)$ is very small or zero for most $x \neq 0$, and finite but large near $x = 0$. This regularization enables numerical approximation of the spectral density and is central to many practical algorithms.
 
-One intuitive approach is to select an interval $I \subset \R$ such that the spectrum of $H$, $\sigma(H)$, is contained within $I$.
-Next, choose $k$ points $t_i$ in $I$ such that the interval is divided into subintervals:
+For real symmetric matrices, a variety of efficient methods have been developed to approximate the spectral density,
+often relying on this regularization principle.
+However, many problems in mathematics and physics naturally lead to complex Hermitian or even unitary matrices,
+for which the spectral density is less straightforward to compute.
+In this thesis, we generalize the established approaches from the real symmetric case to the Hermitian case,
+and further broaden the scope to unitary matrices.
+This is achieved by first applying the Cayley transform, which provides a bridge between Hermitian and unitary matrices
+and allows us to transfer techniques and insights between these classes.
 
-\[
-\{t_i\}_{i = 1}^k \subset I \quad \text{with} \quad \bigcup_{i = 1}^{k - 1} [t_i, t_{i+1}] = I
-\]
+One intuitive approach is to select an interval $I \subset \R$ containing the spectrum of $H$,
+and divide it into $k$ subintervals using points $\{t_i\}_{i=1}^k$.
+By counting the number of eigenvalues in each subinterval
+and calculating the average value of $\phi(x)$ using $\nu_{[a, b]}$ from equation \ref{eq:nu_a_b},
+one obtains a histogram that approximates the true spectral density as the subintervals become smaller.
 
-Count the number of eigenvalues in each subinterval.
-Then, calculate the average value of $\phi(x)$ in each interval using $\nu_{[a, b]}$ from equation \ref{eq:nu_a_b}.
-The result is a histogram, which, as the subintervals become smaller (i.e., as $k$ increases and $(t_{i+1} - t_i) \longrightarrow 0$), approaches the true spectral density.
+To count the eigenvalues in the intervals, methods such as Sylvester's law of inertia can be used,
+which require computing a decomposition of $A - t_i I = LDL^T$ for all $t_i$ \cite{golubvanloan}.
+While this is efficient for certain structured matrices,
+it becomes computationally expensive or impractical for large, unstructured matrices.
 
-To count the eigenvalues in the intervals, one can use methods such as Sylvester's law of inertia.
-The details of this method are beyond the scope of this work;
-it would require computing a decomposition of $A - t_i I = LDL^T$ for all $t_i$ \cite{golubvanloan}.
-While this can be computationally expensive for general matrices,
-it remains a viable and efficient option for certain structured matrices.
-However, for large and unstructured matrices, we prefer methods based on matrix-vector multiplications,
-which are more efficient in higher dimensions.
+This motivates the development of efficient numerical methods that can approximate the spectral density
+using only matrix-vector multiplications, which scale better with matrix size.
+In this thesis, we explore such methods, focusing on regularization techniques and polynomial approximations
+that make the computation of spectral densities feasible for large-scale problems.
+These advances have the potential to impact a wide range of scientific and engineering disciplines
+where understanding the spectral properties of large matrices is crucial.

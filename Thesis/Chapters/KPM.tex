@@ -1,12 +1,111 @@
-\section{Overview}
-There exists a whole class of methods, all of which called the kernel polynomial method, or KPM for short.
-They are powerful tools for approximating the spectral density of matrices.
-We will focus on the main approach in the following.\\
+We consider a class of methods, each with its own variants.
+All these methods are collectively referred to as the Kernel Polynomial Method (KPM).
+
 As the name suggests, the KPM is a polynomial extension of the spectral density.
 The coefficients of the polynomials are derived from the method of moments,
 in order to obtain an estimator function as in statistics.
 
-The method is based on a corollary of the following generalized theorem:
+We previously motivated the replacement of the Dirac delta distribution with a regular function $f$,
+and now turn to polynomial approximations for this purpose.
+
+\section{Basic properties of Chebyshev polynomials}
+Among the possible choices, Chebyshev polynomials are particularly well-suited due to their favorable mathematical properties, which we will outline below. We note that these properties are not unique, as Legendre polynomials or Hermite polynomials are examples of other good candidates.
+
+First, let's look how Chebyshev polynomials are defined.
+Using the trigonometric functions, they can be expressed as follows:
+
+\[ T_k(x) =
+\begin{cases}
+
+\cos(k \arccos(x))                & \quad \text{for } k \in [-1, 1]\\
+    \cosh(k \arcosh(x))           & \quad \text{for } k > 1\\
+    (-1)^k \cosh(k \arcosh(-x))   & \quad \text{for } k < -1 \quad \quad .
+\end{cases}
+\]
+
+For simplicity, we only want to use the formula $T_k(x) = \cos(k \arccos(x))$.
+This means to only consider matrices which have eigenvalues within the intervall $[-1, 1]$.
+In the case that this condition should not be fulfilled, the eigenvalues can be transformed accordingly.
+
+For this, let $\lambda_{lb}$ and $\lambda_{ub}$ be the lower and upper bound for the eigenvalues of $A$, respectively.
+To find these, well-established methods like the Gershgorin circle theorem can be used.
+
+Define
+\[
+c := \frac{\lambda_{lb} + \lambda_{ub}}{2} \quad \text{and} \quad d := \frac{\lambda_{ub} - \lambda_{lb}}{2}
+\]
+Then, the matrix $B = \frac{A - c*I_n}{d}$ has eigenvalues in the interval $[-1, 1]$.
+A visualization of this is linked in the appendix.
+
+Another way to define Chebyshev polynomials is by calculating them using the recursion formula
+\[
+T_{k}(x) = 2xT_{k - 1}(x) - T_{k - 2}(x),
+\]
+where the starting conditions are given by $T_0(x) = 1$ and $T_1(x) = x$.
+
+Now, let
+\begin{equation} \label{eq:weight_function}
+    h(x) := \frac{1}{\sqrt{1 - x^2}}
+\end{equation}
+be a weight function.
+Another property of Chebyshev polynomials is
+that they are \emph{orthogonal} in terms of the scalar product weighted with $h$:
+
+\[
+\left \langle f, g \right \rangle = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot f(x) \cdot g(x) \dx.
+\]
+
+This means that
+\begin{equation} \label{eq:orthogonality}
+\int\limits_{-1}^1 \frac{1}{\sqrt{1 - t^2}} \cdot T_k(t) \cdot T_l(t) \dt =
+\begin{cases}
+    0               & \quad \text{for } k \neq l\\
+    \pi             & \quad \text{for } k = l = 0\\
+    \frac{\pi}{2}   & \quad \text{for } k = l \neq 0 \quad .
+\end{cases}
+\end{equation}
+
+\section{Approximating the spectral density}
+We now define the $\hat{\phi}$ as the product of spectral density with the inverse of the weight function \ref{eq:weight_function}:
+\[
+\hat{\phi}(x) := \sqrt{1 - x^2} \phi(x) = \sqrt{1 - x^2} \, \cdot \, \frac{1}{n} \sum_{j = 1}^n \delta(x - \lambda_j)
+\]
+Let $g \in \SR$, the Schwartz space defined in definition \ref{def:Schwartz space}, and let $\mu_k~\in~\R$ coefficients to be determined such that the following equation holds:
+
+\begin{equation} \label{eq:distribution_equality}
+    \int \limits_{-1}^1 \hat{\phi}(x) g(x) \dx = \int \limits_{-1}^1 \sum_{k = 0}^{\infty} \mu_k T_k(x) g(x) \dx
+\end{equation}
+
+If this is true for arbitrary $g \in \SR$, we can simplify our equation \ref{eq:distribution_equality} to
+
+\begin{equation} \label{eq:Chebyshev-Expansion}
+    \hat{\phi}(x) = \sum_{k = 0}^{\infty} \mu_k T_k(x)
+\end{equation}
+
+
+Now utilize the orthogonality of the Chebyshev polynomials, to calculate a specific coefficient $\mu_k$.
+Note that $\delta_{k0}$ in this context denotes the Kronecker delta, and has nothing to do with the Dirac delta distribution.
+
+\begin{align*}
+    & \; \; \sum_{l = 0}^{\infty} \mu_l T_l(x) = \hat{\phi}(x) \\
+    \implies & \left(\sum_{l = 0}^{\infty} \mu_l T_l(x)\right) \cdot T_k(x) = \hat{\phi}(x) \cdot T_k(x)\\
+    \implies & \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot \left(\sum_{l = 0}^{\infty} \mu_l T_l(x)\right) \cdot T_k(x) \dx = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot \hat{\phi}(x) \cdot T_k(x) \dx\\
+    \implies & \mu_k \cdot \frac{\pi}{2 - \delta_{k0}} = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot \sqrt{1 - x^2} \cdot \phi(x) \cdot T_k(x) \dx\\
+    \implies & \mu_k = \frac{2 - \delta_{k0}}{\pi} \cdot \int\limits_{-1}^1 \phi(x) \cdot T_k(x) \dx\\
+\end{align*}
+
+By applying the Dirac delta distribution we obtain:
+\begin{align*}
+    \mu_k = \frac{2 - \delta_{k0}}{\pi} \cdot \int\limits_{-1}^1 \phi(t) \cdot T_k(t) \dt &= \frac{2 - \delta_{k0}}{\pi} \cdot \int\limits_{-1}^1 \frac{1}{n} \sum_{j = 1}^n \delta(t - \lambda_j) \cdot T_k(t) \dt \\
+    &= \frac{2 - \delta_{k0}}{n \pi} \sum_{j = 1}^n T_k(\lambda_j)\\
+    &= \frac{2 - \delta_{k0}}{n \pi} \Tr(T_k(A))
+\end{align*}
+
+This means we are in need of an estimator for $\Tr(T_k(A))$.
+
+\section{Estimating the trace of Chebyshev polynomials}
+
+We want to obtain the corollary of the following generalized theorem:
 
 \begin{theorem}
     Let $A \in \C^{n \times n}$ be a normal matrix with spectral decomposition
@@ -43,11 +142,8 @@ The method is based on a corollary of the following generalized theorem:
     Since $U$ is unitary, we have shown that $\E[\beta \beta^*] = I_n$.
 \end{proof}
 
-
-\vspace{0.5 cm}
 This theorem has a nice corollary when investigating a matrix function $f(A)$.
-In that case, we have
-
+In that case,
 \begin{align*}
     \E\left[v^* f(A) v\right] &= \E\left[(U\beta)^* f(U\Lambda U^*) (U\beta)\right] \\
         &= \E\left[\beta^* U^* U f(\Lambda) U^* U \beta\right] \\
@@ -58,118 +154,17 @@ In that case, we have
 \end{align*}
 
 or, more concisely,
-\begin{equation} \label{eq:theorem_result}
+\begin{equation} \label{eq:Chebyshev_trace}
     \E\left[v^* f(A) v\right] = \Tr(f(A)).
 \end{equation}
 
 We now have a method to calculate the trace of a matrix function $f(A)$,
 using only vector multiplications with $A$.
 
-\section{Polynomial Extension with Chebyshev polynomials}
-We assume Chebyshev polynomials to be a good fit for the polynomial extension of the Dirac delta distribution
-because of the many great properties we will see now. First, let's look how Chebyshev polynomials are defined.
-Using the trigonometric functions, they can be expressed as follows:
+\section{The Kernel Polynomial Method algorithm}
 
-\[ T_k(x) =
-\begin{cases}
-
-\cos(k \arccos(x))                & \quad \text{for } k \in [-1, 1]\\
-    \cosh(k \arcosh(x))           & \quad \text{for } k > 1\\
-    (-1)^k \cosh(k \arcosh(-x))   & \quad \text{for } k < -1
-\end{cases}
-\]
-
-We will only use the formula $T_k(x) = \cos(k \arccos(x))$.
-This means to only consider matrices, which have eigenvalues within the intervall $[-1, 1]$.
-In the case that this condition should not be fulfilled, the eigenvalues can be transformed accordingly.
-For this, let $\lambda_{lb}$ and $\lambda_{ub}$ be the lower and upper bound for the eigenvalues of $A$, respectively.
-To find these, well-established methods like the Gershgorin circle theorem can be used.
-
-Define
-\[
-c := \frac{\lambda_{lb} + \lambda_{ub}}{2} \quad \text{and} \quad d := \frac{\lambda_{ub} - \lambda_{lb}}{2}
-\]
-Then, the matrix $B = \frac{A - c*I_n}{d}$ has eigenvalues in the interval $[-1, 1]$.
-A visualization of this is linked in the appendix.
-
-
-Another way to define Chebyshev polynomials is by calculating them using the recursion formula
-\[
-T_{k + 1}(x) = 2xT_k(x) - T_{k - 1}(x),
-\]
-where the starting conditions are given by $T_0(x) = 1$ and $T_1(x) = x$.
-
-Additionally, note that the result in equation \ref{eq:theorem_result} says, that
-
-\begin{equation} \label{eq:Chebyshev_trace}
-    \E\left[\,v^T T_k(A) v\,\right] = \Tr\left(T_k(A)\right).
-\end{equation}
-
-This result will be central in the following discussion.
-
-
-Now, let
-\begin{equation} \label{eq:weight_function}
-    h(x) = \frac{1}{\sqrt{1 - x^2}}
-\end{equation}
-be a weight function.
-Another property of Chebyshev polynomials is
-that they are \emph{orthogonal} in terms of the scalar product weighted with $h$:
-
-\[
-\left \langle f, g \right \rangle = \int_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot f(x) \cdot g(x) \dx.
-\]
-
-This means that
-
-\[
-\int_{-1}^1 \frac{1}{\sqrt{1 - t^2}} \cdot T_k(t) \cdot T_l(t) \dt =
-\begin{cases}
-    0               & \quad \text{for } k \neq l\\
-    \pi             & \quad \text{for } k = l = 0\\
-    \frac{\pi}{2}   & \quad \text{for } k = l \neq 0
-\end{cases}
-\]
-
-\section{Approximating the spectral density}
-Now multiply the spectral density with the inverse of the weight function \ref{eq:weight_function}:
-\[
-\hat{\phi}(x) = \sqrt{1 - x^2} \phi(x) = \sqrt{1 - x^2} \, \cdot \, \frac{1}{n} \sum_{j = 1}^n \delta(x - \lambda_j)
-\]
-Let $g \in \SR$, the Schwartz space defined in definition \ref{def:Schwartz space},
-and $\mu_k \in \R$ coefficients to be determined such that the following equation holds:
-
-\begin{equation} \label{eq:distribution_equality}
-    \int \limits_{-1}^1 \hat{\phi}(t) g(t) \dt = \int \limits_{-1}^1 \sum_{k = 0}^{\infty} \mu_k T_k(t) g(t) \dt
-\end{equation}
-
-If this is true for arbitrary $g \in \SR$, we can simplify our equation \ref{eq:distribution_equality} to
-
-\begin{equation} \label{eq:Chebyshev-Expansion}
-    \hat{\phi}(x) = \sum_{k = 0}^{\infty} \mu_k T_k(x)
-\end{equation}
-
-
-Now utilize the orthogonality of the Chebyshev polynomials, to calculate a specific coefficient $\mu_k$:
-
-\begin{align*}
-    & \; \; \sum_{l = 0}^{\infty} \mu_l T_l(t) = \hat{\phi}(t) \\
-    \implies & \left(\sum_{l = 0}^{\infty} \mu_l T_l(t)\right) \cdot T_k(t) = \hat{\phi}(t) \cdot T_k(t)\\
-    \implies & \int_{-1}^1 \frac{1}{\sqrt{1 - t^2}} \cdot \left(\sum_{l = 0}^{\infty} \mu_l T_l(t)\right) \cdot T_k(t) \dt = \int_{-1}^1 \frac{1}{\sqrt{1 - t^2}} \cdot \hat{\phi}(t) \cdot T_k(t) \dt\\
-    \implies & \mu_k \cdot \frac{\pi}{2 - \delta_{k0}} = \int_{-1}^1 \frac{1}{\sqrt{1 - t^2}} \cdot \sqrt{1 - t^2} \cdot \phi(t) \cdot T_k(t) \dt\\
-    \implies & \mu_k = \frac{2 - \delta_{k0}}{\pi} \cdot \int_{-1}^1 \phi(t) \cdot T_k(t) \dt\\
-\end{align*}
-
-By applying the Dirac delta distribution we obtain:
-\begin{align*}
-    \mu_k = \frac{2 - \delta_{k0}}{\pi} \cdot \int_{-1}^1 \phi(t) \cdot T_k(t) \dt &= \frac{2 - \delta_{k0}}{\pi} \cdot \int_{-1}^1 \frac{1}{n} \sum_{j = 1}^n \delta(t - \lambda_j) \cdot T_k(t) \dt \\
-    &= \frac{2 - \delta_{k0}}{n \pi} \sum_{j = 1}^n T_k(\lambda_j)\\
-    &= \frac{2 - \delta_{k0}}{n \pi} \Tr(T_k(A))
-\end{align*}
-
-Now let $n_{\text{vec}} \in \R$ and consider vectors $v_0^{(1)}, v_0^{(2)}, \dots, v_0^{(n_{\text{vec}})}$,
-which are chosen randomly from the standard normal distribution,
-that is to say $\E[v_0^{(k)}] = 0$ und $\E\left[v_0^{(k)}\left(v_0^{(k)}\right)^T\right] = I_n$.
+Now let $n_{\text{vec}} \in \N$ and consider random vectors $v_0^{(1)}, v_0^{(2)}, \dots, v_0^{(n_{\text{vec}})}$,
+each drawn independently from the standard normal distribution, that is, $\mathbb{E}[v_0^{(k)}] = 0$ and $\mathbb{E}\left[v_0^{(k)} \left(v_0^{(k)}\right)^T\right] = I_n$.
 It follows from equation \ref{eq:Chebyshev_trace} that
 \[
 \zeta_k = \frac{1}{n_{\text{vec}}} \sum_{l = 1}^{n_{\text{vec}}} \left( v_0^{(l)} \right)^T T_k(A) v_0^{(l)}
@@ -179,8 +174,8 @@ is a good estimator for $\Tr(T_k(A))$ and therefore
 \mu_k \approx \frac{2 - \delta_{k0}}{n \pi} \zeta_k
 \]
 
-In order to determine the $\zeta_k$, let $v_0 \equiv v_0^{(l)}$
-Using the recursion formula for Tschebyschev polynomials, we can calculate
+In order to determine the $\zeta_k$, let $v_0 \equiv v_0^{(l)}$.
+Using the recursion formula for Chebyschev polynomials, we can calculate
 \[
 T_{k + 1}(A)v_0 = 2 A T_k(A) v_0 - T_{k - 1}(A) v_0
 \]
@@ -189,7 +184,7 @@ For $v_k \equiv T_k(A)v_0$ it also holds that
 v_{k + 1} = 2 A v_k - v_{k - 1}
 \]
 
-With this we are fully equpped for the final calculation and the goal of the KPM is reached:
+With this we are fully equipped for the final calculation and the goal of the KPM is reached:
 Instead of having to multiply matrices with other matrices, it now suffices to multiply matrices with vectors.
 Now we can approximate $\phi(x)$ as closely as we like.
 As aforementioned, it is not always desirable to have an infinitely exact approximation.

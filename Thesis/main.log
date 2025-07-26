@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.9)  26 JUL 2025 11:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.9)  26 JUL 2025 13:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -673,29 +673,31 @@ Chapter 1.
 
 [3] (./Graphics/cayley_transform.tex)
 
-[4])
+[4]
 
-[5]
+[5])
+
+[6]
 Chapter 2.
 (./Chapters/motivation.tex
 
-[6
+[7
 
 ])
 
-[7]
+[8]
 Chapter 3.
 (./Chapters/KPM.tex
 
-[8
+[9
 
 ]
-
-[9]
 
 [10]
 
 [11]
+
+[12]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 205.
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 208.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
@@ -703,36 +705,36 @@ File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 208.
-<Graphics/eigenvalue_comparison.png, id=193, 722.7pt x 361.35pt>
+<Graphics/eigenvalue_comparison.png, id=198, 722.7pt x 361.35pt>
 File: Graphics/eigenvalue_comparison.png Graphic file (type png)
 <use Graphics/eigenvalue_comparison.png>
 Package pdftex.def Info: Graphics/eigenvalue_comparison.png  used on input line 256.
 (pdftex.def)             Requested size: 398.3386pt x 199.16766pt.
 )
 
-[12]
+[13]
 
-[13 <./Graphics/eigenvalue_comparison.png>]
+[14 <./Graphics/eigenvalue_comparison.png>]
 Chapter 4.
 (./Chapters/quality_analysis.tex
 
-[14
+[15
 
 ]
 
-[15]
-<./Graphics/screenshot.png, id=220, 604.2575pt x 417.56pt>
+[16]
+<./Graphics/screenshot.png, id=225, 604.2575pt x 417.56pt>
 File: ./Graphics/screenshot.png Graphic file (type png)
 <use ./Graphics/screenshot.png>
 Package pdftex.def Info: ./Graphics/screenshot.png  used on input line 110.
 (pdftex.def)             Requested size: 308.81267pt x 213.39566pt.
 
 
-[16 <./Graphics/screenshot.png>]) (./Chapters/bibliography.tex
+[17 <./Graphics/screenshot.png>]) (./Chapters/bibliography.tex
 
-[17])
+[18])
 
-[18
+[19
 
 ] (./main.aux)
  ***********
@@ -743,18 +745,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 60BC76E60E26C763443A098AE306C95D;3041.
  ) 
 Here is how much of TeX's memory you used:
- 32496 strings out of 473190
- 756687 string characters out of 5715801
- 1638099 words of memory out of 5000000
- 55159 multiletter control sequences out of 15000+600000
+ 32498 strings out of 473190
+ 756715 string characters out of 5715801
+ 1641255 words of memory out of 5000000
+ 55160 multiletter control sequences out of 15000+600000
  568893 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,11n,105p,791b,2108s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (20 pages, 662765 bytes).
+Output written on main.pdf (21 pages, 665332 bytes).
 PDF statistics:
- 332 PDF objects out of 1000 (max. 8388607)
- 265 compressed objects within 3 object streams
- 65 named destinations out of 1000 (max. 500000)
+ 337 PDF objects out of 1000 (max. 8388607)
+ 269 compressed objects within 3 object streams
+ 66 named destinations out of 1000 (max. 500000)
  156 words of extra memory for PDF output out of 10000 (max. 10000000)
 

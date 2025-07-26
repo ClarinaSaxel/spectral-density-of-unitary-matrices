@@ -1,35 +1,26 @@
-The importance of eigenvalues in mathematics and physics is well established. For very large matrices, however, computing all eigenvalues can be prohibitively expensive. In many applications, it suffices to know only a few extremal eigenvalues or the overall distribution of eigenvalues, leading to the concept of the spectral density.
+The importance of eigenvalues in mathematics and physics is well established. For very large matrices, however, computing all eigenvalues can be prohibitively expensive. In many applications, it suffices to know only a few extremal eigenvalues, certain functionals of the eigenvalues, or the overall distribution of eigenvalues, leading to the concept of the spectral density.
 
-While the spectral density is well understood for real symmetric matrices, our goal is to extend this concept to the complex case. To achieve this, we first examine Hermitian matrices, which generalize symmetric matrices, introduce the Cayley transform as a bridge to unitary matrices, and finally define and investigate the spectral density for unitary matrices. With this foundation, we are well-equipped to proceed with the main algorithm.
+The spectral density, as defined below, provides an exact representation of the eigenvalue distribution. Because it is formulated using the Dirac delta distribution—which is not a conventional function—it must be regularized for practical computations. While efficient techniques exist for real symmetric matrices, our aim is to extend these ideas to the unitary case. To do so, we first revisit Hermitian matrices, introduce the Cayley transform as a link to unitary matrices, and then develop the spectral density framework for unitary matrices. This foundation enables us to address the main algorithm.
 
 \section{Unitary Matrices}
 
-We start with two definitions for important real matrices that we then extend to complex matrices. The index $^T$ marks the transpose of a matrix. As common in literature, $I_n$ denotes the identity matrix of size $n$.
+We begin with a basic definition of real symmetric matrices, which we then extend to the complex case. The superscript $^T$ denotes the transpose of a matrix, while~$^*$ indicates the \emph{conjugate transpose}, also called the \emph{adjoint}, obtained by taking the transpose and then complex conjugating all entries. As is common in the literature, $I_n$ denotes the identity matrix of size $n$.
 
 \begin{definition}[Symmetric matrix]
-    Let $A$ be a real, square matrix of size $n$.
-    Then $A$ is called \emph{symmetric} if $A^T = A$.
+    Let $A \in \R^{n \times n}$ be a real, square matrix of size~$n$. Then $A$ is called \emph{symmetric} if $A^T = A$.
 \end{definition}
 
-The following definition is for matrices with their transpose as their inverse.
-
-\begin{definition}[Orthogonal matrix]
-    Let $A$ be a real, square matrix of size $n$.
-    Then $A$ is called \emph{orthogonal} if $A^T \cdot A = A \cdot A^T = I_n$.
-\end{definition}
-
-Now we define the complex equivalent of a real symmetric matrix. Here, $A^*$ denotes the \emph{conjugate transpose} (also called adjoint) of $A$, that is, the matrix obtained by taking the transpose and then complex conjugating all entries.
+This definition naturally leads us to the complex equivalent of a real symmetric matrix.
 
 \begin{definition}[Hermitian matrix]
-    Let $A$ be a complex square matrix of size $n$.
-    Then $A$ is called \emph{Hermitian} if $A^* = A$.
+    Let $A \in \C^{n \times n}$ be a complex square matrix of size $n$. Then $A$ is called \emph{Hermitian} if $A^* = A$.
 \end{definition}
 
 Throughout this thesis, $A$ will denote a complex, square matrix of size $n$, unless stated otherwise. When referring to a Hermitian matrix, we will use the letter $H$.
 
 We now examine the eigenvalues of Hermitian matrices.
 
-Let $H = H^*$ and $H v = \lambda v$ for a complex vector $v \neq \mathbf{0}$ of size $n$ and a scalar $\lambda \in \C$. Consider now the inner product $ v^* v$. Remember that $(A \cdot B)^* = B^* \cdot A^*$ holds for a matrix product, and obviously ${(A^*)^*} = A$ for all matrices and vectors.
+Let $H = H^*$ and $H v = \lambda v$ for a complex vector $v \in \C^n \setminus \{\mathbf{0}\}$ and a scalar $\lambda \in \C$. Consider now the inner product $ v^* v$. With $(A B)^* = B^* A^*$ and obviously ${(A^*)^*} = A$ we have that
 
 \[
     \lambda v^* v = v^* \left( \lambda v \right)
@@ -38,21 +29,23 @@ Let $H = H^*$ and $H v = \lambda v$ for a complex vector $v \neq \mathbf{0}$ of 
     = \left( H^* v \right)^* v
     = \left( H v \right)^* v
     = (\lambda v)^* v
-    = \overline{\lambda} v^* v
+    = \overline{\lambda} v^* v.
 \]
 
-Since we have that $v \neq \mathbf{0}$ it follows that $v^* v \neq \mathbf{0}$ and therefore $\lambda = \overline{\lambda}$, that is to say $\lambda$ is real. This means that all eigenvalues of Hermitian matrices are real numbers. It follows that all eigenvalues of symmetric matrices are also real numbers, since they are a special case of Hermitian matrices. Now we can define the complex equivalent of orthogonal matrices:
+Since we required that $v \neq \mathbf{0}$, it follows that $v^* v \neq \mathbf{0}$ and therefore we can divide the equation by the inner product to obtain $\lambda = \overline{\lambda}$, that is to say $\lambda$ is real. This means that all eigenvalues of Hermitian matrices are real numbers. It follows that all eigenvalues of symmetric matrices are also real numbers, since they are a special case of Hermitian matrices.
+
+We go on to define the complex matrices central to this thesis:
 
 \begin{definition}[Unitary matrix]
-    A matrix $A$ is called \emph{unitary} if $A^* \cdot A = A \cdot A^* = I_n$.
+    A matrix $A$ is called \emph{unitary} if $A^* A = A A^* = I_n$. The real equivalent is called an \emph{orthogonal matrix}, where $A^T A = A A^T = I_n$.
 \end{definition}
 
-We will oftentimes denote unitary matrices by using $U$ as a reference. It is easy to see that orthogonal matrices are a special case of unitary matrices, since $A^T = A^*$ for all real matrices.
+We will oftentimes denote unitary matrices by using $U$ as a reference. 
 
 Consider a unitary matrix $U$ and an eigenpair $(\lambda, v)$ of $U$. The complex conjugate of the eigenvalue equation $U v = \lambda v$ is
 
 \[
-    v^* U^* = v^* \overline{\lambda} = \overline{\lambda} v^*
+    v^* U^* = v^* \overline{\lambda} = \overline{\lambda} v^*.
 \]
 
 We calculate
@@ -61,7 +54,7 @@ We calculate
     v^* v = v^* I_n v = v^* U^* U v = v^* \overline{\lambda} \lambda v = \overline{\lambda} \lambda v^* v = \left| \lambda \right|^2 v^* v
 \]
 
-Similarly to above, we can divide by $v^* v$ to obtain
+With the identical argument as above, we can divide by $v^* v$ to obtain
 
 \[
     1 = \left| \lambda \right|^2 \implies \left| \lambda \right| = 1
@@ -76,21 +69,23 @@ There is a special group of matrices that all the matrices we have defined so fa
     that is to say $A^* A = A A^*$.
 \end{definition}
 
-It is straightforward to see that both Hermitian and unitary matrices are normal matrices and that the notion includes real symmetric and orthogonal matrices as special cases. The spectral theorem states that normal matrices can be diagonalized by a unitary matrix \cite{sheldonaxler}. That means, for any normal matrix $A$, there exists a unitary matrix $U$ such that $A = U \Lambda U^*$, where $\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ with $\lambda_1, \ldots, \lambda_n$ being the eigenvalues of $A$. This is essential for applying a function to a matrix, which we will get to in the next section.
+It is straightforward to see that both Hermitian and unitary matrices are normal matrices and that the notion includes real symmetric and orthogonal matrices as special cases. The spectral theorem states that normal matrices can be diagonalized by a unitary matrix~\cite[Thm.~7.24, p.~218]{sheldonaxler}. That means, for any normal matrix $A$, there exists a unitary matrix $U$ such that $A = U \Lambda U^*$, where $\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ with $\lambda_1, \ldots, \lambda_n$ being the eigenvalues of $A$. This is essential for applying a function to a matrix, which is discussed in the next section.
 
 \section{Cayley Transform}
 
-Before giving the central definition of this section, we will first extend the concept of functions to normal matrices, allowing us to map one matrix to another.
+Before giving the central definition of this section, we first extend the concept of functions to normal matrices, allowing us to map one matrix to another.
 
-\begin{definition}[Matrix function on normal matrices]
+\begin{definition}[Matrix function of normal matrices]
     Let $A$ be a normal matrix and let $f: \C \to \C$ be a function that is defined on the spectrum of $A$,
     $\sigma(A) = \{\lambda_1, \ldots, \lambda_n\}$.
     Then the \emph{matrix function} $f(A)$ is defined as
     \[
-    f(A) := U f(\Lambda) U^* = U \diag(f(\lambda_1), \ldots, f(\lambda_n)) U^*
+    f(A) := U f(\Lambda) U^* = U \diag(f(\lambda_1), \ldots, f(\lambda_n)) U^*,
     \]
     where $U$ is the matrix of eigenvectors of $A$ and $\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ is the diagonal matrix of eigenvalues.
 \end{definition}
+
+This definition is a special case of the more general definition of matrix functions via Jordan canonical form given by Higham in~\cite[p.~3]{higham}. For normal matrices, the Jordan canonical form is diagonal, so Higham’s general definition reduces to the spectral decomposition used here.
 
 Now we can define the \emph{Cayley transform}, which is a specific matrix function, that establishes a correspondence between Hermitian and unitary matrices, allowing spectral properties to be translated between these two important classes.
 
@@ -107,11 +102,11 @@ This function maps the real line to the unit circle in the complex plane.
 
 For matrices, the Cayley transform maps a Hermitian matrix $H$ (with $i + H$ invertible) to a unitary matrix $U$ via
 \[
-U = (i - H)(i + H)^{-1}.
+U = (i I_n - H)(i I_n + H)^{-1}.
 \]
-The condition of $i + H$ being invertible is the same as requiring that $H$ does not have $-i$ as an eigenvalue. If (and only if) that were the case, then we had $H v = -i v$ for some eigenvector $v \neq \mathbf{0}$, and therefore
+The condition of $i I_n + H$ being invertible is the same as requiring that $H$ does not have $-i$ as an eigenvalue. If (and only if) that were the case, then we had $H v = -i v$ for some eigenvector $v \neq \mathbf{0}$, and therefore
 \[
-(i + H) v = i v + H v = i v + (-i v) = 0.
+(i I_n + H) v = i I_n v + H v = i v + (-i v) = 0.
 \]
 
 Since Hermitian matrices have only real eigenvalues as discussed above, $-i$ can never be an eigenvalue. Conversely, given a unitary matrix $U$ (with $U \neq -I_n$), the inverse Cayley transform yields a Hermitian matrix:

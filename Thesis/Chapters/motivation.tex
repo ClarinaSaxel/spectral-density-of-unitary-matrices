@@ -1,17 +1,6 @@
-Because of its ability to capture the distribution of eigenvalues,
-the spectral density of a matrix is a crucial concept in various fields.
-For example, in quantum mechanics, it describes the density of energy states;
-in statistics, it is related to the distribution of principal components;
-and in machine learning, it provides insight into the behavior of large neural networks.
-However, two main challenges arise when defining and computing the spectral density for a matrix $H$:
+Because of its ability to capture the distribution of eigenvalues, the spectral density of a matrix is a crucial concept in various fields. For example, in quantum mechanics, it describes the density of energy states; in statistics, it is related to the distribution of principal components; and in machine learning, it provides insight into the behavior of large neural networks. However, two main challenges arise when defining and computing the spectral density for a matrix $H$:
 
-Firstly, the eigenvalues of $H$ are typically not known in advance.
-If they were, computing the spectral density would be straightforward,
-but this is rarely the case for large matrices.
-Secondly, the spectral density is defined using the Dirac delta distribution,
-which is not a conventional function and cannot be evaluated pointwise.
-This makes direct computation infeasible,
-especially for large matrices where eigenvalue decomposition is prohibitively expensive.
+Firstly, the eigenvalues of $H$ are typically not known in advance. If they were, computing the spectral density would be straightforward, but this is rarely the case for large matrices. Secondly, the spectral density is defined using the Dirac delta distribution, which is not a conventional function and cannot be evaluated pointwise. This makes direct computation infeasible, especially for large matrices where eigenvalue decomposition is prohibitively expensive.
 
 To address these challenges, a fundamental idea is to replace the delta distribution by a regular function $f$ with similar properties:
 \begin{equation} \label{integral_equals_one}

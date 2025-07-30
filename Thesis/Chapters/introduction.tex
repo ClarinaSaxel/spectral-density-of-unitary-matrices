@@ -136,52 +136,48 @@ This will be relevant later, as we can then use $\varphi$ to transform unitary m
 
 \section{Spectral Density}
 
-To get to the notion of the spectral density, we first need some more basic definitions to build on. The reader is assumed to be familiar with the concepts of distributions. Let us also recap that for $\Omega \subset \C^n$ open and non-empty, a \emph{test function} is a smooth function with compact support defined on $\Omega$. The space of all test functions on $\Omega$ is usually denoted by $\mathcal{E}$.
-
-We will now look at an important case of a distribution
+To get to the notion of the spectral density, we first need some more basic definitions to build on.
+The reader is assumed to be familiar with the concepts of distributions. Should that not be the case, \cite{strichartz} gives a comprehensive introduction in his first chapter. Let us also recap that for $\Omega \subset \C^n$ open and non-empty, a \emph{test function} is a smooth function with compact support defined on $\Omega$. The space of all test functions on $\Omega$ is usually denoted by $\mathcal{E}$.
 
 \begin{definition}[Dirac delta distribution]
     Let $\mathcal{E} = \Cinfty(\Omega)$ with $0 \in \Omega \subset \R^n$.
     Then
     \[
-    \delta: \mathcal{E} \to \R, \quad f \mapsto f(0) \quad \text{with} \quad \delta(f) = \langle \delta, f \rangle = f(0)
+    \delta: \mathcal{E} \to \R, \quad f \mapsto f(0) \quad \text{with} \quad \langle \delta, f \rangle := \delta(f) = f(0).
     \]
 \end{definition}
 
-this distribution is often mistakenly referred to as a function, although it is not a function in the classical sense.
-
-The Dirac delta is characterized by the following property:
-
+This distribution is often mistakenly referred to as a function, although it is not a function in the classical sense. The Dirac delta is characterized by the following property:
 \[
 \int\limits_{-\infty}^{\infty} f(x) \delta(x-a) \dx = \int\limits_{-\infty}^{\infty} f(x) \delta(a-x) \dx = f(a) \implies \int\limits_{-\infty}^{\infty} \delta(x-a) \dx = 1.
 \]
 
-This means that the Dirac delta distribution is zero everywhere except at the point $a$, where it is infinitely high, such that the integral over it equals $1$. We now have all the tools we need to define the central concept of this thesis:
+This means that the Dirac delta distribution is zero everywhere except at the point $a$, where it is \emph{infinitely large}, such that the integral over it equals $1$. We now have all the tools we need to define the central concept of this thesis:
 
 \begin{definition}[Spectral density]
-    Let $H$ be hermitian and sparse.
-    For $x \in \R$, the \emph{spectral density} is then defined as
+    Let $H \in \C^{n \times n}$ be Hermitian.
+    For $x \in \R$, the \emph{spectral density} $\phi(x)$ is defined as
     \[
-    \phi(x) = \frac{1}{n} \sum_{j=1}^{n} \delta(x - \lambda_j)
+    \phi(x) = \frac{1}{n} \sum_{j=1}^{n} \delta(x - \lambda_j),
     \]
     where $\delta$ is the Dirac delta distribution
     and $\lambda_j$ are the eigenvalues of $H$ in non-descending order.
 \end{definition}
 
-The summation over the $n$ eigenvalues of $H$ creates a spike at each eigenvalue $\lambda_j$, resulting in a distribution that is zero everywhere except at the eigenvalues of $H$. The division by $n$ ensures that the spectral density is normalized, meaning that the integral over the entire real line equals $1$. This is an important property, as it allows us to interpret the spectral density as a probability density function.
+The summation over the $n$ eigenvalues of $H$ creates a spike at each eigenvalue~$\lambda_j$, resulting in a distribution that is zero everywhere except at the eigenvalues of~$H$. The division by $n$ ensures that the spectral density is normalized, meaning that the integral over the entire real line equals $1$. This is an important property, as it allows us to interpret the spectral density as a probability density function.
 
 The number of eigenvalues $\nu$ in an interval $[a, b]$ can then be counted in the following manner:
 
-\begin{equation} \label{eq:nu_a_b}
+\begin{equation} \label{nu_a_b}
     \nu_{[a, b]} = \int\limits_a^b \sum_j \delta(t - \lambda_j) \dt \equiv \int\limits_a^b n \phi(t) \dt
 \end{equation}
 
-Lastly, we will need the notion of the Schwartz space, which we will use as the space of test functions in the following sections.
+Lastly, we need the notion of the Schwartz space, which we will use as the space of test functions in the following sections.
 
 \begin{definition}[Schwartz space over $\R$] \label{def:Schwartz space}
     The \emph{Schwartz space} over $\R$ consists of all smooth functions $f$ that decay rapidly to zero as $|x|$ approaches infinity \cite{richtmyer}.
     Formally,
     \[
-    \SR := \left\{f \in \Cinfty(\R) \mid \forall p, k \in \N_0: \sup_{x \in \R} \left| x^p f^{(k)}(x) \right| < \infty \right\}
+    \SR := \left\{f \in \Cinfty(\R) \mid \forall p, k \in \N_0: \sup_{x \in \R} \left| x^p f^{(k)}(x) \right| < \infty \right\}.
     \]
 \end{definition}

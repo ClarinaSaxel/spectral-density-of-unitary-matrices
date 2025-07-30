@@ -1,15 +1,8 @@
-We consider a class of methods, each with its own variants.
-All these methods are collectively referred to as the Kernel Polynomial Method (KPM).
-
-As the name suggests, the KPM is a polynomial extension of the spectral density.
-The coefficients of the polynomials are derived from the method of moments,
-in order to obtain an estimator function as in statistics.
-
-We previously motivated the replacement of the Dirac delta distribution with a regular function $f$,
-and now turn to polynomial approximations for this purpose.
+The Kernel Polynomial Method (KPM) is a powerful technique for approximating spectral properties of large matrices \cite{weisse2006,linsaadyang14}. It employs polynomial expansions to efficiently estimate quantities such as the spectral density and related functions. We previously motivated the replacement of the Dirac delta distribution with a regular function~$f$, and now use the variant of KPM that incorporates this regularization using Chebyshev polynomials.
+The coefficients of the polynomials are derived from the method of moments, in order to obtain an estimator function as in statistics.
 
 \section{Basic properties of Chebyshev polynomials}
-Among the possible choices, Chebyshev polynomials are particularly well-suited due to their favorable mathematical properties, which we will outline below. We note that these properties are not unique, as Legendre polynomials or Hermite polynomials are examples of other good candidates.
+Among the possible choices, Chebyshev polynomials of the first kind are particularly well-suited due to their favorable mathematical properties, which we will outline below. We note that these properties are not unique, as Legendre polynomials or Hermite polynomials are examples of other good candidates.
 
 First, let's look how Chebyshev polynomials are defined.
 Using the trigonometric functions, they can be expressed as follows:
@@ -17,14 +10,14 @@ Using the trigonometric functions, they can be expressed as follows:
 \[ T_k(x) =
 \begin{cases}
 
-\cos(k \arccos(x))                & \quad \text{for } k \in [-1, 1]\\
-    \cosh(k \arcosh(x))           & \quad \text{for } k > 1\\
-    (-1)^k \cosh(k \arcosh(-x))   & \quad \text{for } k < -1 \quad \quad .
+\cos(k \arccos(x))                & \quad \text{for } k \in [-1, 1],\\
+    \cosh(k \arcosh(x))           & \quad \text{for } k > 1,\\
+    (-1)^k \cosh(k \arcosh(-x))   & \quad \text{for } k < -1.
 \end{cases}
 \]
 
 For simplicity, we only want to use the formula $T_k(x) = \cos(k \arccos(x))$.
-This means to only consider matrices which have eigenvalues within the intervall $[-1, 1]$.
+This means to only consider matrices that have eigenvalues within the intervall $[-1, 1]$.
 In the case that this condition should not be fulfilled, the eigenvalues can be transformed accordingly.
 
 For this, let $\lambda_{lb}$ and $\lambda_{ub}$ be the lower and upper bound for the eigenvalues of $A$, respectively.
@@ -43,65 +36,90 @@ T_{k}(x) = 2xT_{k - 1}(x) - T_{k - 2}(x),
 \]
 where the starting conditions are given by $T_0(x) = 1$ and $T_1(x) = x$.
 
-Now, let
-\begin{equation} \label{eq:weight_function}
-    h(x) := \frac{1}{\sqrt{1 - x^2}}
-\end{equation}
-be a weight function.
-Another property of Chebyshev polynomials is
-that they are \emph{orthogonal} in terms of the scalar product weighted with $h$:
-
+Let's recall that for a given interval~$[a, b]$ and weight function~$w(x) \geq 0$ defined on that interval, we define the inner product
 \[
-\left \langle f, g \right \rangle = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot f(x) \cdot g(x) \dx.
+\langle f, g \rangle_w := \int\limits_a^b w(x) f(x) g(x) \dx.
 \]
+Now, let
+\[
+h(x) := \frac{1}{\sqrt{1 - x^2}}
+\]
+be a weight function on $[-1, 1]$. We investigate the inner product of two Chebyshev polynomials with respect to this weight function:
 
-This means that
+\begin{lemma}[Orthogonality of Chebyshev Polynomials]
+Let $T_k(x)$ denote the Chebyshev polynomials, and let $h(x) = \frac{1}{\sqrt{1 - x^2}}$ be the weight function on $[-1, 1]$. Then, for all integers $k, l \geq 0$,
 \begin{equation} \label{eq:orthogonality}
-\int\limits_{-1}^1 \frac{1}{\sqrt{1 - t^2}} \cdot T_k(t) \cdot T_l(t) \dt =
-\begin{cases}
-    0               & \quad \text{for } k \neq l\\
-    \pi             & \quad \text{for } k = l = 0\\
-    \frac{\pi}{2}   & \quad \text{for } k = l \neq 0 \quad .
-\end{cases}
+    \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} T_k(x) T_l(x) \dx =
+    \begin{cases}
+        0               & \text{if } k \neq l,\\
+        \pi             & \text{if } k = l = 0,\\
+        \frac{\pi}{2}   & \text{if } k = l \neq 0.
+    \end{cases}
 \end{equation}
+\end{lemma}
+
+\begin{proof}
+Recall that $T_k(x) = \cos(k \arccos(x))$ for $x \in [-1, 1]$. Let $x = \cos \theta$ with $\theta \in [0, \pi]$. Then $\dx = -\sin \theta \, d\theta$ and $\sqrt{1 - x^2} = \sin \theta$.
+
+Substituting, we have:
+\begin{align*}
+    \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} T_k(x) T_l(x) \dx
+    &= \int\limits_{\theta=\pi}^{0} \frac{1}{\sin \theta} \cos(k \theta) \cos(l \theta) (-\sin \theta) d\theta \\
+    &= \int\limits_{0}^{\pi} \cos(k \theta) \cos(l \theta) d\theta
+\end{align*}
+
+The orthogonality of cosine functions on $[0, \pi]$ gives:
+\begin{align*}
+    \int\limits_{0}^{\pi} \cos(k \theta) \cos(l \theta) d\theta =
+    \begin{cases}
+        0               & \text{if } k \neq l,\\
+        \pi             & \text{if } k = l = 0,\\
+        \frac{\pi}{2}   & \text{if } k = l \neq 0.
+    \end{cases}
+\end{align*}
+which proves the lemma.
+\end{proof}
 
 \section{Approximating the spectral density}
-We now define the $\hat{\phi}$ as the product of spectral density with the inverse of the weight function \ref{eq:weight_function}:
+We now define the $\hat{\phi}$ as the product of spectral density with the inverse of the weight function~$h(x)$:
 \[
 \hat{\phi}(x) := \sqrt{1 - x^2} \phi(x) = \sqrt{1 - x^2} \, \cdot \, \frac{1}{n} \sum_{j = 1}^n \delta(x - \lambda_j)
 \]
-Let $g \in \SR$, the Schwartz space defined in definition \ref{def:Schwartz space}, and let $\mu_k~\in~\R$ coefficients to be determined such that the following equation holds:
+Let $g \in \SR$, the Schwartz space defined in Definition \ref{def:Schwartz space}, and let $\mu_k~\in~\R$ coefficients to be determined such that the following equation holds:
 
-\begin{equation} \label{eq:distribution_equality}
+\[
     \int \limits_{-1}^1 \hat{\phi}(x) g(x) \dx = \int \limits_{-1}^1 \sum_{k = 0}^{\infty} \mu_k T_k(x) g(x) \dx
-\end{equation}
+\]
 
-If this is true for arbitrary $g \in \SR$, we can simplify our equation \ref{eq:distribution_equality} to
+If this is true for arbitrary $g \in \SR$, we can simplify the equation above to
 
 \begin{equation} \label{eq:Chebyshev-Expansion}
     \hat{\phi}(x) = \sum_{k = 0}^{\infty} \mu_k T_k(x)
 \end{equation}
 
 
-Now utilize the orthogonality of the Chebyshev polynomials, to calculate a specific coefficient $\mu_k$.
-Note that $\delta_{k0}$ in this context denotes the Kronecker delta, and has nothing to do with the Dirac delta distribution.
+Now utilize the orthogonality of the Chebyshev polynomials to calculate a specific coefficient~$\mu_k$.
+Note that~$\delta_{k0}$ in this context denotes the Kronecker delta, and therefore equals $1$ for~$k = 0$ and $0$ for~$k \neq 0$. Applying the inner product defined above to both sides of the equation yields
 
 \begin{align*}
-    & \; \; \sum_{l = 0}^{\infty} \mu_l T_l(x) = \hat{\phi}(x) \\
-    \implies & \left(\sum_{l = 0}^{\infty} \mu_l T_l(x)\right) \cdot T_k(x) = \hat{\phi}(x) \cdot T_k(x)\\
-    \implies & \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot \left(\sum_{l = 0}^{\infty} \mu_l T_l(x)\right) \cdot T_k(x) \dx = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot \hat{\phi}(x) \cdot T_k(x) \dx\\
-    \implies & \mu_k \cdot \frac{\pi}{2 - \delta_{k0}} = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \cdot \sqrt{1 - x^2} \cdot \phi(x) \cdot T_k(x) \dx\\
-    \implies & \mu_k = \frac{2 - \delta_{k0}}{\pi} \cdot \int\limits_{-1}^1 \phi(x) \cdot T_k(x) \dx\\
+    & \; \; \left \langle \sum_{l = 0}^{\infty} \mu_l T_l(x), T_k(x) \right \rangle_h = \left \langle \hat{\phi}(x), T_k(x) \right \rangle_h \\
+    \implies & \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \left(\sum_{l = 0}^{\infty} \mu_l T_l(x)\right) T_k(x) \dx = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \hat{\phi}(x) T_k(x) \dx.\\
 \end{align*}
+
+On the left side, every term of the sum except for the~$k$-th term vanishes due to the orthogonality of the Chebyshev polynomials, while we make use of our definition of~$\hat{\phi}$ on the right side. Therefore, we have
+
+\[
+    \mu_k \frac{\pi}{2 - \delta_{k0}} = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \sqrt{1 - x^2} \phi(x) T_k(x) \dx \implies \mu_k = \frac{2 - \delta_{k0}}{\pi} \int\limits_{-1}^1 \phi(x) T_k(x) \dx
+\]
 
 By applying the Dirac delta distribution we obtain:
 \begin{align*}
-    \mu_k = \frac{2 - \delta_{k0}}{\pi} \cdot \int\limits_{-1}^1 \phi(t) \cdot T_k(t) \dt &= \frac{2 - \delta_{k0}}{\pi} \cdot \int\limits_{-1}^1 \frac{1}{n} \sum_{j = 1}^n \delta(t - \lambda_j) \cdot T_k(t) \dt \\
+    \mu_k = \frac{2 - \delta_{k0}}{\pi} \int\limits_{-1}^1 \phi(t) T_k(t) \dt &= \frac{2 - \delta_{k0}}{\pi} \int\limits_{-1}^1 \frac{1}{n} \sum_{j = 1}^n \delta(t - \lambda_j) T_k(t) \dt \\
     &= \frac{2 - \delta_{k0}}{n \pi} \sum_{j = 1}^n T_k(\lambda_j)\\
     &= \frac{2 - \delta_{k0}}{n \pi} \Tr(T_k(A))
 \end{align*}
 
-This means we are in need of an estimator for $\Tr(T_k(A))$.
+with $\Tr(T_k(A)) := \displaystyle \sum_{j = 1}^n T_k(\lambda_j)$ the \emph{trace} of the Chebyshev polynomial applied to the matrix $A$. This means we are in need of an estimator for $\Tr(T_k(A))$.
 
 \section{Estimating the trace of Chebyshev polynomials}
 
@@ -126,7 +144,7 @@ We want to obtain the corollary of the following generalized theorem:
 \end{theorem}
 
 
-\begin{proof}[Proof of Theorem 1]
+\begin{proof}[Proof]
     Since the expectation operator is linear, it holds that
     \[
     \E[v] = \E[U\beta] = U\E[\beta] = 0 \implies \E[\beta] = 0
@@ -145,18 +163,17 @@ We want to obtain the corollary of the following generalized theorem:
 This theorem has a nice corollary when investigating a matrix function $f(A)$.
 In that case,
 \begin{align*}
-    \E\left[v^* f(A) v\right] &= \E\left[(U\beta)^* f(U\Lambda U^*) (U\beta)\right] \\
-        &= \E\left[\beta^* U^* U f(\Lambda) U^* U \beta\right] \\
-        &= \E\left[\beta^* f(\Lambda) \beta\right] \\
-        &= \E\left[\sum_{j = 1}^n |\beta_j|^2 f(\lambda_j) \right] \\
-        &= \sum_{j = 1}^n f(\lambda_j) \E\left[ |\beta_j|^2 \right] \\
-        &= \sum_{j = 1}^n f(\lambda_j)
+    \E\left[v^* f(A) v\right] = \E\left[(U\beta)^* f(U\Lambda U^*) (U\beta)\right] &= \E\left[\beta^* U^* U f(\Lambda) U^* U \beta\right] \\
+    &= \E\left[\beta^* f(\Lambda) \beta\right] \\
+    &= \E\left[\sum_{j = 1}^n |\beta_j|^2 f(\lambda_j) \right] \\
+    &= \sum_{j = 1}^n f(\lambda_j) \E\left[ |\beta_j|^2 \right] \\
+    &= \sum_{j = 1}^n f(\lambda_j)
 \end{align*}
 
 or, more concisely,
-\begin{equation} \label{eq:Chebyshev_trace}
+\[
     \E\left[v^* f(A) v\right] = \Tr(f(A)).
-\end{equation}
+\]
 
 We now have a method to calculate the trace of a matrix function $f(A)$,
 using only vector multiplications with $A$.
@@ -165,23 +182,23 @@ using only vector multiplications with $A$.
 
 Now let $n_{\text{vec}} \in \N$ and consider random vectors $v_0^{(1)}, v_0^{(2)}, \dots, v_0^{(n_{\text{vec}})}$,
 each drawn independently from the standard normal distribution, that is, $\mathbb{E}[v_0^{(k)}] = 0$ and $\mathbb{E}\left[v_0^{(k)} \left(v_0^{(k)}\right)^T\right] = I_n$.
-It follows from equation \ref{eq:Chebyshev_trace} that
+It follows from $\E\left[v^* f(A) v\right] = \Tr(f(A))$ that
 \[
 \zeta_k = \frac{1}{n_{\text{vec}}} \sum_{l = 1}^{n_{\text{vec}}} \left( v_0^{(l)} \right)^T T_k(A) v_0^{(l)}
 \]
 is a good estimator for $\Tr(T_k(A))$ and therefore
 \[
-\mu_k \approx \frac{2 - \delta_{k0}}{n \pi} \zeta_k
+\mu_k \approx \frac{2 - \delta_{k0}}{n \pi} \zeta_k.
 \]
 
 In order to determine the $\zeta_k$, let $v_0 \equiv v_0^{(l)}$.
 Using the recursion formula for Chebyschev polynomials, we can calculate
 \[
-T_{k + 1}(A)v_0 = 2 A T_k(A) v_0 - T_{k - 1}(A) v_0
+T_{k + 1}(A)v_0 = 2 A T_k(A) v_0 - T_{k - 1}(A) v_0.
 \]
 For $v_k \equiv T_k(A)v_0$ it also holds that
 \[
-v_{k + 1} = 2 A v_k - v_{k - 1}
+v_{k + 1} = 2 A v_k - v_{k - 1}.
 \]
 
 With this we are fully equipped for the final calculation and the goal of the KPM is reached:
@@ -192,12 +209,11 @@ Since it holds that
 \[
 \lim \limits_{k \to \infty} \mu_k \to 0
 \]
-and we are only interested in $T_k(x)$ with $k \leq M$\\
+and we are only interested in $T_k(x)$ with $k \leq M$.
 Therefore we estimate $\phi$ with
-\begin{equation} \label{eq:Angenäherte Spektraldichte}
+\begin{equation} \label{Approximated spectral density}
     \tilde{\phi}_M(x) = \frac{1}{\sqrt{1 - x^2}} \sum_{k = 0}^{M} \mu_k T_k(x)
 \end{equation}
-
 The following pseudo code is based on \cite[p.~10]{linsaadyang14} and summarizes the steps described above.
 The implementation is done in Python, and linked in the appendix.
 
@@ -224,7 +240,7 @@ The implementation is done in Python, and linked in the appendix.
     \State $\zeta_k \gets \frac{\zeta_k}{n_{\text{vec}}}$
     \State $\mu_k \gets \frac{2 - \delta_{k0}}{n \pi} \zeta_k$
     \EndFor
-    \State $\text{Evaluate } \tilde{\phi}_M(t_i) \text{ with equation } \ref{eq:Angenäherte Spektraldichte}$
+    \State $\text{Evaluate } \tilde{\phi}_M(t_i) \eqref{Approximated spectral density}$
     \end{algorithmic}
 \end{algorithm}
 
@@ -235,7 +251,7 @@ and as this is the case, the KPM can be applied to unitary matrices as well.
 
 When generating random unitary matrices for numerical experiments,
 it is important to ensure that their eigenvalues are distributed uniformly on the unit circle,
-as predicted by random matrix theory.
+as predicted by random matrix theory~\cite{mezzadri2007}.
 A common approach is to generate a random complex matrix $A$ with independent standard normal entries
 and then construct a unitary matrix from $A$ using either the QR decomposition or the singular value decomposition (SVD).
 In the QR approach, $A$ is factored as $A = QR$, where $Q$ is unitary and $R$ is upper triangular.
@@ -244,7 +260,7 @@ In the SVD approach, $A$ is factored as $A = U \Sigma V^*$,
 and either $U$ or $V$ (both unitary) can be used as a random unitary matrix.
 Although both methods produce unitary matrices, their statistical properties differ.
 The SVD-based approach yields unitary matrices whose eigenvalues are uniformly distributed on the unit circle,
-matching the theoretical prediction for random unitary matrices (the so-called Haar measure).
+matching the theoretical prediction for random unitary matrices (the so-called Haar measure)~\cite{mezzadri2007}.
 In contrast, the QR-based approach does not generally produce a uniform distribution of eigenvalues on the unit circle.
 This distinction is important for applications where the spectral properties of random unitary matrices play a central role,
 such as in the study of spectral densities.

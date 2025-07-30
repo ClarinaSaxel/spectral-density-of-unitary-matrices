@@ -1,8 +1,8 @@
-PWD /Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis
+PWD /Users/carinaseidel/Documents/Uni Potsdam/spectral-density-of-unitary-matrices/Thesis
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/carinaseidel/Documents/spectral-density-of-unitary-matrices/Thesis/main.tex
+INPUT /Users/carinaseidel/Documents/Uni Potsdam/spectral-density-of-unitary-matrices/Thesis/main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/report.cls
@@ -363,9 +363,9 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
 INPUT ./Graphics/cayley_transform.tex
 INPUT ./Graphics/cayley_transform.tex
 INPUT Graphics/cayley_transform.tex
-INPUT ./Chapters/motivation.tex
-INPUT ./Chapters/motivation.tex
-INPUT Chapters/motivation.tex
+INPUT ./Chapters/regularization.tex
+INPUT ./Chapters/regularization.tex
+INPUT Chapters/regularization.tex
 INPUT ./Chapters/KPM.tex
 INPUT ./Chapters/KPM.tex
 INPUT Chapters/KPM.tex
@@ -386,10 +386,10 @@ INPUT ./Graphics/screenshot.png
 INPUT ./Graphics/screenshot.png
 INPUT ./Graphics/screenshot.png
 INPUT ./Graphics/screenshot.png
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./Chapters/bibliography.tex
 INPUT ./Chapters/bibliography.tex
 INPUT Chapters/bibliography.tex
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out

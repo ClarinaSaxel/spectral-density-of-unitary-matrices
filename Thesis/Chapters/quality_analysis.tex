@@ -1,7 +1,7 @@
 Let $\tilde{\phi}(t)$ be a regular function, that estimates the spectral density.
 Since $\phi(t)$ is no function in the classical sense, but all approximations are continuous functions,
 \[
-\left|\left|\phi(t) - \tilde{\phi}(t)\right|\right|_{L^p}
+\left \|\phi(t) - \tilde{\phi}(t)\right \|_{L^p}
 \]
 is not defined, to estimate the error.
 In the following, we will introduce two methods to circumvent this problem.
@@ -34,7 +34,7 @@ The error can therefore be measured as follows:
 \]
 
 To transfer the concept of resolution to this error,
-we first consider $\nu_{[a, b]}$ from equation \ref{eq:nu_a_b} and define accordingly
+we first consider $\nu_{[a, b]}$ from \eqref{nu_a_b} and define accordingly
 \[
 \tilde{\nu}_{[a, b]} = \int\limits_a^b n \tilde{\phi}(t) \dt
 \]
@@ -81,7 +81,7 @@ but also the more sensitive it is to noise in the data.
 This is a common approach in numerical analysis to approximate distributions with smooth functions.
 The function $\phi_{\sigma}(t)$ is then well-defined and can be used to calculate the error for $p=1, 2$ and $\infty$:
 \[
-\epsilon_2 = \left|\left| \phi_{\sigma}(t) - \tilde{\phi}(t) \right|\right|_p
+\epsilon_2 = \left \| \phi_{\sigma}(t) - \tilde{\phi}(t) \right \|_p
 \]
 
 Let
@@ -103,9 +103,9 @@ the larger the $\sigma$, the smoother but also less accurate the approximation.
 For smaller values, one obtains coarser functions,
 where small peaks can be detected exactly where the eigenvalues are located.
 The following graphic is taken from \cite[p.~6]{linsaadyang14} and illustrates this effect for four different values of $\sigma$:
-Sei also
+Let also
 $$\phi_{\sigma}(t) = \left \langle \phi(\cdot), g_{\sigma}(\cdot - t)\right \rangle = \sum_{j = 1}^n g_{\sigma}(t - \lambda_j)$$
-Dies ist dann nicht anderes als die "Weichzeichnung" der Spektraldichte durch Gauß-Funktionen der Breite $\sigma$.
+This is nothing other than the "blurring" (or "smoothing") of the spectral density through Gaussian functions of width $\sigma$.
 
 \includegraphics[height=7.5cm]{./Graphics/screenshot.png}
 

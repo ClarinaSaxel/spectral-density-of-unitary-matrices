@@ -1,4 +1,4 @@
-Because of its ability to capture the distribution of eigenvalues, the spectral density of a matrix is a crucial concept in various fields. For example, in quantum mechanics, it describes the density of energy states; in statistics, it is related to the distribution of principal components; and in machine learning, it provides insight into the behavior of large neural networks. However, two main challenges arise when defining and computing the spectral density for a matrix $H$:
+Because of its ability to capture the distribution of eigenvalues, the spectral density of a matrix is a crucial concept in various fields. For example, in quantum mechanics, it describes the density of energy states~\cite{reichl,sakurainapolitano}; in signal processing, it describes how power is distributed over frequency~\cite{oppenheimschafer, mitra}; and in vibration analysis, it characterizes how energy is distributed among the natural frequencies of a structure~\cite{nortonkarczub}. However, two main challenges arise when defining and computing the spectral density for a matrix $H$.
 
 Firstly, the eigenvalues of $H$ are typically not known in advance. If they were, computing the spectral density would be straightforward, but this is rarely the case for large matrices. Secondly, the spectral density is defined using the Dirac delta distribution, which is not a conventional function and cannot be evaluated pointwise. This makes direct computation infeasible, especially for large matrices where eigenvalue decomposition is prohibitively expensive.
 
@@ -7,7 +7,7 @@ To address these challenges, a fundamental idea is to replace the delta distribu
     \int\limits_{\mathbb{R}} f(x)\, dx = 1,
 \end{equation}
 
-where $f(x)$ is very small or zero for most $x \neq 0$, and finite but large near $x = 0$. This regularization enables numerical approximation of the spectral density and is central to many practical algorithms.
+where $f(x)$ is very small or zero for most $x \neq 0$, and large but finite near $x = 0$. This regularization enables numerical approximation of the spectral density and is central to many practical algorithms.
 
 For real symmetric matrices, a variety of efficient methods have been developed to approximate the spectral density,
 often relying on this regularization principle.
@@ -21,11 +21,11 @@ and allows us to transfer techniques and insights between these classes.
 One intuitive approach is to select an interval $I \subset \R$ containing the spectrum of $H$,
 and divide it into $k$ subintervals using points $\{t_i\}_{i=1}^k$.
 By counting the number of eigenvalues in each subinterval
-and calculating the average value of $\phi(x)$ using $\nu_{[a, b]}$ from equation \ref{eq:nu_a_b},
+and calculating the average value of $\phi(x)$ using $\nu_{[a, b]}$ from \eqref{nu_a_b},
 one obtains a histogram that approximates the true spectral density as the subintervals become smaller.
 
 To count the eigenvalues in the intervals, methods such as Sylvester's law of inertia can be used,
-which require computing a decomposition of $A - t_i I = LDL^T$ for all $t_i$ \cite{golubvanloan}.
+which require computing a decomposition of $A - t_i I = LDL^T$ for all $t_i$ \cite{golub2013matrix}.
 While this is efficient for certain structured matrices,
 it becomes computationally expensive or impractical for large, unstructured matrices.
 

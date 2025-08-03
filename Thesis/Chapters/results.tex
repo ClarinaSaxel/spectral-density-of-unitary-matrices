@@ -50,3 +50,24 @@ We can now compare the spectral density of a SVD-based random unitary matrix $U$
 \end{figure}
 
 It is evident, that a bigger $\sigma$ leads to a smoother spectral density but at the cost of losing information, while a smaller $\sigma$ captures more fine-grained features. This behavior is consistent across both SVD-based and QR-based random unitary matrices.
+
+With this understanding of the spectral density and the choice of random unitary matrices, we can now proceed to implement the Kernel Polynomial Method (KPM) to compute the spectral density numerically. Below are the results of applying the KPM to both SVD-based and QR-based random unitary matrices.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Graphics/svd_kpm.png}
+        \subcaption{SVD-based}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Graphics/qr_kpm.png}
+        \subcaption{QR-based}
+    \end{minipage}
+    \caption{KPM spectral density estimates for random unitary matrices}
+    \label{fig:compare_svd_qr_kpm}
+\end{figure}
+
+In comparison to the theoretical spectral density, the KPM estimates show large oscillations, so called \emph{Gibbs oscillations}, which are a common artifact of polynomial approximations. These oscillations can be mitigated by using a larger number of Chebyshev polynomials in the KPM, but this also increases the computational cost. It is also obvious that the KPM hurts the principle of non-negativity of the spectral density, as it can yield negative values in the estimates. This is a known limitation of the KPM and can be addressed by some sophisticated techniques in the future.

@@ -237,7 +237,7 @@ The implementation is done in Python, and linked in the appendix.
 \begin{algorithm}[H]
     \caption{The Kernel Polynomial Method}\label{alg:cap}
     \begin{algorithmic}[5]
-    \Require $U \in \mathbb{C}^{n \times n}$ with $U^{-1} = U^*$
+    \Require $U \in \mathbb{C}^{n \times n}$ with $U^{-1} = U^*$, points $t_i$ to evaluate the spectral density, number of Chebyshev polynomials $M$, number of random vectors $n_{\text{vec}}$\\
     \Ensure Estimated spectral density \{$\tilde{\phi}_M(t_i)$\}\\
     \For{$k = 0 : M$}
     \State $\zeta_k \gets 0$

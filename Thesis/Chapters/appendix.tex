@@ -1,0 +1,46 @@
+\section{The Jacobian for the Cayley Transform}
+
+To compute the Jacobian for the Cayley transform $\varphi: \R \to S^1$, let $x \in \mathbb{R}$. Then
+\[
+\varphi(x) = \frac{i - x}{i + x} = -\frac{x^2 - 1}{x^2 + 1} + i \frac{2x}{x^2 + 1}.
+\]
+The derivative of $\varphi$ and its inverse are computed as follows:
+\[
+\hat{\varphi} =
+\begin{bmatrix}
+    -\frac{x^2 - 1}{x^2 + 1}, & \frac{2}{x^2 + 1} \\
+\end{bmatrix}
+\implies \frac{\dphi}{\dx} =
+\begin{bmatrix}
+    -\frac{4x}{(x^2 + 1)^2}, & \frac{2 - 2x^2}{(x^2 + 1)^2} \\
+\end{bmatrix}
+\]
+by the quotient rule. The norm of the derivative is then
+
+\[
+\left \| \frac{\dphi}{\dx} \right \| = \sqrt{\left(-\frac{4x}{(x^2 + 1)^2}\right)^2 + \left(\frac{2 - 2x^2}{(x^2 + 1)^2}\right)^2} = \sqrt{\frac{16x^2 + 4 - 8x^2 + 4x^4}{(x^2 + 1)^4}} = \frac{2}{x^2 + 1}.
+\]
+
+Therefore, the Jacobian for the transformation from $z$ to $w$ is
+\[
+J(z) = \left| \frac{dw}{dz} \right| = \frac{2}{(z^2 + 1)}
+\]
+and the inverse Jacobian is $\frac{z^2 + 1}{2}$.
+
+Thus, to transform the spectral density from the real line to the unit circle, we multiply by
+\[
+\frac{x^2 + 1}{2}
+\]
+This factor accounts for the change of variables and ensures that the density is properly normalized on the unit circle. (See handwritten notes for the derivation.)
+
+\section{Source Code and Materials}
+Below is the link to our GitHub repository, which contains both the LaTeX source files for this thesis and the executable, self-written Python code implementing the Kernel Polynomial Method.
+
+\noindent
+\url{https://github.com/ClarinaSaxel/spectral-density-of-unitary-matrices}
+
+\section{Declaration of Independent Work}
+I hereby declare that I have written this thesis independently and have not used any sources or aids other than those indicated. All passages taken from other works, either verbatim or in substance, have been identified as such.
+
+\section{Zusammenfassung (Deutsch)}
+Diese Bachelorarbeit behandelt die numerische Approximation der Spektraldichte unitärer Matrizen mit der Kernel-Polynom-Methode (KPM). Es werden die mathematischen Grundlagen, die Regularisierung der Spektraldichte, die Anwendung der KPM sowie numerische Ergebnisse vorgestellt und diskutiert. Die Arbeit wurde in englischer Sprache verfasst; diese Zusammenfassung erfolgt gemäß den formalen Anforderungen in deutscher Sprache.

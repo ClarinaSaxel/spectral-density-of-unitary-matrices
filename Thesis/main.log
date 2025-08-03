@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.9)  30 JUL 2025 21:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.9)  3 AUG 2025 21:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -533,6 +533,10 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \titlewidth=\dimen287
 \titlewidthlast=\dimen288
 \titlewidthfirst=\dimen289
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks53
+\inpenc@posthook=\toks54
 ) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
@@ -546,24 +550,24 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -606,19 +610,25 @@ LaTeX Font Info:    ... okay on input line 54.
 \scratchbox=\box70
 \nofMPsegments=\count340
 \nofMParguments=\count341
-\everyMPshowfont=\toks53
+\everyMPshowfont=\toks55
 \MPscratchCnt=\count342
 \MPscratchDim=\dimen291
 \MPnumerator=\count343
 \makeMPintoPDFobject=\count344
-\everyMPtoPDFconversion=\toks54
+\everyMPtoPDFconversion=\toks56
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 54.
+Package hyperref Info: Link coloring OFF on input line 57.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -635,7 +645,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<./Graphics/Universität_Potsdam_logo.png, id=75, 602.25pt x 602.25pt>
+<./Graphics/Universität_Potsdam_logo.png, id=95, 602.25pt x 602.25pt>
 File: ./Graphics/Universität_Potsdam_logo.png Graphic file (type png)
 <use ./Graphics/Universität_Potsdam_logo.png>
 Package pdftex.def Info: ./Graphics/Universität_Potsdam_logo.png  used on input line 54.
@@ -661,7 +671,7 @@ l.9 \end{abstract}
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.62 \chapter
+l.65 \chapter
              {Introduction} [1
 
 ]
@@ -684,99 +694,95 @@ Chapter 2.
 
 [7
 
-])
+]
 
-[8]
+[8])
+
+[9]
+
+[10]
 Chapter 3.
 (./Chapters/KPM.tex
 
-[9
+[11
 
 ]
 
-[10]
-
-[11]
-
 [12]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 221.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 224.
+
+[13]
+
+[14]
+
+[15]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 238.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 241.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 224.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 241.
 
 
-[13]
-<Graphics/eigenvalue_comparison.png, id=225, 722.7pt x 361.35pt>
-File: Graphics/eigenvalue_comparison.png Graphic file (type png)
-<use Graphics/eigenvalue_comparison.png>
-Package pdftex.def Info: Graphics/eigenvalue_comparison.png  used on input line 272.
-(pdftex.def)             Requested size: 398.3386pt x 199.16766pt.
-)
-
-[14]
-
-[15 <./Graphics/eigenvalue_comparison.png>]
-Chapter 4.
-(./Chapters/quality_analysis.tex
-
-[16
-
-]
+[16])
 
 [17]
-<./Graphics/screenshot.png, id=251, 604.2575pt x 417.56pt>
-File: ./Graphics/screenshot.png Graphic file (type png)
-<use ./Graphics/screenshot.png>
-Package pdftex.def Info: ./Graphics/screenshot.png  used on input line 110.
-(pdftex.def)             Requested size: 308.81267pt x 213.39566pt.
+Chapter 4.
+(./Chapters/results.tex
 
-
-[18 <./Graphics/screenshot.png>])
-
-[19]
-Chapter 5.
-(./Chapters/bibliography.tex
-
-[20
+[18
 
 ]
-Underfull \hbox (badness 1394) in paragraph at lines 83--87
-[]\OT1/cmr/m/sc/10.95 A. Weisse, G. Wellein, A. Alver-mann, H. Fehske\OT1/cmr/m/n/10.95 , \OT1/cmr/m/it/10.95 The ker-nel
- []
+<Graphics/eigenvalue_comparison.png, id=307, 722.7pt x 361.35pt>
+File: Graphics/eigenvalue_comparison.png Graphic file (type png)
+<use Graphics/eigenvalue_comparison.png>
+Package pdftex.def Info: Graphics/eigenvalue_comparison.png  used on input line 38.
+(pdftex.def)             Requested size: 398.3386pt x 199.16766pt.
 
 
-Underfull \hbox (badness 1107) in paragraph at lines 83--87
-\OT1/cmr/m/it/10.95 poly-no-mial method\OT1/cmr/m/n/10.95 , Re-views of Mod-ern Physics, 78(1): 275--306, 2006.
- []
-
+[19 <./Graphics/eigenvalue_comparison.png>]
+<Graphics/compare_svd_qr_spectral_density.png, id=315, 1011.78pt x 505.89pt>
+File: Graphics/compare_svd_qr_spectral_density.png Graphic file (type png)
+<use Graphics/compare_svd_qr_spectral_density.png>
+Package pdftex.def Info: Graphics/compare_svd_qr_spectral_density.png  used on input line 47.
+(pdftex.def)             Requested size: 398.3386pt x 199.17207pt.
 )
+
+[20 <./Graphics/compare_svd_qr_spectral_density.png>]
+Chapter 5.
+(./Chapters/appendix.tex
 
 [21
 
-] (./main.aux)
+]) (./Chapters/bibliography.tex
+
+[22]
+
+[23
+
+])
+
+[24] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 53BE407D6B71A0863A38896F0C659315;3277.
+(rerunfilecheck)             Checksum: C23A996773903A701EADB03DDE2A7BC4;4583.
  ) 
 Here is how much of TeX's memory you used:
- 32524 strings out of 473190
- 757113 string characters out of 5715801
- 1641438 words of memory out of 5000000
- 55176 multiletter control sequences out of 15000+600000
+ 32642 strings out of 473190
+ 759684 string characters out of 5715801
+ 1643552 words of memory out of 5000000
+ 55263 multiletter control sequences out of 15000+600000
  568893 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,16n,105p,805b,2108s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,16n,105p,968b,2110s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (23 pages, 675311 bytes).
+Output written on main.pdf (26 pages, 942251 bytes).
 PDF statistics:
- 371 PDF objects out of 1000 (max. 8388607)
- 298 compressed objects within 3 object streams
- 76 named destinations out of 1000 (max. 500000)
- 164 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 444 PDF objects out of 1000 (max. 8388607)
+ 367 compressed objects within 4 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 204 words of extra memory for PDF output out of 10000 (max. 10000000)
 

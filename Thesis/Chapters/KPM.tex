@@ -1,55 +1,35 @@
-The Kernel Polynomial Method (KPM) is a powerful technique for approximating spectral properties of large matrices \cite{weisse2006,linsaadyang14}. It employs polynomial expansions to efficiently estimate quantities such as the spectral density and related functions. We previously motivated the replacement of the Dirac delta distribution with a regular function~$f$, and now use the variant of KPM that incorporates this regularization using Chebyshev polynomials.
-The coefficients of the polynomials are derived from the method of moments, in order to obtain an estimator function as in statistics.
+The Kernel Polynomial Method (KPM) is a powerful technique for approximating spectral properties of large matrices~\cite{weisse2006,linsaadyang14}. It employs polynomial expansions to efficiently estimate quantities such as the spectral density and related functions. We previously motivated the replacement of the Dirac delta distribution with a basis of regular functions~$f_k$. We will focus on Chebyshev polynomials for this purpose.
 
-\section{Basic properties of Chebyshev polynomials}
-Among the possible choices, Chebyshev polynomials of the first kind are particularly well-suited due to their favorable mathematical properties, which we will outline below. We note that these properties are not unique, as Legendre polynomials or Hermite polynomials are examples of other good candidates.
+\section{Basic Properties of Chebyshev Polynomials}
+We now develop an algorithm for the KPM that incorporates the regularization of the spectral density using Chebyshev polynomials of the first kind. As mentioned in the previous chapter, other polynomial bases could also be considered, which is why the KPM has several variants.
 
-First, let's look how Chebyshev polynomials are defined.
-Using the trigonometric functions, they can be expressed as follows:
+First, let's look how Chebyshev polynomials are defined. Using the trigonometric functions, they can be expressed as follows:
 
 \[ T_k(x) =
 \begin{cases}
-
 \cos(k \arccos(x))                & \quad \text{for } k \in [-1, 1],\\
     \cosh(k \arcosh(x))           & \quad \text{for } k > 1,\\
     (-1)^k \cosh(k \arcosh(-x))   & \quad \text{for } k < -1.
 \end{cases}
 \]
+For being able to make use of the polynomials' orthogonality, we only use the formula~$T_k(x) = \cos(k \arccos(x))$. This means to only consider matrices that have eigenvalues within the interval~$[-1, 1]$. In the case that this condition should not be fulfilled, the eigenvalues can be transformed accordingly.
 
-For simplicity, we only want to use the formula $T_k(x) = \cos(k \arccos(x))$.
-This means to only consider matrices that have eigenvalues within the intervall $[-1, 1]$.
-In the case that this condition should not be fulfilled, the eigenvalues can be transformed accordingly.
-
-For this, let $\lambda_{lb}$ and $\lambda_{ub}$ be the lower and upper bound for the eigenvalues of $A$, respectively.
-To find these, well-established methods like the Gershgorin circle theorem can be used.
-
-Define
+For this, let~$\lambda_{lb}$ and~$\lambda_{ub}$ be the lower and upper bound for the eigenvalues of~$A$, respectively. To find these, well-established methods like the Gershgorin circle theorem can be used~\cite{hornjohnson2013}. Define
 \[
 c := \frac{\lambda_{lb} + \lambda_{ub}}{2} \quad \text{and} \quad d := \frac{\lambda_{ub} - \lambda_{lb}}{2}
 \]
-Then, the matrix $B = \frac{A - c*I_n}{d}$ has eigenvalues in the interval $[-1, 1]$.
-A visualization of this is linked in the appendix.
+Then, the matrix~$B = \frac{A - c*I_n}{d}$ has eigenvalues in the interval~$[-1, 1]$. A visualization of this is linked in the bibliography.
 
-Another way to define Chebyshev polynomials is by calculating them using the recursion formula
-\[
-T_{k}(x) = 2xT_{k - 1}(x) - T_{k - 2}(x),
-\]
-where the starting conditions are given by $T_0(x) = 1$ and $T_1(x) = x$.
-
-Let's recall that for a given interval~$[a, b]$ and weight function~$w(x) \geq 0$ defined on that interval, we define the inner product
-\[
-\langle f, g \rangle_w := \int\limits_a^b w(x) f(x) g(x) \dx.
-\]
 Now, let
 \[
 h(x) := \frac{1}{\sqrt{1 - x^2}}
 \]
-be a weight function on $[-1, 1]$. We investigate the inner product of two Chebyshev polynomials with respect to this weight function:
+be a weight function on~$[-1, 1]$. We investigate the inner product of two Chebyshev polynomials with respect to this weight function:
 
 \begin{lemma}[Orthogonality of Chebyshev Polynomials]
-Let $T_k(x)$ denote the Chebyshev polynomials, and let $h(x) = \frac{1}{\sqrt{1 - x^2}}$ be the weight function on $[-1, 1]$. Then, for all integers $k, l \geq 0$,
+Let~$T_k(x)$ denote the Chebyshev polynomials, and let~$h(x) = \frac{1}{\sqrt{1 - x^2}}$ be the weight function on~$[-1, 1]$. Then, for all integers~$k, l \geq 0$, we have that
 \begin{equation} \label{eq:orthogonality}
-    \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} T_k(x) T_l(x) \dx =
+    \left \langle T_k, T_l \right \rangle_h = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} T_k(x) T_l(x) \dx =
     \begin{cases}
         0               & \text{if } k \neq l,\\
         \pi             & \text{if } k = l = 0,\\
@@ -59,16 +39,14 @@ Let $T_k(x)$ denote the Chebyshev polynomials, and let $h(x) = \frac{1}{\sqrt{1 
 \end{lemma}
 
 \begin{proof}
-Recall that $T_k(x) = \cos(k \arccos(x))$ for $x \in [-1, 1]$. Let $x = \cos \theta$ with $\theta \in [0, \pi]$. Then $\dx = -\sin \theta \, d\theta$ and $\sqrt{1 - x^2} = \sin \theta$.
-
+Recall that~$T_k(x) = \cos(k \arccos(x))$ for~$x \in [-1, 1]$. Let~$x = \cos \theta$ with $\theta \in [0, \pi]$. Then~$\dx = -\sin \theta \, d\theta$ and~$\sqrt{1 - x^2} = \sin \theta$.
 Substituting, we have:
 \begin{align*}
     \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} T_k(x) T_l(x) \dx
     &= \int\limits_{\theta=\pi}^{0} \frac{1}{\sin \theta} \cos(k \theta) \cos(l \theta) (-\sin \theta) d\theta \\
     &= \int\limits_{0}^{\pi} \cos(k \theta) \cos(l \theta) d\theta
 \end{align*}
-
-The orthogonality of cosine functions on $[0, \pi]$ gives:
+The orthogonality of cosine functions on~$[0, \pi]$ gives:
 \begin{align*}
     \int\limits_{0}^{\pi} \cos(k \theta) \cos(l \theta) d\theta =
     \begin{cases}
@@ -77,53 +55,74 @@ The orthogonality of cosine functions on $[0, \pi]$ gives:
         \frac{\pi}{2}   & \text{if } k = l \neq 0.
     \end{cases}
 \end{align*}
-which proves the lemma.
+This is a standard result in Fourier analysis~\cite{kreyszig} which proves the lemma.
 \end{proof}
 
-\section{Approximating the spectral density}
-We now define the $\hat{\phi}$ as the product of spectral density with the inverse of the weight function~$h(x)$:
+Lastly, we need a three-term recurrence relation for the Chebyshev polynomials. This is a well-known property of these polynomials, which can be derived using trigonometric identities.
+
+\begin{lemma}[Three-term recurrence for Chebyshev polynomials]
+For all integers $\mbox{$k \geq 2$}$, the Chebyshev polynomials of the first kind satisfy
 \[
-\hat{\phi}(x) := \sqrt{1 - x^2} \phi(x) = \sqrt{1 - x^2} \, \cdot \, \frac{1}{n} \sum_{j = 1}^n \delta(x - \lambda_j)
+T_{k}(x) = 2xT_{k - 1}(x) - T_{k - 2}(x),
 \]
-Let $g \in \SR$, the Schwartz space defined in Definition \ref{def:Schwartz space}, and let $\mu_k~\in~\R$ coefficients to be determined such that the following equation holds:
-
+where the starting conditions are
 \[
-    \int \limits_{-1}^1 \hat{\phi}(x) g(x) \dx = \int \limits_{-1}^1 \sum_{k = 0}^{\infty} \mu_k T_k(x) g(x) \dx
+T_0(x) = 1 \quad \text{and} \quad T_1(x) = x.
 \]
+\end{lemma}
 
-If this is true for arbitrary $g \in \SR$, we can simplify the equation above to
+\begin{proof}
+Let $T_k(x) = \cos(k \arccos(x))$ for $x \in [-1, 1]$ and set $\theta = \arccos(x)$, so $\mbox{$T_k(x) = \cos(k\theta)$}$ and $x = \cos\theta$. The starting conditions are straightforward to verify, as $T_0(x) = \cos(0) = 1$ and $T_1(x) = \cos(\arccos(x)) = x$. For $k \geq 2$, we use the angle addition and subtraction formulas:
+\begin{align*}
+\cos(k\theta) &= \cos((k-1)\theta + \theta) = \cos((k-1)\theta)\cos\theta - \sin((k-1)\theta)\sin\theta \\
+\cos((k-2)\theta) &= \cos((k-1)\theta - \theta) = \cos((k-1)\theta)\cos\theta + \sin((k-1)\theta)\sin\theta
+\end{align*}
+Adding these two equations gives:
+\[
+\cos(k\theta) + \cos((k-2)\theta) = 2\cos\theta \cos((k-1)\theta)
+\]
+which can be rearranged as
+\[
+\cos(k\theta) = 2\cos\theta \cos((k-1)\theta) - \cos((k-2)\theta)
+\]
+Substituting back $T_k(x) = \cos(k\theta)$ and $x = \cos\theta$, we obtain
+\[
+T_k(x) = 2x T_{k-1}(x) - T_{k-2}(x)
+\]
+as claimed.
+\end{proof}
 
-\begin{equation} \label{eq:Chebyshev-Expansion}
-    \hat{\phi}(x) = \sum_{k = 0}^{\infty} \mu_k T_k(x)
-\end{equation}
-
-
-Now utilize the orthogonality of the Chebyshev polynomials to calculate a specific coefficient~$\mu_k$.
-Note that~$\delta_{k0}$ in this context denotes the Kronecker delta, and therefore equals $1$ for~$k = 0$ and $0$ for~$k \neq 0$. Applying the inner product defined above to both sides of the equation yields
+\section{Approximating the Spectral Density}
+Define~$\hat{\phi}_h$ with the inverse of the weight function~$h$ as in \eqref{eq:phi_hat}, that is
+\[
+    \hat{\phi}_h(x) := h^{-1}(x) \, \phi(x) = \sqrt{1 - x^2} \; \frac{1}{n} \sum_{j = 1}^n \delta(x - \lambda_j).
+\]
+Again, as in \eqref{eq:phi_hat_polynomial_expansion}, we can express~$\hat{\phi}_h$ as an infinite series of Chebyshev polynomials:
+\[
+    \hat{\phi}_h(x) = \sum_{k = 0}^{\infty} \mu_k T_k(x)
+\]
+Now utilize the orthogonality \eqref{eq:orthogonality} of the Chebyshev polynomials to calculate a specific coefficient~$\mu_k$.
+Note that~$\delta_{k0}$ in this context denotes the Kronecker delta, and therefore equals~$1$ for~$k = 0$ and~$0$ for~$k \neq 0$. Applying the inner product~\eqref{eq:inner_product} to both sides of the equation yields
 
 \begin{align*}
     & \; \; \left \langle \sum_{l = 0}^{\infty} \mu_l T_l(x), T_k(x) \right \rangle_h = \left \langle \hat{\phi}(x), T_k(x) \right \rangle_h \\
     \implies & \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \left(\sum_{l = 0}^{\infty} \mu_l T_l(x)\right) T_k(x) \dx = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \hat{\phi}(x) T_k(x) \dx.\\
-\end{align*}
-
-On the left side, every term of the sum except for the~$k$-th term vanishes due to the orthogonality of the Chebyshev polynomials, while we make use of our definition of~$\hat{\phi}$ on the right side. Therefore, we have
+\end{align*}On the left side, every term of the sum except for the~$k$-th term vanishes due to the orthogonality of the Chebyshev polynomials, while we make use of our definition of~$\hat{\phi}$ on the right side. Therefore, we have
 
 \[
     \mu_k \frac{\pi}{2 - \delta_{k0}} = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \sqrt{1 - x^2} \phi(x) T_k(x) \dx \implies \mu_k = \frac{2 - \delta_{k0}}{\pi} \int\limits_{-1}^1 \phi(x) T_k(x) \dx
 \]
-
 By applying the Dirac delta distribution we obtain:
 \begin{align*}
     \mu_k = \frac{2 - \delta_{k0}}{\pi} \int\limits_{-1}^1 \phi(t) T_k(t) \dt &= \frac{2 - \delta_{k0}}{\pi} \int\limits_{-1}^1 \frac{1}{n} \sum_{j = 1}^n \delta(t - \lambda_j) T_k(t) \dt \\
     &= \frac{2 - \delta_{k0}}{n \pi} \sum_{j = 1}^n T_k(\lambda_j)\\
     &= \frac{2 - \delta_{k0}}{n \pi} \Tr(T_k(A))
 \end{align*}
-
 with $\Tr(T_k(A)) := \displaystyle \sum_{j = 1}^n T_k(\lambda_j)$ the \emph{trace} of the Chebyshev polynomial applied to the matrix $A$. This means we are in need of an estimator for $\Tr(T_k(A))$.
 
-\section{Estimating the trace of Chebyshev polynomials}
+\section{Estimating the Trace of Chebyshev Polynomials}
 
-We want to obtain the corollary of the following generalized theorem:
+We want to obtain the corollary of the following generalized theorem~\cite{hutchinson1989}:
 
 \begin{theorem}
     Let $A \in \C^{n \times n}$ be a normal matrix with spectral decomposition
@@ -175,14 +174,11 @@ or, more concisely,
     \E\left[v^* f(A) v\right] = \Tr(f(A)).
 \]
 
-We now have a method to calculate the trace of a matrix function $f(A)$,
-using only vector multiplications with $A$.
+We now have a method to calculate the trace of a matrix function $f(A)$, using only vector multiplications with $A$. This is useful to estimate the trace of Chebyshev polynomials which we need to calculate our coefficients~$\mu_k$.
 
-\section{The Kernel Polynomial Method algorithm}
+\section{The Kernel Polynomial Method Algorithm}
 
-Now let $n_{\text{vec}} \in \N$ and consider random vectors $v_0^{(1)}, v_0^{(2)}, \dots, v_0^{(n_{\text{vec}})}$,
-each drawn independently from the standard normal distribution, that is, $\mathbb{E}[v_0^{(k)}] = 0$ and $\mathbb{E}\left[v_0^{(k)} \left(v_0^{(k)}\right)^T\right] = I_n$.
-It follows from $\E\left[v^* f(A) v\right] = \Tr(f(A))$ that
+Now let $n_{\text{vec}} \in \N$ and consider random vectors $v_0^{(1)}, v_0^{(2)}, \dots, v_0^{(n_{\text{vec}})}$, each drawn independently from the standard normal distribution, that is, $\mathbb{E}[v_0^{(k)}] = 0$ and $\mathbb{E}\left[v_0^{(k)} \left(v_0^{(k)}\right)^*\right] = I_n$. The subscript $0$ indicates the vectors have not been multiplied by $A$. It follows from $\E\left[v^* f(A) v\right] = \Tr(f(A))$ that
 \[
 \zeta_k = \frac{1}{n_{\text{vec}}} \sum_{l = 1}^{n_{\text{vec}}} \left( v_0^{(l)} \right)^T T_k(A) v_0^{(l)}
 \]
@@ -205,22 +201,43 @@ With this we are fully equipped for the final calculation and the goal of the KP
 Instead of having to multiply matrices with other matrices, it now suffices to multiply matrices with vectors.
 Now we can approximate $\phi(x)$ as closely as we like.
 As aforementioned, it is not always desirable to have an infinitely exact approximation.
-Since it holds that
+By the Riemann-Lebesgue lemma~\cite[p.~103]{rudin1987} it holds that
 \[
 \lim \limits_{k \to \infty} \mu_k \to 0
 \]
 and we are only interested in $T_k(x)$ with $k \leq M$.
 Therefore we estimate $\phi$ with
 \begin{equation} \label{Approximated spectral density}
-    \tilde{\phi}_M(x) = \frac{1}{\sqrt{1 - x^2}} \sum_{k = 0}^{M} \mu_k T_k(x)
+    \tilde{\phi}_M(x) := \frac{1}{\sqrt{1 - x^2}} \sum_{k = 0}^{M} \mu_k T_k(x)
 \end{equation}
-The following pseudo code is based on \cite[p.~10]{linsaadyang14} and summarizes the steps described above.
+Note that this approximation no longer satisfies the condition of non-negativity, as the Chebyshev polynomials oscillate between $-1$ and $1$. This will need to be considered when interpreting the results. Before we can state the final algorithm, we need to discuss how to apply the KPM to unitary matrices, as using the Cayley transform entails additional computations.
+
+\section{The KPM for Unitary Matrices}
+Applying the Cayley transform to an arbitrary unitary matrix~$U$ yields a Hermitian matrix~$H$, so the KPM can in principle be applied to unitary matrices as well. While explicitly forming $H = i(I_n - U)(I_n + U)^{-1}$ works for smaller matrices, it is highly impractical for larger ones: even if $U$ is sparse, the inverse $(I_n + U)^{-1}$ is typically dense, making $H$ expensive to store and destroying any sparsity. Instead, the Cayley transform is applied implicitly, as an operator acting on vectors. Whenever the algorithm requires the action of $H$ on a vector $v$, we compute
+\[
+    H v = (I_n - U)(I_n + U)^{-1} v
+\]
+by first solving the linear system
+\begin{equation}\label{eq:linear_system}
+    (I_n + U) w = v
+\end{equation}
+for $w$, and then evaluating $i(I_n - U)w$. This approach avoids explicit matrix inversion and leverages fast matrix-vector products and sparse linear solvers, preserving efficiency and scalability for large-scale problems. For large, sparse $U$, iterative methods such as GMRES or MINRES can be used to solve $(I_n + U)w = v$ efficiently, especially when a good preconditioner is available. This operator-based application is a key distinction from the Hermitian case, where simple matrix-vector products suffice.
+
+We can even further reduce the number of matrix-vector products by the following observation: 
+\[
+(I_n + U) w = v \implies w + Uw = v \implies Uw = v - w.
+\]
+So evaluating $i(I_n - U)w$ can be simplified to $i(w - Uw) = i(w - (v - w)) = i(2w - v)$. This means only having to solve the linear system once and then only using vector operations to obtain the next vector in the recursion, never even having to multiply directly with a matrix.
+
+Another consideration that needs to be made is regarding the eigenvalues of $U$. Because of our using Chebyshev polynomials for orthogonality, we established that a Hermitian matrix needs to have eigenvalues in the interval $[-1, 1]$. If we were starting with a Hermitian matrix, this would be but a simple transformation. How does this translate to unitary matrices?
+
+Algorithm \ref{alg:cap} is based on \cite[p.~10]{linsaadyang14} and summarizes the steps described above.
 The implementation is done in Python, and linked in the appendix.
 
-\begin{algorithm}
+\begin{algorithm}[H]
     \caption{The Kernel Polynomial Method}\label{alg:cap}
     \begin{algorithmic}[5]
-    \Require $A = A^* \in \mathbb{C}^{n \times n}$ with eigenvalues in the intervall $[-1, 1]$
+    \Require $U \in \mathbb{C}^{n \times n}$ with $U^{-1} = U^*$
     \Ensure Estimated spectral density \{$\tilde{\phi}_M(t_i)$\}\\
     \For{$k = 0 : M$}
     \State $\zeta_k \gets 0$
@@ -230,9 +247,11 @@ The implementation is done in Python, and linked in the appendix.
     \For{$k = 0 : M$}
     \State $\text{Calculate } \zeta_k \gets \zeta_k + \left( v_0^{(l)} \right)^T v_k{(l)}\text{;}$  
     \If{$k = 0$}
-    \State $v_1^{(l)} \gets A v_0^{(l)}$
+    \State $\text{Solve } (I_n + U) w_0^{(l)} = v_0^{(l)}$
+    \State $v_1^{(l)} \gets i (2w_0^{(l)} - v_0^{(l)})$
     \Else
-    \State $v_{k+1}^{(l)} \gets 2 A v_k^{(l)} - v_{k-1}^{(l)}$ \Comment{Three term recursion}
+    \State $\text{Solve } (I_n + U) w_k^{(l)} = v_k^{(l)}$
+    \State $v_{k+1}^{(l)} \gets 2 i (2w_k^{(l)} - v_k^{(l)}) - v_{k-1}^{(l)}$ \Comment{Three term recursion}
     \EndIf
     \EndFor
     \EndFor
@@ -244,32 +263,4 @@ The implementation is done in Python, and linked in the appendix.
     \end{algorithmic}
 \end{algorithm}
 
-Applying the Cayley transform to an arbitrary unitary matrix $U$ yields a Hermitian matrix $H$;
-and as this is the case, the KPM can be applied to unitary matrices as well.
-
-\section{The Choice of Random Unitary Matrices}
-
-When generating random unitary matrices for numerical experiments,
-it is important to ensure that their eigenvalues are distributed uniformly on the unit circle,
-as predicted by random matrix theory~\cite{mezzadri2007}.
-A common approach is to generate a random complex matrix $A$ with independent standard normal entries
-and then construct a unitary matrix from $A$ using either the QR decomposition or the singular value decomposition (SVD).
-In the QR approach, $A$ is factored as $A = QR$, where $Q$ is unitary and $R$ is upper triangular.
-The matrix $Q$ is then used as the random unitary matrix.
-In the SVD approach, $A$ is factored as $A = U \Sigma V^*$,
-and either $U$ or $V$ (both unitary) can be used as a random unitary matrix.
-Although both methods produce unitary matrices, their statistical properties differ.
-The SVD-based approach yields unitary matrices whose eigenvalues are uniformly distributed on the unit circle,
-matching the theoretical prediction for random unitary matrices (the so-called Haar measure)~\cite{mezzadri2007}.
-In contrast, the QR-based approach does not generally produce a uniform distribution of eigenvalues on the unit circle.
-This distinction is important for applications where the spectral properties of random unitary matrices play a central role,
-such as in the study of spectral densities.
-For such purposes, the SVD-based construction is preferable,
-as it ensures the correct statistical behavior of the eigenvalues.
-
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=1\textwidth]{Graphics/eigenvalue_comparison.png}
-    \caption{Eigenvalue distributions of random unitary matrices generated via SVD and QR.}
-    \label{fig:eigenvalue-comparison}
-\end{figure}
+That concludes the description of the Kernel Polynomial Method. In the next chapter, we use this algorithm to generate some results, which we then compare with the actual spectral density. Furthermore, we discuss the choice of random unitary matrices, and how it influences the results.

@@ -13,8 +13,8 @@ plt.rcParams.update({
     "ytick.labelsize": 10
 })
 
-n = 10  # Matrix size (adjust as needed)
-num_trials = 100  # Number of random samples
+n = 20  # Matrix size (adjust as needed)
+num_trials = 90  # Number of random samples
 
 eigvals_svd = []
 eigvals_qr = []

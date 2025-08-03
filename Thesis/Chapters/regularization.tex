@@ -1,37 +1,61 @@
-Because of its ability to capture the distribution of eigenvalues, the spectral density of a matrix is a crucial concept in various fields. For example, in quantum mechanics, it describes the density of energy states~\cite{reichl,sakurainapolitano}; in signal processing, it describes how power is distributed over frequency~\cite{oppenheimschafer, mitra}; and in vibration analysis, it characterizes how energy is distributed among the natural frequencies of a structure~\cite{nortonkarczub}. However, two main challenges arise when defining and computing the spectral density for a matrix $H$.
+Because of its ability to capture the distribution of eigenvalues, the spectral density of a matrix is a crucial concept in various fields. For example, in quantum mechanics, it describes the density of energy states~\cite{reichl,sakurainapolitano}; in signal processing, it describes how power is distributed over frequency~\cite{oppenheimschafer, mitra}; and in vibration analysis, it characterizes how energy is distributed among the natural frequencies of a structure~\cite{nortonkarczub}. However, two main challenges arise when defining and computing the spectral density for a matrix~$H$.
 
-Firstly, the eigenvalues of $H$ are typically not known in advance. If they were, computing the spectral density would be straightforward, but this is rarely the case for large matrices. Secondly, the spectral density is defined using the Dirac delta distribution, which is not a conventional function and cannot be evaluated pointwise. This makes direct computation infeasible, especially for large matrices where eigenvalue decomposition is prohibitively expensive.
+Firstly, the eigenvalues of~$H$ are typically not known in advance. If they were, computing the spectral density would be straightforward, but this is rarely the case for large matrices. Secondly, the spectral density is defined using the Dirac delta distribution, which is not a conventional function and cannot be evaluated pointwise. This makes direct computation infeasible, especially for large matrices where eigenvalue decomposition is prohibitively expensive.
 
-To address these challenges, a fundamental idea is to replace the delta distribution by a regular function $f$ with similar properties:
-\begin{equation} \label{integral_equals_one}
-    \int\limits_{\mathbb{R}} f(x)\, dx = 1,
+\section{Regularization and Polynomial Expansion}
+To address the second challenge, a fundamental idea is to replace the delta distribution by a regular function~$f$ with similar properties. To be effective, the regularizing function should be normalized, meaning it satisfies the condition
+\[
+    \int\limits_{\mathbb{R}} f(x)\, dx = 1;
+\]
+localized, meaning it is significant only near the origin; and sufficiently smooth to avoid introducing artificial oscillations or numerical instability. Sufficiently smooth is to say that the regularizing function should have continuous derivatives up to at least a certain order. Making sure~$f$ decays rapidly away from zero ensures that the regularized spectral density reflects the true distribution of eigenvalues without excessive broadening.
+
+The choice of regularizing function~$f$ is crucial for both the accuracy and stability of spectral density approximations. While a single regular function~$f$ to replace the Dirac delta distribution might be hard to find, a powerful approach is to expand the spectral density in terms of a basis of functions such as $f_1, f_2, \ldots$ satisfying the above mentioned requirements to allow for greater flexibility and accuracy. A perfect approximation would satisfy equality in the sense of distributions, meaning that it holds when integrated against a test function~$g \in \SR$, the Schwartz space of rapidly decreasing functions from Definition ~\ref{def:Schwartz_space}. More precisely, this can be expressed as
+\[
+\int\limits_{-\infty}^{\infty} \phi(x) g(x) \dx = \int\limits_{-\infty}^{\infty} \sum_{k=0}^{\infty} \mu_k f_k(x) g(x) \dx.
+\]
+If this equation holds true for all test functions~$g$, it can be simplified to
+
+\begin{equation} \label{eq:polynomial_expansion}
+    \phi(x) = \sum_{k=0}^{\infty} \mu_k f_k(x),
 \end{equation}
+which we call our \emph{polynomial expansion}. Now we need to determine the coefficients~$\mu_k$ in the expansion. The easiest way to do this is to isolate a single coefficient~$\mu_k$, as we will do in this following section.
 
-where $f(x)$ is very small or zero for most $x \neq 0$, and large but finite near $x = 0$. This regularization enables numerical approximation of the spectral density and is central to many practical algorithms.
+\section{Orthogonal Polynomial Expansions and Basis Selection}
+For a given interval~$[a, b]$, we consider a non-negative weight function $w: [a, b] \to \R$. The inner product for two functions $f, g: [a, b] \to \R$ is then defined as
+\begin{equation} \label{eq:inner_product}
+    \left \langle f, g \right \rangle_w := \int\limits_a^b w(x) f(x) g(x) \dx.
+\end{equation}
+Now define~$\hat{\phi}_w$ as the product of spectral density with the inverse of one such weight function $w$:
+\begin{equation} \label{eq:phi_hat}
+\hat{\phi}_w(x) := w^{-1}(x) \, \phi(x) =  w^{-1}(x) \; \frac{1}{n} \sum_{j = 1}^n \delta(x - \lambda_j)
+\end{equation}
+Similarly to \eqref{eq:polynomial_expansion}, we can then express the modified spectral density~$\hat{\phi}_w$ as an infinite series of regular functions~$f_k$:
+\begin{equation} \label{eq:phi_hat_polynomial_expansion}
+    \hat{\phi}_w(x) = \sum_{k = 0}^{\infty} \mu_k f_k(x)
+\end{equation}
+To isolate a single coefficient $\mu_k$, it is useful that the basis functions $f_k$ are \emph{orthogonal} with respect to some weight function $w(x)$. This means that for any two indices $k$ and $l$, we have:
+\[
+\left \langle f_k, f_l \right \rangle_w = \int \limits_{a}^b w(x) f_k(x) f_l(x) \dx = 0 \quad \text{for } k \neq l.
+\]
+It is also advantageous to use an orthogonal polynomial base which satisfies an explicitly known three-term recurrence relation of the form
+\[
+f_{k}(x) = (A_k x + B_k) f_{k-1}(x) + C_k f_{k-2}(x),
+\]
+where $A_k, B_k, C_k \in \R$ are coefficients that may depend on~$k$ and the weight function. This three-term recurrence relation would allow us to efficiently compute the polynomials by using only vector instead of matrix multiplications. This entails the polynomials being degree-graded, that is to say $\deg(f_k) = k$ for each~$k$.
 
-For real symmetric matrices, a variety of efficient methods have been developed to approximate the spectral density,
-often relying on this regularization principle.
-However, many problems in mathematics and physics naturally lead to complex Hermitian or even unitary matrices,
-for which the spectral density is less straightforward to compute.
-In this thesis, we generalize the established approaches from the real symmetric case to the Hermitian case,
-and further broaden the scope to unitary matrices.
-This is achieved by first applying the Cayley transform, which provides a bridge between Hermitian and unitary matrices
-and allows us to transfer techniques and insights between these classes.
+It follows from Favard's theorem~\cite[Thm.~2.1]{szego1975} that for every possible choice of weight function $w$ and interval $[a, b]$, there exists a orthogonal polynomial basis $\{f_k\}_{k=0}^{\infty}$ that is unique up to normalization and satisfies the above properties. Since there are infinitely many choices for the weight function, we have infinitely many choices for the basis functions, and we can choose one that is convenient for our purposes. Some well-studied examples of orthogonal polynomial bases are the Chebyshev polynomials, Legendre polynomials, and Hermite polynomials. These are widely used in numerical analysis and approximation theory due to their favorable convergence properties and computational efficiency~\cite{masonhandscomb}. We focus on Chebyshev polynomials in the next chapter.
 
-One intuitive approach is to select an interval $I \subset \R$ containing the spectrum of $H$,
-and divide it into $k$ subintervals using points $\{t_i\}_{i=1}^k$.
-By counting the number of eigenvalues in each subinterval
-and calculating the average value of $\phi(x)$ using $\nu_{[a, b]}$ from \eqref{nu_a_b},
-one obtains a histogram that approximates the true spectral density as the subintervals become smaller.
+Finally, to ensure that our chosen regularizing functions provide meaningful and accurate approximations of the spectral density in practice, we turn to practical strategies for validation and computation. These considerations are the focus of the next section.
 
-To count the eigenvalues in the intervals, methods such as Sylvester's law of inertia can be used,
-which require computing a decomposition of $A - t_i I = LDL^T$ for all $t_i$ \cite{golub2013matrix}.
-While this is efficient for certain structured matrices,
-it becomes computationally expensive or impractical for large, unstructured matrices.
+\section{Efficient Numerical Methods}
+For real symmetric matrices, a variety of efficient methods have been developed to approximate the spectral density, often relying on this regularization principle~\cite{weisse2006,linsaadyang14,golub2013matrix}. However, many problems in mathematics and physics naturally lead to complex Hermitian or even unitary matrices, for which the spectral density is less straightforward to compute. In this thesis, we generalize the established approaches for Chebyshev polynomials from the real symmetric case to the Hermitian case, and further broaden the scope to unitary matrices. This is achieved by first applying the Cayley transform, which provides a bridge between Hermitian and unitary matrices and allows us to transfer techniques and insights between these classes.
 
-This motivates the development of efficient numerical methods that can approximate the spectral density
-using only matrix-vector multiplications, which scale better with matrix size.
-In this thesis, we explore such methods, focusing on regularization techniques and polynomial approximations
-that make the computation of spectral densities feasible for large-scale problems.
-These advances have the potential to impact a wide range of scientific and engineering disciplines
-where understanding the spectral properties of large matrices is crucial.
+One intuitive approach by~\cite{linsaadyang14} is to select an interval~$I \subset \R$ containing the spectrum of~$H$, and divide it into~$k$ subintervals using points~$\{t_i\}_{i=1}^k$. By applying Sylvester's law of inertia~\cite{sylvester1852}, we can count the number of eigenvalues in each subinterval, resulting in a histogram. Then we could approximate the average value of~$\phi(x)$ in that interval using the fact that the number of eigenvalues in the interval can formally be expressed as
+\begin{equation} \label{eq:nu_a_b}
+    \nu_{[t_i, t_{i+1}]} := \int\limits_{t_i}^{t_{i+1}} \sum_j \delta(t - \lambda_j) \dt \equiv \int\limits_{t_i}^{t_{i+1}} n \phi(t) \dt.
+\end{equation}
+This provides useful reference points for assessing the shape of the regularized spectral density and evaluating whether the chosen functions~$f_k$ yield an appropriate approximation.
+
+Using Sylvester's law of inertia requires computing a decomposition of~$A - t_i I = LDL^T$ for all~$t_i$~\cite{golub2013matrix}. While this is efficient for certain structured matrices~\cite{bennermach2012}, it becomes computationally expensive or impractical for large, unstructured matrices.
+
+This motivates the development and use of efficient numerical methods that can approximate the spectral density using only matrix-vector multiplications, which scale better with matrix size. In this thesis, we explore one such method, the so-called Kernel polynomial method or KPM for short, which makes the computation of spectral densities feasible for large-scale problems. These advances have the potential to impact a wide range of scientific and engineering disciplines where understanding the spectral properties of large matrices is crucial.

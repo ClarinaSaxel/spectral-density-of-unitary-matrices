@@ -5,11 +5,13 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{dsfont}
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{pgfplots}
 \usepackage{tikz}
 \usepackage{titlesec}
+\usepackage[utf8]{inputenc}
 
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{calc}
@@ -35,6 +37,7 @@
 \newcommand{\1}{\mathds{1}}
 \newcommand{\dt}{\;\mathrm{d}t}
 \newcommand{\dx}{\;\mathrm{d}x}
+\newcommand{\dphi}{\;\mathrm{d}\hat{\varphi}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\K}{\mathbb{K}}
@@ -68,13 +71,12 @@
 \chapter{Kernel Polynomial Method}
 \input{Chapters/KPM.tex}
 
-\chapter{Quality Analysis}
-\input{Chapters/quality_analysis.tex}
+\chapter{Results}
+\input{Chapters/results.tex}
 
 \chapter{Appendix}
-Below is the link to my GitHub repository, which contains all LaTeX source files for both this thesis and the accompanying presentation, as well as executable, self-written Python code implementing the Kernel Polynomial Method.
-\url{https://github.com/ClarinaSaxel/spectral-density-of-unitary-matrices}
+\input{Chapters/appendix.tex}
 
 \input{Chapters/bibliography.tex}
-    
+
 \end{document}

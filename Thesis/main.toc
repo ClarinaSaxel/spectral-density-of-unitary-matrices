@@ -15,8 +15,9 @@
 \contentsline {chapter}{\numberline {4}Results}{18}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Transformation of the Spectral Density for Comparison}{18}{section.4.1}%
 \contentsline {section}{\numberline {4.2}The Choice of Random Unitary Matrices}{19}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Conclusion}{21}{section.4.3}%
 \contentsline {chapter}{\numberline {5}Appendix}{22}{chapter.5}%
 \contentsline {section}{\numberline {5.1}The Jacobian for the Cayley Transform}{22}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Source Code and Materials}{22}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Declaration of Independent Work}{23}{section.5.3}%
+\contentsline {section}{\numberline {5.3}Declaration of Independent Work}{22}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Zusammenfassung (Deutsch)}{23}{section.5.4}%

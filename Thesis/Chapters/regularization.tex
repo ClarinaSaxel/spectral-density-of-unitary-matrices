@@ -14,11 +14,10 @@ The choice of regularizing function~$f$ is crucial for both the accuracy and sta
 \int\limits_{-\infty}^{\infty} \phi(x) g(x) \dx = \int\limits_{-\infty}^{\infty} \sum_{k=0}^{\infty} \mu_k f_k(x) g(x) \dx.
 \]
 If this equation holds true for all test functions~$g$, it can be simplified to
-
 \begin{equation} \label{eq:polynomial_expansion}
     \phi(x) = \sum_{k=0}^{\infty} \mu_k f_k(x),
 \end{equation}
-which we call our \emph{polynomial expansion}. Now we need to determine the coefficients~$\mu_k$ in the expansion. The easiest way to do this is to isolate a single coefficient~$\mu_k$, as we will do in this following section.
+which we call our \emph{polynomial expansion}. To proceed, we need to determine the coefficients~$\mu_k$ in the expansion. The easiest way to do this is to isolate a single coefficient~$\mu_k$, as we do in this following section.
 
 \section{Orthogonal Polynomial Expansions and Basis Selection}
 For a given interval~$[a, b]$, we consider a non-negative weight function $w: [a, b] \to \R$. The inner product for two functions $f, g: [a, b] \to \R$ is then defined as
@@ -27,7 +26,7 @@ For a given interval~$[a, b]$, we consider a non-negative weight function $w: [a
 \end{equation}
 Now define~$\hat{\phi}_w$ as the product of spectral density with the inverse of one such weight function $w$:
 \begin{equation} \label{eq:phi_hat}
-\hat{\phi}_w(x) := w^{-1}(x) \, \phi(x) =  w^{-1}(x) \; \frac{1}{n} \sum_{j = 1}^n \delta(x - \lambda_j)
+\hat{\phi}_w(x) := w^{-1}(x) \, \phi(x) =  w^{-1}(x) \; \frac{1}{n} \sum_{j = 1}^n \delta(x - \lambda_j).
 \end{equation}
 Similarly to \eqref{eq:polynomial_expansion}, we can then express the modified spectral density~$\hat{\phi}_w$ as an infinite series of regular functions~$f_k$:
 \begin{equation} \label{eq:phi_hat_polynomial_expansion}
@@ -41,9 +40,9 @@ It is also advantageous to use an orthogonal polynomial base which satisfies an 
 \[
 f_{k}(x) = (A_k x + B_k) f_{k-1}(x) + C_k f_{k-2}(x),
 \]
-where $A_k, B_k, C_k \in \R$ are coefficients that may depend on~$k$ and the weight function. This three-term recurrence relation would allow us to efficiently compute the polynomials by using only vector instead of matrix multiplications. This entails the polynomials being degree-graded, that is to say $\deg(f_k) = k$ for each~$k$.
+where $A_k, B_k, C_k \in \R$ are coefficients that may depend on~$k$ and the weight function. This three-term recurrence relation allows us to efficiently compute the polynomials by using only vector instead of matrix multiplications. This entails the polynomials being degree-graded, that is to say $\deg(f_k) = k$ for each~$k$.
 
-It follows from Favard's theorem~\cite[Thm.~2.1]{szego1975} that for every possible choice of weight function $w$ and interval $[a, b]$, there exists a orthogonal polynomial basis $\{f_k\}_{k=0}^{\infty}$ that is unique up to normalization and satisfies the above properties. Since there are infinitely many choices for the weight function, we have infinitely many choices for the basis functions, and we can choose one that is convenient for our purposes. Some well-studied examples of orthogonal polynomial bases are the Chebyshev polynomials, Legendre polynomials, and Hermite polynomials. These are widely used in numerical analysis and approximation theory due to their favorable convergence properties and computational efficiency~\cite{masonhandscomb}. We focus on Chebyshev polynomials in the next chapter.
+It follows from Favard's theorem~\cite[Thm.~2.1]{szego1975} that for every possible choice of weight function $w$ and interval $[a, b]$, there exists an orthogonal polynomial basis $\{f_k\}_{k=0}^{\infty}$ that is unique up to normalization and satisfies the above properties. Since there are infinitely many choices for the weight function, we have infinitely many choices for the basis functions, and we can choose one that is convenient for our purposes. Some well-studied examples of orthogonal polynomial bases are the Chebyshev polynomials, Legendre polynomials, and Hermite polynomials. These are widely used in numerical analysis and approximation theory due to their favorable convergence properties and computational efficiency~\cite{masonhandscomb}. We focus on Chebyshev polynomials in the next chapter.
 
 Finally, to ensure that our chosen regularizing functions provide meaningful and accurate approximations of the spectral density in practice, we turn to practical strategies for validation and computation. These considerations are the focus of the next section.
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.9)  3 AUG 2025 22:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.7.9)  5 AUG 2025 23:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -672,7 +672,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<./Graphics/Universität_Potsdam_logo.png, id=95, 602.25pt x 602.25pt>
+<./Graphics/Universität_Potsdam_logo.png, id=99, 602.25pt x 602.25pt>
 File: ./Graphics/Universität_Potsdam_logo.png Graphic file (type png)
 <use ./Graphics/Universität_Potsdam_logo.png>
 Package pdftex.def Info: ./Graphics/Universität_Potsdam_logo.png  used on input line 54.
@@ -742,13 +742,13 @@ Chapter 3.
 [14]
 
 [15]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 238.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 241.
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 237.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 240.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 241.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 240.
 
 
 [16])
@@ -760,7 +760,7 @@ Chapter 4.
 [18
 
 ]
-<Graphics/eigenvalue_comparison.png, id=308, 722.7pt x 361.35pt>
+<Graphics/eigenvalue_comparison.png, id=317, 722.7pt x 361.35pt>
 File: Graphics/eigenvalue_comparison.png Graphic file (type png)
 <use Graphics/eigenvalue_comparison.png>
 Package pdftex.def Info: Graphics/eigenvalue_comparison.png  used on input line 38.
@@ -768,32 +768,32 @@ Package pdftex.def Info: Graphics/eigenvalue_comparison.png  used on input line 
 
 
 [19 <./Graphics/eigenvalue_comparison.png>]
-<Graphics/compare_svd_qr_spectral_density.png, id=316, 1011.78pt x 505.89pt>
+<Graphics/compare_svd_qr_spectral_density.png, id=325, 1011.78pt x 505.89pt>
 File: Graphics/compare_svd_qr_spectral_density.png Graphic file (type png)
 <use Graphics/compare_svd_qr_spectral_density.png>
-Package pdftex.def Info: Graphics/compare_svd_qr_spectral_density.png  used on input line 47.
+Package pdftex.def Info: Graphics/compare_svd_qr_spectral_density.png  used on input line 48.
 (pdftex.def)             Requested size: 398.3386pt x 199.17207pt.
-<Graphics/svd_kpm.png, id=317, 505.89pt x 361.35pt>
+<Graphics/svd_kpm.png, id=326, 505.89pt x 361.35pt>
 File: Graphics/svd_kpm.png Graphic file (type png)
 <use Graphics/svd_kpm.png>
-Package pdftex.def Info: Graphics/svd_kpm.png  used on input line 60.
+Package pdftex.def Info: Graphics/svd_kpm.png  used on input line 61.
 (pdftex.def)             Requested size: 195.1881pt x 139.42067pt.
-<Graphics/qr_kpm.png, id=318, 505.89pt x 361.35pt>
+<Graphics/qr_kpm.png, id=327, 505.89pt x 361.35pt>
 File: Graphics/qr_kpm.png Graphic file (type png)
 <use Graphics/qr_kpm.png>
-Package pdftex.def Info: Graphics/qr_kpm.png  used on input line 66.
+Package pdftex.def Info: Graphics/qr_kpm.png  used on input line 67.
 (pdftex.def)             Requested size: 195.1881pt x 139.42067pt.
-)
 
-[20 <./Graphics/compare_svd_qr_spectral_density.png> <./Graphics/svd_kpm.png> <./Graphics/qr_kpm.png>]
+
+[20 <./Graphics/compare_svd_qr_spectral_density.png> <./Graphics/svd_kpm.png> <./Graphics/qr_kpm.png>])
 
 [21]
 Chapter 5.
-(./Chapters/appendix.tex
+(./Chapters/appendix.tex)
 
 [22
 
-]) (./Chapters/bibliography.tex
+] (./Chapters/bibliography.tex
 
 [23]
 
@@ -807,21 +807,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C23A996773903A701EADB03DDE2A7BC4;4583.
+(rerunfilecheck)             Checksum: AAC781D4A8F599D4679C011416FF3539;4688.
  ) 
 Here is how much of TeX's memory you used:
- 34078 strings out of 473190
- 787675 string characters out of 5715801
- 1657888 words of memory out of 5000000
- 56687 multiletter control sequences out of 15000+600000
+ 34084 strings out of 473190
+ 787755 string characters out of 5715801
+ 1659013 words of memory out of 5000000
+ 56690 multiletter control sequences out of 15000+600000
  568893 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,16n,105p,968b,2132s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,16n,105p,1001b,2132s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (27 pages, 1292315 bytes).
+Output written on main.pdf (27 pages, 1292713 bytes).
 PDF statistics:
- 454 PDF objects out of 1000 (max. 8388607)
- 372 compressed objects within 4 object streams
- 101 named destinations out of 1000 (max. 500000)
- 214 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 464 PDF objects out of 1000 (max. 8388607)
+ 382 compressed objects within 4 object streams
+ 104 named destinations out of 1000 (max. 500000)
+ 222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,4 +1,4 @@
-We now want to use the algorithm from the previous section to compute the spectral density of a unitary matrix~$U$. In order to assess the results, we need to compare the computed spectral density with the theoretical one. The problem is that the spectral density we defined applies to the real line, while the eigenvalues of a unitary matrix lie on the unit circle in the complex plane. To overcome this, we need to transform it a little first.
+We now want to use the algorithm from the previous section to compute the spectral density of a unitary matrix~$U$. In order to assess the results, we need to compare the computed spectral density with the theoretical one. The problem is that the spectral density we defined applies to the real line, while the eigenvalues of a unitary matrix lie on the unit circle $S^1$ in the complex plane. To overcome this, we need to transform it a little first.
 
 \section{Transformation of the Spectral Density for Comparison}
 
@@ -17,7 +17,7 @@ Then we replace the Dirac delta function in the spectral density with the Gaussi
 \]
 
 
-However, we defined the spectral density only on the real line, while the eigenvalues of a unitary matrix lie on the unit circle. To be able to evaluate $\phi_\sigma(z)$ for $z \in \C$, we use the inverse Cayley transform $\varphi^{-1}(z) = i\frac{1 - z}{1 + z}$, which maps $z \in \mathbb{S}^1$ to $x \in \R$, and evaluate $\phi_\sigma(\varphi^{-1}(z))$. According to the standard change-of-variables formula for probability densities, this requires multiplying by the Jacobian determinant to ensure correct normalization:
+However, we defined the spectral density only on the real line, while the eigenvalues of a unitary matrix lie on the unit circle. To be able to evaluate $\phi_\sigma(z)$ for $z \in \C$, we use the inverse Cayley transform $\varphi^{-1}(z) = i\frac{1 - z}{1 + z}$, which maps $z \in S^1$ to $x \in \R$, and evaluate $\phi_\sigma(\varphi^{-1}(z))$. According to the standard change-of-variables formula for probability densities, this requires multiplying by the Jacobian determinant to ensure correct normalization:
 \[
     \hat{\phi}_\sigma(z) = \phi_\sigma(\varphi^{-1}(z)) \, \frac{(\varphi^{-1}(z))^2 + 1}{2} = \sum_{i=1}^n g_\sigma(\varphi^{-1}(z) - \lambda_i) \, \frac{(\varphi^{-1}(z))^2 + 1}{2}.
 \]
@@ -40,7 +40,8 @@ In contrast, the QR-based approach does not generally produce a uniform distribu
     \label{fig:eigenvalue-comparison}
 \end{figure}
 
-We can now compare the spectral density of a SVD-based random unitary matrix $U$ with that of a QR-based random unitary matrix $Q$. We also show how the $\sigma$ influences the plots.
+
+This enables a comparison of the spectral density of a SVD-based random unitary matrix $U$ with that of a QR-based random unitary matrix $Q$. We also show how the $\sigma$ influences the plots.
 
 \begin{figure}[H]
     \centering
@@ -71,3 +72,9 @@ With this understanding of the spectral density and the choice of random unitary
 \end{figure}
 
 In comparison to the theoretical spectral density, the KPM estimates show large oscillations, so called \emph{Gibbs oscillations}, which are a common artifact of polynomial approximations. These oscillations can be mitigated by using a larger number of Chebyshev polynomials in the KPM, but this also increases the computational cost. It is also obvious that the KPM hurts the principle of non-negativity of the spectral density, as it can yield negative values in the estimates. This is a known limitation of the KPM and can be addressed by some sophisticated techniques in the future.
+
+\section{Conclusion}
+
+In this thesis, we have developed and implemented a framework for estimating the spectral density of unitary matrices, building on the Kernel Polynomial Method and extending established techniques from the Hermitian case. We have discussed the mathematical foundations, the role of the Cayley transform, and the importance of regularization. Through numerical experiments, we have compared different approaches for generating random unitary matrices and analyzed the impact of regularization parameters and polynomial order on the quality of the spectral density estimates.
+
+Our results demonstrate both the strengths and limitations of the KPM in the unitary setting. While the method enables efficient computation for large matrices, challenges such as Gibbs oscillations and the violation of non-negativity remain. These issues highlight opportunities for further refinement, such as improved regularization strategies or alternative polynomial bases. Future work may also address the open problem of optimal scaling for unitary matrices and explore more sophisticated techniques to enhance the accuracy and interpretability of spectral density estimates.

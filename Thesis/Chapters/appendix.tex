@@ -16,22 +16,10 @@ The derivative of $\varphi$ and its inverse are computed as follows:
 \end{bmatrix}
 \]
 by the quotient rule. The norm of the derivative is then
-
 \[
-\left \| \frac{\dphi}{\dx} \right \| = \sqrt{\left(-\frac{4x}{(x^2 + 1)^2}\right)^2 + \left(\frac{2 - 2x^2}{(x^2 + 1)^2}\right)^2} = \sqrt{\frac{16x^2 + 4 - 8x^2 + 4x^4}{(x^2 + 1)^4}} = \frac{2}{x^2 + 1}.
+\left \| \frac{\dphi}{\dx} \right \| = \sqrt{\left(-\frac{4x}{(x^2 + 1)^2}\right)^2 + \left(\frac{2 - 2x^2}{(x^2 + 1)^2}\right)^2} = \sqrt{\frac{16x^2 + 4 - 8x^2 + 4x^4}{(x^2 + 1)^4}} = \frac{2}{x^2 + 1},
 \]
-
-Therefore, the Jacobian for the transformation from $z$ to $w$ is
-\[
-J(z) = \left| \frac{dw}{dz} \right| = \frac{2}{(z^2 + 1)}
-\]
-and the inverse Jacobian is $\frac{z^2 + 1}{2}$.
-
-Thus, to transform the spectral density from the real line to the unit circle, we multiply by
-\[
-\frac{x^2 + 1}{2}
-\]
-This factor accounts for the change of variables and ensures that the density is properly normalized on the unit circle. (See handwritten notes for the derivation.)
+which is the Jacobian $J(x)$. We thus need to multiply with the reciprocal Jacobian $\frac{x^2 + 1}{2}$. This factor accounts for the change of variables and ensures that the density is properly normalized on the unit circle.
 
 \section{Source Code and Materials}
 Below is the link to our GitHub repository, which contains both the LaTeX source files for this thesis and the executable, self-written Python code implementing the Kernel Polynomial Method.

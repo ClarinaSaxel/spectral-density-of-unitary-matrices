@@ -37,7 +37,9 @@ We now introduce the types of complex matrices that play a central role in this 
     A matrix~$A \in \C^{n \times n}$ is called~\emph{unitary} if it satisfies~$A^* A = A A^* = I_n$.
 \end{definition}
 \noindent
-The real analogue is an~\emph{orthogonal matrix}, defined by the condition~$A^T A = A A^T = I_n$. We oftentimes denote unitary matrices by using~$U$ as a reference. Consider a unitary matrix~$U$ and an eigenpair~$(\lambda, v)$ of~$U$. The complex conjugate of the eigenvalue equation~$U v = \lambda v$ is
+The real analogue of a unitary matrix is an~\emph{orthogonal matrix}, which is defined by the condition $A^T A = A A^T = I_n$. We oftentimes denote unitary matrices by using~$U$ as a reference.
+
+Consider a unitary matrix~$U$ and an eigenpair~$(\lambda, v)$ of~$U$. The complex conjugate of the eigenvalue equation~$U v = \lambda v$ is
 
 \[
     v^* U^* = v^* \overline{\lambda} = \overline{\lambda} v^*.
@@ -60,20 +62,18 @@ There is a special group of matrices that all the matrices we have defined so fa
     that is to say~$A^* A = A A^*$.
 \end{definition}
 \noindent
-It is straightforward to see that both Hermitian and unitary matrices are normal matrices and that the notion includes real symmetric and orthogonal matrices as special cases. The spectral theorem states that normal matrices can be diagonalized by a unitary matrix~\cite[Thm.~7.24, p.~218]{sheldonaxler}. That means, for any normal matrix~$A$, there exists a unitary matrix~$U$ such that~$A = U \Lambda U^*$, where~$\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ with~$\lambda_1, \ldots, \lambda_n$ being the eigenvalues of~$A$. This is essential for applying a function to a matrix, which is discussed in the next section.
+It is straightforward to see that both Hermitian and unitary matrices are normal matrices and that the notion includes real symmetric and orthogonal matrices as special cases. The spectral theorem states that normal matrices can be diagonalized by a unitary matrix~\cite[Thm.~7.24, p.~218]{sheldonaxler}. That means, for any normal matrix~$A$, there exists a unitary matrix~$U$ such that~$A = U \Lambda U^*$, where~$\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ is a diagonal matrix with~$\lambda_1, \ldots, \lambda_n$ being the eigenvalues of~$A$. This is essential for applying a function to a matrix, which is discussed in the next section.
 
 \section{Cayley Transform}
 
-Before giving the central definition of this section, we first extend the concept of functions to normal matrices, allowing us to map one matrix to another.
+To proceed, we extend the concept of functions to normal matrices, which allows us to map one matrix to another.
 
 \begin{definition}[Matrix function of normal matrices] \label{def:matrix_function}
-    Let~$A \in \C^{n \times n}$ be a normal matrix and let~$f: \C \to \C$ be a function that is defined on the spectrum of~$A$,
-    $\sigma(A) = \{\lambda_1, \ldots, \lambda_n\}$.
-    Then the~\emph{matrix function}~$f(A)$ is defined as
-    \[
-    f(A) := f(U \Lambda U^*) = U f(\Lambda) U^* = U \diag(f(\lambda_1), \ldots, f(\lambda_n)) U^*,
-    \]
-    where~$U$ is the matrix of eigenvectors of~$A$ and~$\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ is the diagonal matrix of eigenvalues.
+Let~$A \in \C^{n \times n}$ be a normal matrix and let~$f: \C \to \C$ be a function that is defined on the spectrum of~$A$, that is, the set of its eigenvalues $\sigma(A) = \{\lambda_1, \ldots, \lambda_n\}$, where each~$\lambda_j$ is an eigenvalue of~$A$. Then the~\emph{matrix function}~$f(A)$ is defined as
+\[
+f(A) := f(U \Lambda U^*) = U f(\Lambda) U^* = U \diag(f(\lambda_1), \ldots, f(\lambda_n)) U^*,
+\]
+where~$U$ is the matrix of eigenvectors of~$A$ and~$\Lambda = \diag(\lambda_1, \ldots, \lambda_n)$ is the diagonal matrix of eigenvalues.
 \end{definition}
 
 This definition is a special case of the more general definition of matrix functions via the Jordan canonical form given by Higham in~\cite[p.~3]{higham}. Another consequence of the spectral theorem is that for normal matrices, the Jordan canonical form is diagonal. Therefore, Higham's general definition reduces to the spectral decomposition used here.
@@ -101,7 +101,7 @@ This calculation also illustrates that $(i I_n - H)$ and $(i I_n + H)^{-1}$ comm
 \[
 (i I_n - H)(i I_n + H)^{-1} = (i I_n + H)^{-1}(i I_n - H),
 \]
-as they are both products of the same unitary matrix~$U$ and diagonal matrices, which all commute with each other. Consequently, the interpretation of~$\frac{1}{i + z}$ (as a scalar or matrix function) does not affect the result, since the order of multiplication is immaterial in this context.
+as they are both products of the same unitary matrix~$U$ and diagonal matrices, which all commute with each other. Consequently, the interpretation of~$\frac{1}{i + z}$ as a scalar or matrix function does not affect the result, since the order of multiplication is immaterial in this context.
 
 We have obtained an explicit formula which yields a unitary matrix~$V$ from a Hermitian matrix~$H$, given that~$i I_n + H$ is invertible. The Cayley transform for a Hermitian matrix is thus defined as
 \[
@@ -134,7 +134,7 @@ One of the most fundamental distributions in analysis, and central to the spectr
     \]
 \end{definition}
 \noindent
-This distribution is often mistakenly referred to as a function, although it is not a function in the classical sense. The Dirac delta is characterized by its defining property,
+This distribution is often referred to as a function, although it is not a function in the classical sense. The Dirac delta is characterized by its defining property,
 \[
 \int\limits_{-\infty}^{\infty} f(x) \delta(x-a) \dx = \int\limits_{-\infty}^{\infty} f(x) \delta(a-x) \dx = f(a) \implies \int\limits_{-\infty}^{\infty} \delta(x-a) \dx = 1.
 \]

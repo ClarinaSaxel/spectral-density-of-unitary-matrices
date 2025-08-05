@@ -1,7 +1,7 @@
-The Kernel Polynomial Method (KPM) is a powerful technique for approximating spectral properties of large matrices~\cite{weisse2006,linsaadyang14}. It employs polynomial expansions to efficiently estimate quantities such as the spectral density and related functions. We previously motivated the replacement of the Dirac delta distribution with a basis of regular functions~$f_k$. We will focus on Chebyshev polynomials for this purpose.
+The Kernel Polynomial Method (KPM) is a powerful technique for approximating spectral properties of large matrices~\cite{weisse2006,linsaadyang14}. It employs polynomial expansions to efficiently estimate quantities such as the spectral density and related functions. We previously motivated the replacement of the Dirac delta distribution with a basis of regular functions~$f_k$. In the following, we focus on Chebyshev polynomials for this purpose.
 
 \section{Basic Properties of Chebyshev Polynomials}
-We now develop an algorithm for the KPM that incorporates the regularization of the spectral density using Chebyshev polynomials of the first kind. As mentioned in the previous chapter, other polynomial bases could also be considered, which is why the KPM has several variants.
+We want to develop an algorithm for the KPM that incorporates the regularization of the spectral density using Chebyshev polynomials of the first kind. As mentioned in the previous chapter, other polynomial bases could also be considered, which is why the KPM has several variants.
 
 First, let's look how Chebyshev polynomials are defined. Using the trigonometric functions, they can be expressed as follows:
 
@@ -18,8 +18,7 @@ For this, let~$\lambda_{lb}$ and~$\lambda_{ub}$ be the lower and upper bound for
 \[
 c := \frac{\lambda_{lb} + \lambda_{ub}}{2} \quad \text{and} \quad d := \frac{\lambda_{ub} - \lambda_{lb}}{2}
 \]
-Then, the matrix~$B = \frac{A - c*I_n}{d}$ has eigenvalues in the interval~$[-1, 1]$. A visualization of this is linked in the bibliography.
-
+Then, the matrix~$B = \frac{A - c*I_n}{d}$ has eigenvalues in the interval~$[-1, 1]$.
 Now, let
 \[
 h(x) := \frac{1}{\sqrt{1 - x^2}}
@@ -101,13 +100,13 @@ Again, as in \eqref{eq:phi_hat_polynomial_expansion}, we can express~$\hat{\phi}
 \[
     \hat{\phi}_h(x) = \sum_{k = 0}^{\infty} \mu_k T_k(x)
 \]
-Now utilize the orthogonality \eqref{eq:orthogonality} of the Chebyshev polynomials to calculate a specific coefficient~$\mu_k$.
+To determine a specific coefficient~$\mu_k$, we utilize the orthogonality \eqref{eq:orthogonality} of the Chebyshev polynomials.
 Note that~$\delta_{k0}$ in this context denotes the Kronecker delta, and therefore equals~$1$ for~$k = 0$ and~$0$ for~$k \neq 0$. Applying the inner product~\eqref{eq:inner_product} to both sides of the equation yields
 
 \begin{align*}
-    & \; \; \left \langle \sum_{l = 0}^{\infty} \mu_l T_l(x), T_k(x) \right \rangle_h = \left \langle \hat{\phi}(x), T_k(x) \right \rangle_h \\
-    \implies & \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \left(\sum_{l = 0}^{\infty} \mu_l T_l(x)\right) T_k(x) \dx = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \hat{\phi}(x) T_k(x) \dx.\\
-\end{align*}On the left side, every term of the sum except for the~$k$-th term vanishes due to the orthogonality of the Chebyshev polynomials, while we make use of our definition of~$\hat{\phi}$ on the right side. Therefore, we have
+    & \; \; \left \langle \sum_{l = 0}^{\infty} \mu_l T_l(x), T_k(x) \right \rangle_h = \left \langle \hat{\phi}_h(x), T_k(x) \right \rangle_h \\
+    \implies & \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \left(\sum_{l = 0}^{\infty} \mu_l T_l(x)\right) T_k(x) \dx = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \hat{\phi}_h(x) T_k(x) \dx.\\
+\end{align*}On the left side, every term of the sum except for the~$k$-th term vanishes due to the orthogonality of the Chebyshev polynomials, while we make use of our definition of~$\hat{\phi}_h$ on the right side. Therefore, we have
 
 \[
     \mu_k \frac{\pi}{2 - \delta_{k0}} = \int\limits_{-1}^1 \frac{1}{\sqrt{1 - x^2}} \sqrt{1 - x^2} \phi(x) T_k(x) \dx \implies \mu_k = \frac{2 - \delta_{k0}}{\pi} \int\limits_{-1}^1 \phi(x) T_k(x) \dx
@@ -174,7 +173,7 @@ or, more concisely,
     \E\left[v^* f(A) v\right] = \Tr(f(A)).
 \]
 
-We now have a method to calculate the trace of a matrix function $f(A)$, using only vector multiplications with $A$. This is useful to estimate the trace of Chebyshev polynomials which we need to calculate our coefficients~$\mu_k$.
+This provides a method to calculate the trace of a matrix function $f(A)$, using only vector multiplications with $A$. This is useful to estimate the trace of Chebyshev polynomials, which we need to calculate our coefficients~$\mu_k$.
 
 \section{The Kernel Polynomial Method Algorithm}
 
@@ -197,9 +196,9 @@ For $v_k \equiv T_k(A)v_0$ it also holds that
 v_{k + 1} = 2 A v_k - v_{k - 1}.
 \]
 
-With this we are fully equipped for the final calculation and the goal of the KPM is reached:
-Instead of having to multiply matrices with other matrices, it now suffices to multiply matrices with vectors.
-Now we can approximate $\phi(x)$ as closely as we like.
+With this, we are fully equipped for the final calculation and the goal of the KPM is reached:
+Instead of having to multiply matrices with other matrices, it suffices to multiply matrices with vectors.
+This allows us to approximate $\phi(x)$ as closely as we like.
 As aforementioned, it is not always desirable to have an infinitely exact approximation.
 By the Riemann-Lebesgue lemma~\cite[p.~103]{rudin1987} it holds that
 \[
@@ -213,7 +212,7 @@ Therefore we estimate $\phi$ with
 Note that this approximation no longer satisfies the condition of non-negativity, as the Chebyshev polynomials oscillate between $-1$ and $1$. This will need to be considered when interpreting the results. Before we can state the final algorithm, we need to discuss how to apply the KPM to unitary matrices, as using the Cayley transform entails additional computations.
 
 \section{The KPM for Unitary Matrices}
-Applying the Cayley transform to an arbitrary unitary matrix~$U$ yields a Hermitian matrix~$H$, so the KPM can in principle be applied to unitary matrices as well. While explicitly forming $H = i(I_n - U)(I_n + U)^{-1}$ works for smaller matrices, it is highly impractical for larger ones: even if $U$ is sparse, the inverse $(I_n + U)^{-1}$ is typically dense, making $H$ expensive to store and destroying any sparsity. Instead, the Cayley transform is applied implicitly, as an operator acting on vectors. Whenever the algorithm requires the action of $H$ on a vector $v$, we compute
+Applying the Cayley transform to an arbitrary unitary matrix~$U$ yields a Hermitian matrix~$H$, so the KPM can in principle be applied to unitary matrices as well. While explicitly forming $H = i(I_n - U)(I_n + U)^{-1}$ works for smaller matrices, it is highly impractical for larger ones: even if $U$ is sparse, the inverse $(I_n + U)^{-1}$ is typically dense, making $H$ expensive to store and thus eliminating any sparsity~\cite{trefethen1997}. Instead, the Cayley transform is applied implicitly, as an operator acting on vectors. Whenever the algorithm requires the action of $H$ on a vector $v$, we compute
 \[
     H v = (I_n - U)(I_n + U)^{-1} v
 \]
@@ -221,7 +220,7 @@ by first solving the linear system
 \begin{equation}\label{eq:linear_system}
     (I_n + U) w = v
 \end{equation}
-for $w$, and then evaluating $i(I_n - U)w$. This approach avoids explicit matrix inversion and leverages fast matrix-vector products and sparse linear solvers, preserving efficiency and scalability for large-scale problems. For large, sparse $U$, iterative methods such as GMRES or MINRES can be used to solve $(I_n + U)w = v$ efficiently, especially when a good preconditioner is available. This operator-based application is a key distinction from the Hermitian case, where simple matrix-vector products suffice.
+for $w$, and then evaluating $i(I_n - U)w$. This approach avoids explicit matrix inversion and leverages fast matrix-vector products and sparse linear solvers, preserving efficiency and scalability for large-scale problems. For large, sparse $U$, iterative methods such as GMRES or MINRES can be used to solve $(I_n + U)w = v$ efficiently, especially when a good preconditioner is available~\cite{saad2003}. This operator-based application is a key distinction from the Hermitian case, where simple matrix-vector products suffice.
 
 We can even further reduce the number of matrix-vector products by the following observation: 
 \[
@@ -229,7 +228,7 @@ We can even further reduce the number of matrix-vector products by the following
 \]
 So evaluating $i(I_n - U)w$ can be simplified to $i(w - Uw) = i(w - (v - w)) = i(2w - v)$. This means only having to solve the linear system once and then only using vector operations to obtain the next vector in the recursion, never even having to multiply directly with a matrix.
 
-Another consideration that needs to be made is regarding the eigenvalues of $U$. Because of our using Chebyshev polynomials for orthogonality, we established that a Hermitian matrix needs to have eigenvalues in the interval $[-1, 1]$. If we were starting with a Hermitian matrix, this would be but a simple transformation. How does this translate to unitary matrices?
+Another consideration concerns the eigenvalues of $U$. The use of Chebyshev polynomials for orthogonality requires a Hermitian matrix to have eigenvalues in the interval $[-1, 1]$, and a straightforward transformation is available in the Hermitian case. The corresponding approach for unitary matrices, however, presents additional challenges. A systematic treatment of this aspect remains an interesting direction for future work.
 
 Algorithm \ref{alg:cap} is based on \cite[p.~10]{linsaadyang14} and summarizes the steps described above.
 The implementation is done in Python, and linked in the appendix.
@@ -263,4 +262,4 @@ The implementation is done in Python, and linked in the appendix.
     \end{algorithmic}
 \end{algorithm}
 
-That concludes the description of the Kernel Polynomial Method. In the next chapter, we use this algorithm to generate some results, which we then compare with the actual spectral density. Furthermore, we discuss the choice of random unitary matrices, and how it influences the results.
+This concludes the description of the Kernel Polynomial Method. The next chapter is devoted to the implementation of these algorithms and the design of experiments to investigate their properties. In particular, we compare the results obtained with the actual spectral density and examine how the choice of random unitary matrices influences the outcomes.
